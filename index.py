@@ -15,10 +15,12 @@ level = 1
 screen = pygame.display.set_mode(size)
 
 background = pygame.image.load("Assets/BF.jpg").convert()
+background2 = pygame.image.load("Assets/BG_Nivel2.png").convert()
+
 
 Pantalla1 = Pantallas.pantallaUno(screen)
-# Pantalla2 = pantallas.pantallaDos(screen)
-# Pantalla1 = pantallas.pantallaTres(screen)
+Pantalla2 = Pantallas.pantallaDos(screen)
+# Pantalla1 = Pantallas.pantallaTres(screen)
 animacionNave = NaveAnimacion.NaveBackground((64, 0))
 
 
@@ -31,8 +33,8 @@ while not done:
       done = True
     if event.type == pygame.MOUSEBUTTONDOWN:
       x,y = event.pos
-  screen.blit(background,[0,0])
   if level == 1:
+    screen.blit(background,[0,0])
     Pantalla1.inicio()
     screen.blit(animacionNave.image, animacionNave.rect)
     if naveLand == False:
@@ -41,8 +43,8 @@ while not done:
             print("aterrizo")
             naveLand = True
   if level == 2:
-    pass
-    # Pantalla2.inicio()
+    screen.blit(background2,[0,0])
+    Pantalla2.Plataformer_Nivel2()
   if level == 3:
     pass
     # Pantalla3.inicio()

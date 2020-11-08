@@ -88,3 +88,31 @@ class pantallaUno():
     self.screen.blit(self.cub[9],[self.cub_size[3]*10,self.pantalla_y-self.cub_size[0]-self.cub_size[3]])
     self.screen.blit(self.cub[9],[(self.cub_size[3]*11)-25,self.pantalla_y-self.cub_size[0]-self.cub_size[3]])
     self.screen.blit(self.cub[9],[(self.cub_size[3]*11)-37,self.pantalla_y-self.cub_size[0]-(self.cub_size[3]*2)])
+
+class pantallaDos():
+  def __init__(self,screen):
+    self.screen = screen
+    self.cub = [
+      pygame.image.load("Assets/T1.png"),
+      pygame.image.load("Assets/S1.png"),
+      pygame.image.load("Assets/S2.png"),
+      pygame.image.load("Assets/S3.png"),
+      pygame.image.load("Assets/S4.png"),
+      pygame.image.load("Assets/BarrelMini.png"),
+      pygame.image.load("Assets/P2.png"),
+      pygame.image.load("Assets/RoofEntrance.png"),
+      pygame.image.load("Assets/Door.png"),
+      pygame.image.load("Assets/BGpuerta1.png"),
+      pygame.image.load("Assets/BGpuerta2.png"),
+      pygame.image.load("Assets/RoofEntrance2.png"),
+    ]
+    self.cub_size = [
+      64,   #Tamaño del terreno 0
+      50,   #Barril             1
+    ]
+    self.pantalla_X = 1152
+    #self.pantalla_y = 768
+    self.pantalla_y = 640
+
+  def Plataformer_Nivel2(self):
+      pass
