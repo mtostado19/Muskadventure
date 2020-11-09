@@ -93,18 +93,15 @@ class pantallaDos():
   def __init__(self,screen):
     self.screen = screen
     self.cub = [
-      pygame.image.load("Assets/T1.png"),
-      pygame.image.load("Assets/S1.png"),
-      pygame.image.load("Assets/S2.png"),
-      pygame.image.load("Assets/S3.png"),
-      pygame.image.load("Assets/S4.png"),
-      pygame.image.load("Assets/BarrelMini.png"),
-      pygame.image.load("Assets/P2.png"),
-      pygame.image.load("Assets/RoofEntrance.png"),
-      pygame.image.load("Assets/Door.png"),
-      pygame.image.load("Assets/BGpuerta1.png"),
-      pygame.image.load("Assets/BGpuerta2.png"),
-      pygame.image.load("Assets/RoofEntrance2.png"),
+      pygame.image.load("Assets/S2.png"), #0
+      pygame.image.load("Assets/S3.png"), #1
+      pygame.image.load("Assets/BarrelMini.png"), #2
+      pygame.image.load("Assets/P2.png"), #3
+      pygame.image.load("Assets/RoofEntrance.png"), #4
+      pygame.image.load("Assets/RoofEntrance2.png"), #5
+      pygame.image.load("Assets/Door.png"), #6
+      pygame.image.load("Assets/BGpuerta1.png"), #7
+      pygame.image.load("Assets/BGpuerta2.png"), #8
     ]
     self.cub_size = [
       64,   #Tamaño del terreno 0
@@ -115,4 +112,114 @@ class pantallaDos():
     self.pantalla_y = 640
 
   def Plataformer_Nivel2(self):
-      pass
+      #Techo nivel superior
+      self.screen.blit(self.cub[5],[0, 0])
+      self.screen.blit(self.cub[4],[(self.cub_size[0]), 0])
+      self.screen.blit(self.cub[5],[(self.cub_size[0]*2), 0])
+      self.screen.blit(self.cub[5],[(self.cub_size[0]*3), 0])
+      self.screen.blit(self.cub[5],[(self.cub_size[0]*4), 0])
+      self.screen.blit(self.cub[5],[(self.cub_size[0]*5), 0])
+      self.screen.blit(self.cub[5],[(self.cub_size[0]*6), 0])
+      self.screen.blit(self.cub[5],[(self.cub_size[0]*7), 0])
+      self.screen.blit(self.cub[5],[(self.cub_size[0]*8), 0])
+      self.screen.blit(self.cub[5],[(self.cub_size[0]*9), 0])
+      self.screen.blit(self.cub[5],[(self.cub_size[0]*10), 0])
+      self.screen.blit(self.cub[5],[(self.cub_size[0]*11), 0])
+      self.screen.blit(self.cub[5],[(self.cub_size[0]*12), 0])
+      self.screen.blit(self.cub[5],[(self.cub_size[0]*13), 0])
+      self.screen.blit(self.cub[5],[(self.cub_size[0]*14), 0])
+      self.screen.blit(self.cub[5],[(self.cub_size[0]*15), 0])
+      self.screen.blit(self.cub[4],[(self.cub_size[0]*16), 0])
+      self.screen.blit(self.cub[5],[(self.cub_size[0]*17), 0])
+
+      #Piso nivel superior
+      self.screen.blit(self.cub[3],[0, (self.cub_size[0]*2) ])
+      self.screen.blit(self.cub[3],[(self.cub_size[0]), (self.cub_size[0]*2)])
+      self.screen.blit(self.cub[3],[(self.cub_size[0]*2), (self.cub_size[0]*2)])
+      self.screen.blit(self.cub[3],[(self.cub_size[0]*3), (self.cub_size[0]*2)])
+      self.screen.blit(self.cub[3],[(self.cub_size[0]*4), (self.cub_size[0]*2)])
+      self.screen.blit(self.cub[3],[(self.cub_size[0]*5), (self.cub_size[0]*2)])
+      self.screen.blit(self.cub[3],[(self.cub_size[0]*6), (self.cub_size[0]*2)])
+      self.screen.blit(self.cub[3],[(self.cub_size[0]*7), (self.cub_size[0]*2)])
+      self.screen.blit(self.cub[3],[(self.cub_size[0]*8), (self.cub_size[0]*2)])
+
+      #Techo nivel intermedio
+      self.screen.blit(self.cub[5],[0, (self.cub_size[0]*3)])
+      self.screen.blit(self.cub[4],[(self.cub_size[0]), (self.cub_size[0]*3)])
+      self.screen.blit(self.cub[5],[(self.cub_size[0]*2), (self.cub_size[0]*3)])
+      self.screen.blit(self.cub[5],[(self.cub_size[0]*3), (self.cub_size[0]*3)])
+      self.screen.blit(self.cub[5],[(self.cub_size[0]*4), (self.cub_size[0]*3)])
+      self.screen.blit(self.cub[5],[(self.cub_size[0]*5), (self.cub_size[0]*3)])
+      self.screen.blit(self.cub[5],[(self.cub_size[0]*6), (self.cub_size[0]*3)])
+      self.screen.blit(self.cub[5],[(self.cub_size[0]*7), (self.cub_size[0]*3)])
+      self.screen.blit(self.cub[5],[(self.cub_size[0]*8), (self.cub_size[0]*3)])
+
+      #Piso nivel intermedio
+      self.screen.blit(self.cub[3],[(self.cub_size[0]*3), (self.cub_size[0]*5)])
+      self.screen.blit(self.cub[3],[(self.cub_size[0]*4), (self.cub_size[0]*5)])
+      self.screen.blit(self.cub[3],[(self.cub_size[0]*5), (self.cub_size[0]*5)])
+      self.screen.blit(self.cub[3],[(self.cub_size[0]*6), (self.cub_size[0]*5)])
+      self.screen.blit(self.cub[3],[(self.cub_size[0]*7), (self.cub_size[0]*5)])
+      self.screen.blit(self.cub[3],[(self.cub_size[0]*8), (self.cub_size[0]*5)])
+      self.screen.blit(self.cub[3],[(self.cub_size[0]*9), (self.cub_size[0]*5)])
+      self.screen.blit(self.cub[3],[(self.cub_size[0]*10), (self.cub_size[0]*5)])
+      self.screen.blit(self.cub[3],[(self.cub_size[0]*11), (self.cub_size[0]*5)])
+      self.screen.blit(self.cub[3],[(self.cub_size[0]*12), (self.cub_size[0]*5)])
+      self.screen.blit(self.cub[3],[(self.cub_size[0]*13), (self.cub_size[0]*5)])
+      self.screen.blit(self.cub[3],[(self.cub_size[0]*14), (self.cub_size[0]*5)])
+      self.screen.blit(self.cub[3],[(self.cub_size[0]*15), (self.cub_size[0]*5)])
+
+      #Piso nivel Inferior
+      self.screen.blit(self.cub[0],[0, self.pantalla_y-self.cub_size[0]])
+      self.screen.blit(self.cub[0],[(self.cub_size[0]), self.pantalla_y-self.cub_size[0]])
+      self.screen.blit(self.cub[0],[(self.cub_size[0]*3), self.pantalla_y-self.cub_size[0]])
+      self.screen.blit(self.cub[0],[(self.cub_size[0]*5), self.pantalla_y-(self.cub_size[0]*2)])
+      self.screen.blit(self.cub[0],[(self.cub_size[0]*6), self.pantalla_y-(self.cub_size[0]*2)])
+      self.screen.blit(self.cub[0],[(self.cub_size[0]*7), self.pantalla_y-(self.cub_size[0]*2)])
+      self.screen.blit(self.cub[0],[(self.cub_size[0]*8), self.pantalla_y-(self.cub_size[0]*2)])
+      self.screen.blit(self.cub[0],[(self.cub_size[0]*9), self.pantalla_y-(self.cub_size[0]*2)])
+      self.screen.blit(self.cub[0],[(self.cub_size[0]*10), self.pantalla_y-(self.cub_size[0]*2)])
+      self.screen.blit(self.cub[0],[(self.cub_size[0]*12), self.pantalla_y-self.cub_size[0]])
+      self.screen.blit(self.cub[0],[(self.cub_size[0]*14), self.pantalla_y-(self.cub_size[0]*2)])
+      self.screen.blit(self.cub[0],[(self.cub_size[0]*16), self.pantalla_y-(self.cub_size[0]*3)])
+      self.screen.blit(self.cub[0],[(self.cub_size[0]*17), self.pantalla_y-(self.cub_size[0]*4)])
+
+
+      #Background Inferior
+      self.screen.blit(self.cub[1],[(self.cub_size[0]*2), self.pantalla_y-self.cub_size[0]])
+      self.screen.blit(self.cub[1],[(self.cub_size[0]*4), self.pantalla_y-self.cub_size[0]])
+      self.screen.blit(self.cub[1],[(self.cub_size[0]*5), self.pantalla_y-self.cub_size[0]])
+      self.screen.blit(self.cub[1],[(self.cub_size[0]*6), self.pantalla_y-self.cub_size[0]])
+      self.screen.blit(self.cub[1],[(self.cub_size[0]*7), self.pantalla_y-self.cub_size[0]])
+      self.screen.blit(self.cub[1],[(self.cub_size[0]*8), self.pantalla_y-self.cub_size[0]])
+      self.screen.blit(self.cub[1],[(self.cub_size[0]*9), self.pantalla_y-self.cub_size[0]])
+      self.screen.blit(self.cub[1],[(self.cub_size[0]*10), self.pantalla_y-self.cub_size[0]])
+      self.screen.blit(self.cub[1],[(self.cub_size[0]*11), self.pantalla_y-self.cub_size[0]])
+      self.screen.blit(self.cub[1],[(self.cub_size[0]*13), self.pantalla_y-self.cub_size[0]])
+      self.screen.blit(self.cub[1],[(self.cub_size[0]*14), self.pantalla_y-self.cub_size[0]])
+      self.screen.blit(self.cub[1],[(self.cub_size[0]*15), self.pantalla_y-self.cub_size[0]])
+      self.screen.blit(self.cub[1],[(self.cub_size[0]*16), self.pantalla_y-self.cub_size[0]])
+      self.screen.blit(self.cub[1],[(self.cub_size[0]*16), self.pantalla_y-(self.cub_size[0]*2)])
+      self.screen.blit(self.cub[1],[(self.cub_size[0]*17), self.pantalla_y-self.cub_size[0]])
+      self.screen.blit(self.cub[1],[(self.cub_size[0]*17), self.pantalla_y-(self.cub_size[0]*2)])
+      self.screen.blit(self.cub[1],[(self.cub_size[0]*17), self.pantalla_y-(self.cub_size[0]*3)])
+
+
+      #Seccion final
+      self.screen.blit(self.cub[3],[(self.cub_size[0]*15), (self.cub_size[0]*2)])
+      self.screen.blit(self.cub[3],[(self.cub_size[0]*16), (self.cub_size[0]*2)])
+      self.screen.blit(self.cub[3],[(self.cub_size[0]*17), (self.cub_size[0]*2)])
+
+
+      #Seccion Bloqueada
+      self.screen.blit(self.cub[1],[(self.cub_size[0]*11), (self.cub_size[0])])
+      self.screen.blit(self.cub[1],[(self.cub_size[0]*11), (self.cub_size[0]*2)])
+      self.screen.blit(self.cub[1],[(self.cub_size[0]*11), (self.cub_size[0]*3)])
+      self.screen.blit(self.cub[1],[(self.cub_size[0]*11), (self.cub_size[0]*4)])
+      self.screen.blit(self.cub[2],[(self.cub_size[0]*11), self.pantalla_y-self.cub_size[0]-(self.cub_size[1]*5)-8])
+      self.screen.blit(self.cub[2],[(self.cub_size[0]*11), self.pantalla_y-self.cub_size[0]-(self.cub_size[1]*6)-8])
+      self.screen.blit(self.cub[2],[(self.cub_size[0]*11), self.pantalla_y-self.cub_size[0]-(self.cub_size[1]*7)-8])
+      self.screen.blit(self.cub[2],[(self.cub_size[0]*11), self.pantalla_y-self.cub_size[0]-(self.cub_size[1]*8)-8])
+      self.screen.blit(self.cub[2],[(self.cub_size[0]*11), self.pantalla_y-self.cub_size[0]-(self.cub_size[1]*9)-8])
+      self.screen.blit(self.cub[2],[(self.cub_size[0]*11), self.pantalla_y-self.cub_size[0]-(self.cub_size[1]*10)-9])
+      self.screen.blit(self.cub[2],[(self.cub_size[0]*11), self.pantalla_y-self.cub_size[0]-(self.cub_size[1]*11)-9])
