@@ -95,17 +95,20 @@ class pantallaDos():
     self.cub = [
       pygame.image.load("Assets/S2.png"), #0
       pygame.image.load("Assets/S3.png"), #1
-      pygame.image.load("Assets/BarrelMini.png"), #2
+      pygame.image.load("Assets/Box_s.png"), #2
       pygame.image.load("Assets/P2.png"), #3
       pygame.image.load("Assets/RoofEntrance.png"), #4
       pygame.image.load("Assets/RoofEntrance2.png"), #5
       pygame.image.load("Assets/Door.png"), #6
       pygame.image.load("Assets/BGpuerta1.png"), #7
       pygame.image.load("Assets/BGpuerta2.png"), #8
+      pygame.image.load("Assets/Escaleras1_Mini.png"), #9
+      pygame.image.load("Assets/S2_floating.png"), #10
     ]
     self.cub_size = [
       64,   #Tamaño del terreno 0
       50,   #Barril             1
+      58,   #Puerta             2
     ]
     self.pantalla_X = 1152
     #self.pantalla_y = 768
@@ -204,6 +207,12 @@ class pantallaDos():
       self.screen.blit(self.cub[1],[(self.cub_size[0]*17), self.pantalla_y-(self.cub_size[0]*2)])
       self.screen.blit(self.cub[1],[(self.cub_size[0]*17), self.pantalla_y-(self.cub_size[0]*3)])
 
+      #Plataformas
+      self.screen.blit(self.cub[10],[(self.cub_size[0]*12), self.pantalla_y-(self.cub_size[0]*5)])
+      self.screen.blit(self.cub[10],[(self.cub_size[0]*14), self.pantalla_y-(self.cub_size[0]*6)])
+      self.screen.blit(self.cub[10],[(self.cub_size[0]*12), self.pantalla_y-(self.cub_size[0]*7)])
+      self.screen.blit(self.cub[10],[(self.cub_size[0]*14), self.pantalla_y-(self.cub_size[0]*8)])
+      self.screen.blit(self.cub[10],[(self.cub_size[0]*12), self.pantalla_y-(self.cub_size[0]*9)])
 
       #Seccion final
       self.screen.blit(self.cub[3],[(self.cub_size[0]*15), (self.cub_size[0]*2)])
@@ -212,14 +221,50 @@ class pantallaDos():
 
 
       #Seccion Bloqueada
-      self.screen.blit(self.cub[1],[(self.cub_size[0]*11), (self.cub_size[0])])
-      self.screen.blit(self.cub[1],[(self.cub_size[0]*11), (self.cub_size[0]*2)])
-      self.screen.blit(self.cub[1],[(self.cub_size[0]*11), (self.cub_size[0]*3)])
-      self.screen.blit(self.cub[1],[(self.cub_size[0]*11), (self.cub_size[0]*4)])
       self.screen.blit(self.cub[2],[(self.cub_size[0]*11), self.pantalla_y-self.cub_size[0]-(self.cub_size[1]*5)-8])
+      self.screen.blit(self.cub[2],[(self.cub_size[0]*11)-self.cub_size[1], self.pantalla_y-self.cub_size[0]-(self.cub_size[1]*5)-8])
       self.screen.blit(self.cub[2],[(self.cub_size[0]*11), self.pantalla_y-self.cub_size[0]-(self.cub_size[1]*6)-8])
+      self.screen.blit(self.cub[2],[(self.cub_size[0]*11)-self.cub_size[1], self.pantalla_y-self.cub_size[0]-(self.cub_size[1]*6)-8])
       self.screen.blit(self.cub[2],[(self.cub_size[0]*11), self.pantalla_y-self.cub_size[0]-(self.cub_size[1]*7)-8])
       self.screen.blit(self.cub[2],[(self.cub_size[0]*11), self.pantalla_y-self.cub_size[0]-(self.cub_size[1]*8)-8])
       self.screen.blit(self.cub[2],[(self.cub_size[0]*11), self.pantalla_y-self.cub_size[0]-(self.cub_size[1]*9)-8])
       self.screen.blit(self.cub[2],[(self.cub_size[0]*11), self.pantalla_y-self.cub_size[0]-(self.cub_size[1]*10)-9])
       self.screen.blit(self.cub[2],[(self.cub_size[0]*11), self.pantalla_y-self.cub_size[0]-(self.cub_size[1]*11)-9])
+
+      #Objetos
+      # -- Escaleras --
+      self.screen.blit(self.cub[9],[(self.cub_size[0]*14)-40, self.pantalla_y-self.cub_size[0]-(self.cub_size[1]*5)-8])
+      self.screen.blit(self.cub[9],[(self.cub_size[0]*14)-40, self.pantalla_y-self.cub_size[0]-(self.cub_size[1]*6)-8])
+      self.screen.blit(self.cub[9],[(self.cub_size[0]*14)-40, self.pantalla_y-self.cub_size[0]-(self.cub_size[1]*7)-8])
+      self.screen.blit(self.cub[9],[(self.cub_size[0]*14)-40, self.pantalla_y-self.cub_size[0]-(self.cub_size[1]*8)-8])
+      self.screen.blit(self.cub[9],[(self.cub_size[0]*14)-40, self.pantalla_y-self.cub_size[0]-(self.cub_size[1]*9)-8])
+
+      self.screen.blit(self.cub[9],[(self.cub_size[0]*9)+10, self.pantalla_y-self.cub_size[0]-(self.cub_size[1]*5)-8])
+      self.screen.blit(self.cub[9],[(self.cub_size[0]*9)+10, self.pantalla_y-self.cub_size[0]-(self.cub_size[1]*6)-8])
+      self.screen.blit(self.cub[9],[(self.cub_size[0]*9)+10, self.pantalla_y-self.cub_size[0]-(self.cub_size[1]*7)-8])
+      self.screen.blit(self.cub[9],[(self.cub_size[0]*9)+10, self.pantalla_y-self.cub_size[0]-(self.cub_size[1]*8)-8])
+      self.screen.blit(self.cub[9],[(self.cub_size[0]*9)+10, self.pantalla_y-self.cub_size[0]-(self.cub_size[1]*9)-8])
+      # -- Puertas --
+      self.screen.blit(self.cub[6],[self.cub_size[0], self.pantalla_y-(self.cub_size[0]*8)-(self.cub_size[2])])
+      self.screen.blit(self.cub[6],[self.cub_size[0]*16, self.pantalla_y-(self.cub_size[0]*8)-(self.cub_size[2])])
+      #  -- Pared de Fondo --
+      self.screen.blit(self.cub[8], [0, self.cub_size[0]])
+      self.screen.blit(self.cub[7], [(self.cub_size[0]*2), self.cub_size[0]])
+      self.screen.blit(self.cub[8], [(self.cub_size[0]*3), self.cub_size[0]])
+      self.screen.blit(self.cub[7], [(self.cub_size[0]*4), self.cub_size[0]])
+      self.screen.blit(self.cub[8], [(self.cub_size[0]*5), self.cub_size[0]])
+      self.screen.blit(self.cub[7], [(self.cub_size[0]*6), self.cub_size[0]])
+      self.screen.blit(self.cub[8], [(self.cub_size[0]*7), self.cub_size[0]])
+      self.screen.blit(self.cub[7], [(self.cub_size[0]*8), self.cub_size[0]])
+
+      self.screen.blit(self.cub[8], [(self.cub_size[0]*15), self.cub_size[0]])
+      self.screen.blit(self.cub[7], [(self.cub_size[0]*17), self.cub_size[0]])
+
+      self.screen.blit(self.cub[8], [(self.cub_size[0]*3), self.cub_size[0]*4])
+      self.screen.blit(self.cub[7], [(self.cub_size[0]*4), self.cub_size[0]*4])
+      self.screen.blit(self.cub[8], [(self.cub_size[0]*5), self.cub_size[0]*4])
+      self.screen.blit(self.cub[7], [(self.cub_size[0]*6), self.cub_size[0]*4])
+      self.screen.blit(self.cub[8], [(self.cub_size[0]*7), self.cub_size[0]*4])
+      self.screen.blit(self.cub[7], [(self.cub_size[0]*8), self.cub_size[0]*4])
+
+      # -- Barriles --
