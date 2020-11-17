@@ -83,6 +83,7 @@ while not done:
         texto_x = texto_final_rect[0]
         screen.blit(texto_final,[texto_x,10])
         screen.blit(NaveLevel.image, NaveLevel.rect)
+        screen.blit(NaveLevel.image_daño, NaveLevel.rect_daño)
         barra_vida(screen, pantalla_x//2-250, pantalla_y-55, NaveLevel.vida)
         for x in enemylist:
             screen.blit(x.image,x.rect)
