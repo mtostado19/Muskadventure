@@ -24,8 +24,6 @@ background = pygame.image.load("Assets/BF.jpg").convert()
 background2 = pygame.image.load("Assets/BG_Nivel2.png").convert()
 BackgroundAtomosfera = pygame.image.load("Assets/Level2/MarteAtmosfera.jpg").convert() # Level 2
 
-current_time = 0
-
 Pantalla1 = Pantallas.pantallaUno(screen)
 Pantalla2 = Pantallas.pantallaDos(screen)
 animacionNave = NaveAnimacion.NaveBackground((64, 0))
@@ -58,6 +56,7 @@ naveLand = False
 done = False
 NuevoIntento = False ##
 
+current_time = pygame.time.get_ticks() + 60000 ##
 while not done:
     for event in pygame.event.get():
         if event.type == pygame.QUIT:
@@ -70,14 +69,16 @@ while not done:
     if level == 1:
         pass
     if level == 2:  # Obviamente Level 2
+        # que el tiempo inicie aqui
         if NuevoIntento:
+            # quiero reiniciar el tiempo aqui
             NaveLevel.vida = 100
             NuevoIntento = False
-        current_time = 60 - pygame.time.get_ticks() //1000
-        if current_time == 0:
+        current_time_2 = pygame.time.get_ticks()
+        if current_time_2 >= current_time:
             level += 1
         screen.blit(BackgroundAtomosfera, [0, 0])
-        texto_final = font.render(str(current_time),True,(255,255,255))
+        texto_final = font.render(str((current_time_2-current_time)//-1000),True,(255,255,255))
         texto_final_rect = texto_final.get_rect()
         texto_final_rect.center = screen_rect.center
         texto_x = texto_final_rect[0]
