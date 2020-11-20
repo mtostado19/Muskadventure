@@ -17,6 +17,7 @@ size = (pantalla_x, pantalla_y)
 level = 2
 screen = pygame.display.set_mode(size)
 font = pygame.font.Font(None,50) ##
+fontmini = pygame.font.Font(None,30) ##
 screen_rect = screen.get_rect() ##
 pygame.display.set_caption("WILD SPACE") ### MMMM
 
@@ -29,23 +30,9 @@ Pantalla2 = Pantallas.pantallaDos(screen)
 animacionNave = NaveAnimacion.NaveBackground((64, 0))
 NaveLevel = NaveLevel2.NaveLevel2((pantalla_x//2, pantalla_y//2+90))
 
-# Esto es del level 2 --
-def barra_vida(screen, x, y, vida):
-    largo = 500
-    ancho = 25
-    calculo_barra = int((vida/100) * largo)
-    borde = pygame.Rect(x, y, largo, ancho)
-    rectangulo = pygame.Rect(x, y, calculo_barra, ancho)
-    pygame.draw.rect(screen, (255, 255, 255), borde, 3)
-    if vida >= 60:
-        pygame.draw.rect(screen, (50, 185, 40), rectangulo)
-    else:
-        pygame.draw.rect(screen, (255, 255, 40), rectangulo)
-    if vida <= 30:
-        pygame.draw.rect(screen, (185, 50, 40), rectangulo)
-    
+# Esto es del level 2 --    
 
-cantidad = 3
+cantidad = 5
 enemylist = []
 for x in range(cantidad):
     teorito = NaveLevel2.Teorito((random.randint(400,1452), -50))
@@ -53,9 +40,9 @@ for x in range(cantidad):
 
 # Termina level 2 --
 naveLand = False
+patata = True
 done = False
 NuevoIntento = False ##
-
 current_time = pygame.time.get_ticks() + 60000 ##
 while not done:
     for event in pygame.event.get():
@@ -78,14 +65,25 @@ while not done:
         if current_time_2 >= current_time:
             level += 1
         screen.blit(BackgroundAtomosfera, [0, 0])
-        texto_final = font.render(str((current_time_2-current_time)//-1000),True,(255,255,255))
+        segundos = (current_time_2-current_time)//-1000
+        texto_final = font.render(str(segundos),True,(255,255,255))
         texto_final_rect = texto_final.get_rect()
         texto_final_rect.center = screen_rect.center
         texto_x = texto_final_rect[0]
         screen.blit(texto_final,[texto_x,10])
+
+        texto_2= fontmini.render(str(NaveLevel.combi[::-1]),True,(255,255,255))
+        screen.blit(texto_2,[20,pantalla_y-50])
+
         screen.blit(NaveLevel.image, NaveLevel.rect)
-        screen.blit(NaveLevel.image_daño, NaveLevel.rect_daño)
-        barra_vida(screen, pantalla_x//2-250, pantalla_y-55, NaveLevel.vida)
+        screen.blit(NaveLevel.image_daño, NaveLevel.rect_daño) ## WARNING
+        if (segundos%10)==0 and segundos!=0:
+            if patata:
+                NaveLevel.putPosition()
+                patata = False
+        else:
+            patata = True
+        NaveLevel2.barra_vida(screen, pantalla_x//2-150, pantalla_y-55, NaveLevel.vida)
         for x in enemylist:
             screen.blit(x.image,x.rect)
             x.rect.y +=1
