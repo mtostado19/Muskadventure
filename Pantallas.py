@@ -3,6 +3,7 @@ import pygame
 class pantallaUno():
   def __init__(self,screen):
     self.screen = screen
+    self.background = pygame.image.load("Assets/BF.jpg").convert()
     self.cub = [
       pygame.image.load("Assets/T1.png"), #0
       pygame.image.load("Assets/S1.png"), #1
@@ -30,8 +31,19 @@ class pantallaUno():
     self.pantalla_X = 1152
     #self.pantalla_y = 768
     self.pantalla_y = 640
+  
+  def inicioLVL(self, background):
+    self.fade = pygame.Surface((self.pantalla_X, self.pantalla_y))
+    self.fade.fill((0,0,0))
+    for alpha in range(0,300):
+      self.fade.set_alpha(300 - alpha)
+      self.inicio()
+      self.screen.blit(self.fade, [0,0])
+      pygame.display.update()
+      pygame.time.delay(5)
 
   def inicio(self):
+    self.screen.blit(self.background,[0,0])
     self.screen.blit(self.cub[2],[0,self.pantalla_y-self.cub_size[0]*2])
     self.screen.blit(self.cub[4],[0,self.pantalla_y-self.cub_size[0]])
     self.screen.blit(self.cub[2],[self.cub_size[0],self.pantalla_y-self.cub_size[0]*2])
