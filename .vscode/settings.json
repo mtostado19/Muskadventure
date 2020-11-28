@@ -1,5 +1,5 @@
 {
     "python.linting.pylintArgs": [
-        "--extension-pkg-whitelist=pygame",
+        "--extension-pkg-whitelist=pygame, cv2",
     ]
 }

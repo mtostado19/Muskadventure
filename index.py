@@ -5,19 +5,22 @@ import NaveAnimacion
 import Menu
 import video
 import nivel1
+import random
 from pygame import movie
 
 pygame.init()
 
 pygame.mixer.music.load('Assets/sound/city.mp3')
-pygame.mixer.music.play(-1)
+#pygame.mixer.music.play(-1)
 pantalla_x = 1152
 pantalla_y = 640
+
+nivel1bool = True
 
 color_1 = (255, 1, 5)
 
 size = (pantalla_x,pantalla_y)
-level = 0
+level = 1
 screen = pygame.display.set_mode(size)
 
 background = pygame.image.load("Assets/BF.jpg").convert()
@@ -34,7 +37,7 @@ LevelIntro = [False, False, False]
 naveLand = False
 done = False
 
-Menu.Menu_entrada()
+#Menu.Menu_entrada()
 
 while not done:
   posx, posy = pygame.mouse.get_pos()
@@ -60,8 +63,22 @@ while not done:
     Menu.inicio()
   
   if level == 1:
-    Nivel1.nivel1()
+    ##Version 2
+    if(nivel1bool):
+      time_terminar = pygame.time.get_ticks() + 60000
+      nivel1bool = False
 
+    time_actual = pygame.time.get_ticks()
+    segundos = (time_actual-time_terminar)//-1000
+    if(time_actual >= time_terminar):
+      level = 3
+    
+    Nivel1.nivel(segundos)
+    Nivel1.eventManager(event)
+
+     ##Version 1
+    #Nivel1.nivel1()
+    #level = 3
   if level == 3:
     ## 
     if LevelIntro[0] != True:
