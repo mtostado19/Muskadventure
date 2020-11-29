@@ -14,17 +14,21 @@ pantalla_y = 640
 color_1 = (255, 1, 5)
 
 size = (pantalla_x,pantalla_y)
-level = 0
+level = 5
 screen = pygame.display.set_mode(size)
 
 background = pygame.image.load("Assets/BF.jpg").convert()
 background2 = pygame.image.load("Assets/BG_Nivel2.png").convert()
+backgroundCave1 = pygame.image.load("Assets/BGCueva1.png").convert()
 menu1 = pygame.image.load("Assets/menu0_2.jpg")
 menu0 = pygame.image.load("Assets/menu0.jpg")
 
 
 Pantalla1 = Pantallas.pantallaUno(screen)
 Pantalla2 = Pantallas.pantallaDos(screen)
+PantallaCueva1 = Pantallas.pantallaCuevaUno(screen)
+PantallaCueva2 = Pantallas.pantallaCuevaDos(screen)
+pantallaMarte = Pantallas.pantallaMarte(screen)
 # Pantalla1 = Pantallas.pantallaTres(screen)
 animacionNave = NaveAnimacion.NaveBackground((64, 0))
 
@@ -60,11 +64,28 @@ while not done:
             print("aterrizo")
             naveLand = True
   if level == 2:
+
+    
     screen.blit(background2,[0,0])
     Pantalla2.Plataformer_Nivel2()
   if level == 3:
-    pass
-    # Pantalla3.inicio()
+    screen.blit(background, [0,0])
+    pantallaMarte.superficieMarte()
+    screen.blit(animacionNave.image, animacionNave.rect)
+    if naveLand == False:
+        animacionNave.rect.y += 1
+        if animacionNave.rect.y >= pantalla_y-300:
+            print("aterrizo")
+            naveLand = True
+  if level == 4:
+    screen.blit(background, [0,0])
+    pantallaMarte.superficieMarteCueva()
+  if level == 5:
+    screen.blit(backgroundCave1, [0,0])
+    PantallaCueva1.Cueva1()
+  if level == 6:
+    screen.blit(backgroundCave1, [0,0])
+    PantallaCueva2.Cueva2()
   pygame.display.flip()
 
 pygame.quit
