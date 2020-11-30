@@ -72,5 +72,5 @@ class Player(pygame.sprite.Sprite):
             else:
                 self.isJump = False
                 self.jumpCount = 8
-                self.rect.y += 5
+                self.rect.y += 4
         self.image = self.sheet.subsurface(self.sheet.get_clip())
