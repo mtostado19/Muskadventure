@@ -2,6 +2,7 @@ import pygame
 from pygame import mixer
 import Pantallas
 import NaveAnimacion
+import player
 
 
 pygame.init()
@@ -14,7 +15,7 @@ pantalla_y = 640
 color_1 = (255, 1, 5)
 
 size = (pantalla_x,pantalla_y)
-level = 5
+level = 3
 screen = pygame.display.set_mode(size)
 
 background = pygame.image.load("Assets/BF.jpg").convert()
@@ -32,6 +33,8 @@ pantallaMarte = Pantallas.pantallaMarte(screen)
 # Pantalla1 = Pantallas.pantallaTres(screen)
 animacionNave = NaveAnimacion.NaveBackground((64, 0))
 
+player = player.Player((0, pantalla_y - 64 - 39))
+clock = pygame.time.Clock()
 
 naveLand = False
 done = False
@@ -77,15 +80,32 @@ while not done:
         if animacionNave.rect.y >= pantalla_y-300:
             print("aterrizo")
             naveLand = True
+    if naveLand == True:
+          player.handle_event(event)
+          player.jump()
+          screen.blit(player.image,player.rect)
+          clock.tick(15)
+          if player.rect.x > 1152:
+            level = 4
+            player.rect.x = 0
+            player.rect.y = pantalla_y - 64 - 39
+
   if level == 4:
     screen.blit(background, [0,0])
     pantallaMarte.superficieMarteCueva()
+    player.handle_event(event)
+    player.jump()
+    screen.blit(player.image,player.rect)
+    clock.tick(15)
+
   if level == 5:
     screen.blit(backgroundCave1, [0,0])
     PantallaCueva1.Cueva1()
+
   if level == 6:
     screen.blit(backgroundCave1, [0,0])
     PantallaCueva2.Cueva2()
+
   pygame.display.flip()
 
 pygame.quit
