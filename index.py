@@ -84,6 +84,7 @@ while not done:
     if controller != None:
             x, y = controller.get_left_stick()
             Nivel1.moveConControl(x, y)
+    Nivel1.verificar()
     Nivel1.nivel(segundos)
     Nivel1.eventManager(event)
      ##Version 1
