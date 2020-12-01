@@ -6,6 +6,7 @@ import Menu
 import video
 import nivel1
 import random
+import xbox360_controller
 from pygame import movie
 
 pygame.init()
@@ -38,6 +39,10 @@ naveLand = False
 done = False
 
 #Menu.Menu_entrada()
+try:
+    controller = xbox360_controller.Controller()
+except:
+    controller = None
 
 while not done:
   posx, posy = pygame.mouse.get_pos()
@@ -71,11 +76,16 @@ while not done:
     time_actual = pygame.time.get_ticks()
     segundos = (time_actual-time_terminar)//-1000
     if(time_actual >= time_terminar):
-      level = 3
-    
+      if (Nivel1.verificar()):
+        level = 3
+      else: 
+        Nivel1 = nivel1.Nivel1(screen)
+        nivel1bool= True
+    if controller != None:
+            x, y = controller.get_left_stick()
+            Nivel1.moveConControl(x, y)
     Nivel1.nivel(segundos)
     Nivel1.eventManager(event)
-
      ##Version 1
     #Nivel1.nivel1()
     #level = 3

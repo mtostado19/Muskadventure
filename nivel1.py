@@ -36,33 +36,12 @@ class Nivel1():
 
     self.font = pygame.font.Font(None,40) ##
 
+    self.s = pygame.Surface((50,50), pygame.SRCALPHA)   # per-pixel alpha
+    self.s.fill((255,255,255,255))                         # notice the alpha value in the color
+    #self.blit(s, (0,0))
+
     self.done = True
     
-  
-  def nivel1(self):
-    time_terminar = pygame.time.get_ticks() + 10000
-    while self.done:
-      for event in pygame.event.get():
-        if event.type == pygame.QUIT:
-            break
-
-      pygame.draw.rect(self.screen,(0,0,0) ,[0,0,self.pantalla_x, self.pantalla_y])
-      self.screen.blit(self.hud,[0,0])
-      #self.screen.blit(self.refuel,[self.initX + self.nave_rect.x//2 - self.refuel_rect.x, self.initY + self.nave_rect.y//2 - self.refuel_rect.y])
-      #self.screen.blit(self.nave,[self.initX, self.initY])
-
-      time_actual = pygame.time.get_ticks()
-      segundos = (time_actual-time_terminar)//-1000
-      texto_final = self.font.render(str(segundos),True,(255,255,255))
-      texto_final_rect = texto_final.get_rect()
-      self.screen.blit(texto_final,[576,10])
-
-      
-      if(time_actual >= time_terminar):
-        self.done = False
-      pygame.display.flip()
-
-
   def nivel(self, segundos):
     pygame.draw.rect(self.screen,(0,0,0) ,[0,0,self.pantalla_x, self.pantalla_y])
     self.screen.blit(self.nave, [self.initX//2 - self.nave_rect[2]//2 + self.naveX, self.initY//2 - self.nave_rect[3]//2 + self.naveY])
@@ -87,14 +66,28 @@ class Nivel1():
 
   def update(self, direction):
     if direction == 'left':
-        self.naveX -= .075
+        self.naveX += .070
     if direction == 'right':
-        self.naveX += .075
+        self.naveX -= .070
 
     if direction == 'up':
-        self.naveY -= .075
+        self.naveY += .070
     if direction == 'down':
-        self.naveY += .075
+        self.naveY -= .070
+
+    if direction == 'down-left':
+        self.naveY -= .070
+        self.naveX += .070
+    if direction == 'down-right':
+        self.naveY -= .070
+        self.naveX -= .070
+
+    if direction == 'up-right':
+      self.naveY += .070
+      self.naveX -= .070
+    if direction == 'up-left':
+      self.naveY += .070
+      self.naveX += .070
 
   def eventManager(self, event):
     if event.type == pygame.QUIT:
@@ -112,6 +105,45 @@ class Nivel1():
         if event.key == pygame.K_DOWN or event.key == pygame.K_s:
             self.update('down')
 
+        if (event.key == pygame.K_DOWN or event.key == pygame.K_s) and (event.key == pygame.K_LEFT or event.key == pygame.K_a):
+            self.update('down-left')
+        if (event.key == pygame.K_DOWN or event.key == pygame.K_s) and (event.key == pygame.K_RIGHT or event.key == pygame.K_d):
+            self.update('down-right')
+        
+        if (event.key == pygame.K_UP or event.key == pygame.K_w) and (event.key == pygame.K_LEFT or event.key == pygame.K_a):
+            self.update('up-left')
+        if (event.key == pygame.K_UP or event.key == pygame.K_w) and (event.key == pygame.K_RIGHT or event.key == pygame.K_d):
+            self.update('up-right')
+            
+
         if event.key == pygame.K_SPACE:
             self.isJump = True
             self.music.saltar()
+  
+  def moveConControl(self, x, y):
+    if y < 0 and x == 0:
+        self.update('up')
+    if y > 0 and x == 0:
+        self.update('down')
+
+    if x < 0 and y == 0:
+        self.update('left')
+    if x > 0 and y == 0:
+        self.update('right')
+
+    if  x > 0 and y < 0:
+        self.update('up-right')
+    if  x > 0 and y > 0:
+        self.update('down-right')
+
+    if  x < 0 and y < 0:
+        self.update('up-left')
+    if  x < 0 and y > 0:
+        self.update('down-left')
+  
+  def verificar(self):
+    #self.screen.blit(self.s, (self.pantalla_x//2 - 25, self.pantalla_y//2 - 25))
+    if (pygame.draw.rect(self.screen, (255,255,255), (self.pantalla_x//2 - 15, self.pantalla_y//2 - 15,30,30)).colliderect(self.initX//2 - self.nave_rect[2]//4 + self.naveX , self.initY//2 - (self.nave_rect[3]//14) + self.refuel_rect[3] + self.naveY, self.refuel_rect[2], self.refuel_rect[3])):
+      return True
+    else: 
+      return False
