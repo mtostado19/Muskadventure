@@ -2,7 +2,7 @@ import pygame
 import cv2
 
 def video1(screen):
-    video = "Assets/video/VideoIntroResized.mp4";
+    video = "Assets/videos/VideoIntroResized.mp4";
     pantalla_x = 1152
     pantalla_y = 640
     font = pygame.font.Font(None,30)
