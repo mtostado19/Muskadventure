@@ -460,6 +460,7 @@ class pantallaCuevaDos():
       pygame.image.load("Assets/Cave/pilar3.png"), #8
       pygame.image.load("Assets/Cave/pilar4.png"), #9
       pygame.image.load("Assets/Cave/roca1.png"), #10
+      pygame.image.load("Assets/Cave/roca4.png"), #11
     ]
     self.cub_size = [
       112,   #Tamaño del piso
@@ -477,6 +478,7 @@ class pantallaCuevaDos():
   def Cueva2(self):
     #piedra
     self.screen.blit(self.cub[10], [0 + self.cub_size[5]* 12, self.pantalla_y - self.cub_size[1]- self.cub_size[7]])
+    self.screen.blit(self.cub[11], [0 + self.cub_size[5]* 4, self.pantalla_y - self.cub_size[1]- self.cub_size[7]])
 
     #Pilares
     self.screen.blit(self.cub[7], [0 + (self.cub_size[5]*4), self.pantalla_y-self.cub_size[1]-(self.cub_size[6])])
