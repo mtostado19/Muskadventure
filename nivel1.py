@@ -45,6 +45,14 @@ class Nivel1():
     self.s_rect[2] = self.sOGy*self.porcentaje
     self.s.fill((255,255,255,255)) 
     
+    #Para Intro
+    self.font = pygame.font.Font(None,30)
+    self.nivel1 = pygame.image.load("Assets/nivel1.png")
+    self.nivel1_image = self.nivel1.subsurface(self.nivel1.get_clip())
+    self.nivel1_rect = self.nivel1_image.get_rect()
+
+    self.instrucciones = pygame.image.load("Assets/instrucciones1.jpg")
+    self.fallaste = pygame.image.load("Assets/fallaste.jpg")
     
   def nivel(self, segundos):
     pygame.draw.rect(self.screen,(0,0,0) ,[0,0,self.pantalla_x, self.pantalla_y])   
@@ -171,3 +179,207 @@ class Nivel1():
     else: 
       self.Alineado = False
       return False
+
+  def ShowPrimerNivel(self):
+    self.introEntrada()
+    self.intro()
+    self.introSalida()
+
+    self.instruccionesEntrada()
+    self.instruccionesFunc()
+    self.instruccionesSalida()
+
+    self.nivelEntrada()
+
+  def introEntrada(self): 
+    for event in pygame.event.get():
+      if event.type == pygame.QUIT:
+        pygame.quit
+    self.fade = pygame.Surface((self.pantalla_x, self.pantalla_y))
+    self.fade.fill((0,0,0))
+    for alpha in range(0,300):
+      self.fade.set_alpha(300 - alpha)
+      self.screen.blit(self.nivel1,[(self.pantalla_x)//2 - self.nivel1_rect[2]//2, (self.pantalla_y)//2 - self.nivel1_rect[3]//2])
+      self.screen.blit(self.fade, [0,0])
+      pygame.display.update()
+      pygame.time.delay(5)
+
+  def intro(self):
+    current_time = pygame.time.get_ticks()
+    endTime = current_time + 5000
+
+    firstText = True;
+
+    while firstText:
+      for event in pygame.event.get():
+        if event.type == pygame.QUIT:
+          pygame.quit
+        if event.type == pygame.MOUSEBUTTONDOWN:
+          firstText = False
+
+      self.screen.blit(self.nivel1,[(self.pantalla_x)//2 - self.nivel1_rect[2]//2, (self.pantalla_y)//2 - self.nivel1_rect[3]//2])
+      self.clickInstruccion()
+      pygame.display.update()
+      
+      tiempo = pygame.time.get_ticks()
+      if tiempo >= endTime:
+        firstText = False   
+  
+  def introSalida(self):
+    for event in pygame.event.get():
+      if event.type == pygame.QUIT:
+        pygame.quit
+    self.fade = pygame.Surface((self.pantalla_x, self.pantalla_y))
+    self.fade.fill((0,0,0))
+    for alpha in range(0,300):
+      self.fade.set_alpha(alpha)
+      self.screen.blit(self.nivel1,[(self.pantalla_x)//2 - self.nivel1_rect[2]//2, (self.pantalla_y)//2 - self.nivel1_rect[3]//2])
+      self.screen.blit(self.fade, [0,0])
+      self.clickInstruccion()
+      pygame.display.update()
+      pygame.time.delay(5)
+
+  def instruccionesEntrada(self):
+    for event in pygame.event.get():
+      if event.type == pygame.QUIT:
+        pygame.quit
+    self.fade = pygame.Surface((self.pantalla_x, self.pantalla_y))
+    self.fade.fill((0,0,0))
+    for alpha in range(0,300):
+      self.fade.set_alpha(300 - alpha)
+      self.screen.blit(self.instrucciones, [0,0])
+      self.screen.blit(self.fade, [0,0])
+      pygame.display.update()
+      pygame.time.delay(5)
+  
+  def instruccionesFunc(self):
+    current_time = pygame.time.get_ticks()
+    endTime = current_time + 10000
+
+    firstText = True;
+
+    while firstText:
+      for event in pygame.event.get():
+        if event.type == pygame.QUIT:
+          pygame.quit
+        if event.type == pygame.MOUSEBUTTONDOWN:
+          firstText = False
+
+      self.screen.blit(self.instrucciones,[0,0])
+      self.clickInstruccion()
+      pygame.display.update()
+      
+      tiempo = pygame.time.get_ticks()
+      if tiempo >= endTime:
+        firstText = False  
+
+  def instruccionesSalida(self):
+    for event in pygame.event.get():
+      if event.type == pygame.QUIT:
+        pygame.quit
+    self.fade = pygame.Surface((self.pantalla_x, self.pantalla_y))
+    self.fade.fill((0,0,0))
+    for alpha in range(0,300):
+      self.fade.set_alpha(alpha)
+      self.screen.blit(self.instrucciones,[0,0])
+      self.screen.blit(self.fade, [0,0])
+      self.clickInstruccion()
+      pygame.display.update()
+      pygame.time.delay(5)
+
+  def nivelEntrada(self):
+    for event in pygame.event.get():
+      if event.type == pygame.QUIT:
+        pygame.quit
+    self.fade = pygame.Surface((self.pantalla_x, self.pantalla_y))
+    self.fade.fill((0,0,0))
+    for alpha in range(0,300):
+      self.fade.set_alpha(300 - alpha)
+      #Por mostrar
+      self.screen.blit(self.nave, [self.initX//2 - self.nave_rect[2]//2 + self.naveX, self.initY//2 - self.nave_rect[3]//2 + self.naveY])
+      self.screen.blit(self.refuel, [self.initX//2 - self.nave_rect[2]//4 + self.naveX , self.initY//2 - (self.nave_rect[3]//14) + self.refuel_rect[3] +self.naveY])
+      if (self.Alineado):
+        self.screen.blit(self.hudGreen,[0,0])  
+      else:
+        self.screen.blit(self.hudRed,[0,0])
+
+      self.screen.blit(self.fade, [0,0])
+      pygame.display.update()
+      pygame.time.delay(5)
+
+  def nivelSalida(self):
+    for event in pygame.event.get():
+      if event.type == pygame.QUIT:
+        pygame.quit
+    self.fade = pygame.Surface((self.pantalla_x, self.pantalla_y))
+    self.fade.fill((0,0,0))
+    for alpha in range(0,300):
+      self.fade.set_alpha(alpha)
+      #Por mostrar:
+      self.screen.blit(self.nave, [self.initX//2 - self.nave_rect[2]//2 + self.naveX, self.initY//2 - self.nave_rect[3]//2 + self.naveY])
+      self.screen.blit(self.refuel, [self.initX//2 - self.nave_rect[2]//4 + self.naveX , self.initY//2 - (self.nave_rect[3]//14) + self.refuel_rect[3] +self.naveY])
+      texto_final = self.font.render("Segundos para el encuentro: 0" ,True,(255,255,255))
+      self.screen.blit(texto_final,[10,10])
+      
+      self.screen.blit(self.fade, [0,0])
+      pygame.display.update()
+      pygame.time.delay(5)
+  
+  def restart(self):
+    current_time = pygame.time.get_ticks()
+    endTime = current_time + 5000
+
+    firstText = True;
+
+    while firstText:
+      for event in pygame.event.get():
+        if event.type == pygame.QUIT:
+          pygame.quit
+        if event.type == pygame.MOUSEBUTTONDOWN:
+          firstText = False
+
+      self.screen.blit(self.fallaste,[0,0])
+      self.clickInstruccion()
+      pygame.display.update()
+      
+      tiempo = pygame.time.get_ticks()
+      if tiempo >= endTime:
+        firstText = False 
+
+  def restartEntrada(self):
+      for event in pygame.event.get():
+        if event.type == pygame.QUIT:
+          pygame.quit
+      self.fade = pygame.Surface((self.pantalla_x, self.pantalla_y))
+      self.fade.fill((0,0,0))
+      for alpha in range(0,300):
+        self.fade.set_alpha(300 - alpha)
+        self.screen.blit(self.fallaste, [0,0])
+        self.screen.blit(self.fade, [0,0])
+        pygame.display.update()
+        pygame.time.delay(5)
+
+  def restartSalida(self):
+      for event in pygame.event.get():
+        if event.type == pygame.QUIT:
+          pygame.quit
+      self.fade = pygame.Surface((self.pantalla_x, self.pantalla_y))
+      self.fade.fill((0,0,0))
+      for alpha in range(0,300):
+        self.fade.set_alpha(alpha)
+        self.screen.blit(self.fallaste,[0,0])
+        self.screen.blit(self.fade, [0,0])
+        self.clickInstruccion()
+        pygame.display.update()
+        pygame.time.delay(5)
+
+  def showRestart(self):
+    self.restartEntrada()
+    self.restart()
+    self.restartSalida()
+
+
+  def clickInstruccion(self):
+    self.texto_marcador = self.font.render(f"[Click para continuar]", True, [255,255,255])
+    self.texto_marcador_rect = self.texto_marcador.get_rect()
+    self.screen.blit(self.texto_marcador, (self.pantalla_x - self.texto_marcador_rect[2] -10, self.pantalla_y - self.texto_marcador_rect[3]-10))

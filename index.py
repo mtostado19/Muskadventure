@@ -12,7 +12,9 @@ from pygame import movie
 pygame.init()
 
 pygame.mixer.music.load('Assets/sound/city.mp3')
-#pygame.mixer.music.play(-1)
+pygame.mixer.music.set_volume(.5)
+pygame.mixer.music.play(-1)
+
 pantalla_x = 1152
 pantalla_y = 640
 
@@ -21,7 +23,7 @@ nivel1bool = True
 color_1 = (255, 1, 5)
 
 size = (pantalla_x,pantalla_y)
-level = 1
+level = 0
 screen = pygame.display.set_mode(size)
 
 background = pygame.image.load("Assets/BF.jpg").convert()
@@ -38,7 +40,7 @@ LevelIntro = [False, False, False]
 naveLand = False
 done = False
 
-#Menu.Menu_entrada()
+Menu.Menu_entrada()
 try:
     controller = xbox360_controller.Controller()
 except:
@@ -61,7 +63,7 @@ while not done:
         pygame.time.delay(1000)
         pygame.mixer.music.fadeout(1000)
         pygame.time.delay(1000)
-        Menu.ShowPrimerNivel()
+        Nivel1.ShowPrimerNivel()
         
   
   if level == 0:
@@ -77,10 +79,16 @@ while not done:
     segundos = (time_actual-time_terminar)//-1000
     if(time_actual >= time_terminar):
       if (Nivel1.verificar()):
+        Nivel1.nivelSalida()
+        video.video2(screen)
+        pygame.mixer.music.fadeout(1000)
+        pygame.time.delay(1000)
         level = 3
       else: 
+        Nivel1.nivelSalida()
         Nivel1 = nivel1.Nivel1(screen)
         nivel1bool= True
+        Nivel1.showRestart()
     if controller != None:
             x, y = controller.get_left_stick()
             Nivel1.moveConControl(x, y)

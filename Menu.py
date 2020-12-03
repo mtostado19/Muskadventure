@@ -16,14 +16,10 @@ class background ():
     self.p1_image = self.p1.subsurface(self.p1.get_clip())
     self.p1_rect = self.p1_image.get_rect()
 
-    self.p2 = pygame.image.load("Assets/texto22.png")
+    self.p2 = pygame.image.load("Assets/texto2.png")
     self.p2_image = self.p2.subsurface(self.p2.get_clip())
     self.p2_rect = self.p2_image.get_rect()
-
-    self.nivel1 = pygame.image.load("Assets/nivel1.png")
-    self.nivel1_image = self.nivel1.subsurface(self.nivel1.get_clip())
-    self.nivel1_rect = self.nivel1_image.get_rect()
-
+ 
     self.play = pygame.image.load("Assets/play.png")
     self.play_rect = self.play.get_rect()
     
@@ -207,57 +203,3 @@ class background ():
       self.screen.blit(self.fade, [0,0])
       pygame.display.update()
       pygame.time.delay(5)
-
-  def primerNivelEntrada(self):
-    for event in pygame.event.get():
-      if event.type == pygame.QUIT:
-        pygame.quit
-    self.fade = pygame.Surface((self.pantalla_X, self.pantalla_y))
-    self.fade.fill((0,0,0))
-    for alpha in range(0,300):
-      self.fade.set_alpha(300 - alpha)
-      self.screen.blit(self.nivel1,[(self.pantalla_X)//2 - self.nivel1_rect[2]//2, (self.pantalla_y)//2 - self.nivel1_rect[3]//2])
-      self.screen.blit(self.fade, [0,0])
-      pygame.display.update()
-      pygame.time.delay(5)
-
-  def primerNivel(self):
-    
-    current_time = pygame.time.get_ticks()
-    endTime = current_time + 5000
-
-    firstText = True;
-
-    while firstText:
-      for event in pygame.event.get():
-        if event.type == pygame.QUIT:
-          pygame.quit
-        if event.type == pygame.MOUSEBUTTONDOWN:
-          firstText = False
-
-      self.screen.blit(self.nivel1,[(self.pantalla_X)//2 - self.nivel1_rect[2]//2, (self.pantalla_y)//2 - self.nivel1_rect[3]//2])
-      self.clickInstruccion()
-      pygame.display.update()
-      
-      tiempo = pygame.time.get_ticks()
-      if tiempo >= endTime:
-        firstText = False   
-  
-  def primerNivelSalida(self):
-    for event in pygame.event.get():
-      if event.type == pygame.QUIT:
-        pygame.quit
-    self.fade = pygame.Surface((self.pantalla_X, self.pantalla_y))
-    self.fade.fill((0,0,0))
-    for alpha in range(0,300):
-      self.fade.set_alpha(alpha)
-      self.screen.blit(self.nivel1,[(self.pantalla_X)//2 - self.nivel1_rect[2]//2, (self.pantalla_y)//2 - self.nivel1_rect[3]//2])
-      self.screen.blit(self.fade, [0,0])
-      self.clickInstruccion()
-      pygame.display.update()
-      pygame.time.delay(5)
-
-  def ShowPrimerNivel(self):
-    self.primerNivelEntrada()
-    self.primerNivel()
-    self.primerNivelSalida()
