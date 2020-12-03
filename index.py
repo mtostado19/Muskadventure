@@ -46,6 +46,8 @@ try:
 except:
     controller = None
 
+clock = pygame.time.Clock()
+
 while not done:
   posx, posy = pygame.mouse.get_pos()
   #print(f"x:{posx} y:{posy}")
@@ -54,7 +56,7 @@ while not done:
     if event.type == pygame.QUIT:
       done = True
     if event.type == pygame.MOUSEBUTTONDOWN:
-      if 498<posx<650 and 273<posy<430:
+      if 498<posx<650 and 273<posy<430 and level==0:
         level += 1
         Menu.Menu_salida()
         pygame.mixer.music.fadeout(3000)
@@ -64,8 +66,6 @@ while not done:
         pygame.mixer.music.fadeout(1000)
         pygame.time.delay(1000)
         Nivel1.ShowPrimerNivel()
-        
-  
   if level == 0:
     Menu.inicio()
   
@@ -117,5 +117,6 @@ while not done:
     pass
     # Pantalla3.inicio()
   pygame.display.flip()
+  clock.tick(60)
 
 pygame.quit
