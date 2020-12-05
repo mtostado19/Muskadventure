@@ -11,10 +11,11 @@ class Player(pygame.sprite.Sprite):
         self.frame = 0
         self.isJump = False
         self.jumpCount = 8
+        self.momentum = 0
+        self.plataformRect = []
+        self.direccion = [0,0]
         self.left_states = {0:(5,41,28,39),1:(45,41,28,39),2:(85,41,28,39)}
         self.right_states = {0:(7,81,28,39),1:(47,81,28,39),2:(87,81,28,39)}
-        #self.left_states = {0:(4,33,25,31),1:(36,33,25,31),2:(68,33,25,31)}
-        #self.right_states = {0:(3,65,25,31),1:(35,65,25,31),2:(67,65,25,31)}
 
     def get_frame(self, frame_set):
         self.frame += 1
@@ -34,10 +35,12 @@ class Player(pygame.sprite.Sprite):
             self.clip(self.left_states)
             if self.rect.x > 0:
                 self.rect.x -= 10
+                self.direccion[0] -= 10
         if direction == 'right':
             self.clip(self.right_states)
             if self.rect.x < 1152:
                 self.rect.x += 10
+                self.direccion[0] += 10
 
         if direction == "stand_left":
             self.clip(self.left_states[0])
@@ -46,9 +49,17 @@ class Player(pygame.sprite.Sprite):
 
         self.image = self.sheet.subsurface(self.sheet.get_clip())
 
-    def handle_event(self, event):
+    def handle_event(self, event, colliders):
         if event.type == pygame.QUIT:
             game_over = True
+
+        self.plataformRect = colliders
+
+        self.direccion = [0,0]
+        self.rect.y += self.momentum
+        self.momentum += 0.2
+        if self.momentum > 6:
+            self.momentum = 6
 
         if event.type == pygame.KEYDOWN:
             if event.key == pygame.K_LEFT:
@@ -56,7 +67,10 @@ class Player(pygame.sprite.Sprite):
             if event.key == pygame.K_RIGHT:
                 self.update('right')
             if event.key == pygame.K_SPACE:
-                self.isJump = True
+                if self.jumpCount < 6:
+                    self.momentum = -5
+
+        self.direccion[1] = self.momentum
 
         if event.type == pygame.KEYUP:
             if event.key == pygame.K_LEFT:
@@ -64,13 +78,28 @@ class Player(pygame.sprite.Sprite):
             if event.key == pygame.K_RIGHT:
                 self.update("stand_right")
 
-    def jump(self):
-        if self.isJump:
-            if self.jumpCount >= -8:
-                self.rect.y -= (self.jumpCount * abs(self.jumpCount)) * 0.5
-                self.jumpCount -= 1
-            else:
-                self.isJump = False
-                self.jumpCount = 8
-                self.rect.y += 4
-        self.image = self.sheet.subsurface(self.sheet.get_clip())
+        prueba = self.movement()
+        if prueba['bottom']:
+            self.momentum = 0
+            self.jumpCount = 0
+        else:
+            self.jumpCount += 1
+
+    def collision_test(self):
+        hit_list = []
+        for tile in self.plataformRect:
+            if self.rect.colliderect(tile):
+                hit_list.append(tile)
+        return hit_list
+
+    def movement(self):
+        collision_types = {'top': False, 'bottom': False, 'right': False, 'left': False}
+        c_list = self.collision_test()
+        for tile in c_list:
+            if self.direccion[1] > 0:
+                self.rect.bottom = tile.top
+                collision_types['bottom'] = True
+            elif self.direccion[1] < 0:
+                self.rect.top = tile.bottom
+                collision_types['top'] = True
+        return collision_types

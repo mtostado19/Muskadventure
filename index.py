@@ -7,15 +7,15 @@ import player
 
 pygame.init()
 
-pygame.mixer.music.load('Assets/sound/city.mp3')
-pygame.mixer.music.play(-1)
+#pygame.mixer.music.load('Assets/sound/city.mp3')
+#pygame.mixer.music.play(-1)
 pantalla_x = 1152
 pantalla_y = 640
 
 color_1 = (255, 1, 5)
 
 size = (pantalla_x,pantalla_y)
-level = 6
+level = 3
 screen = pygame.display.set_mode(size)
 
 background = pygame.image.load("Assets/BF.jpg").convert()
@@ -34,6 +34,11 @@ pantallaMarte = Pantallas.pantallaMarte(screen)
 animacionNave = NaveAnimacion.NaveBackground((64, 0))
 
 player = player.Player((0, pantalla_y - 64 - 39))
+collidersLivel1 = [pygame.Rect(0, 576, 1152, 64)]
+collidersLivel2 = [
+  pygame.Rect(0, 576, 832, 64),
+  #pygame.Rect(0, 576, 1152, 64)
+  ]
 clock = pygame.time.Clock()
 
 naveLand = False
@@ -48,7 +53,7 @@ while not done:
     if event.type == pygame.MOUSEBUTTONDOWN:
       if 217 < posx < 333 and 150 < posy < 300:
         level += 1
-        pygame.mixer.music.stop()
+        #pygame.mixer.music.stop()
       x,y = event.pos
   
   if level == 0:
@@ -81,8 +86,7 @@ while not done:
             print("aterrizo")
             naveLand = True
     if naveLand == True:
-          player.handle_event(event)
-          player.jump()
+          player.handle_event(event, collidersLivel1)
           screen.blit(player.image,player.rect)
           clock.tick(15)
           if player.rect.x > 1152:
@@ -93,14 +97,20 @@ while not done:
   if level == 4:
     screen.blit(background, [0,0])
     pantallaMarte.superficieMarteCueva()
-    player.handle_event(event)
-    player.jump()
+    player.handle_event(event, collidersLivel2)
     screen.blit(player.image,player.rect)
     clock.tick(15)
+    if player.rect.y > 640:
+      level = 5
+      player.rect.x = 0
+      player.rect.y = 60
 
   if level == 5:
     screen.blit(backgroundCave1, [0,0])
     PantallaCueva1.Cueva1()
+    player.handle_event(event, collidersLivel2)
+    screen.blit(player.image,player.rect)
+    clock.tick(15)
 
   if level == 6:
     screen.blit(backgroundCave1, [0,0])
