@@ -413,18 +413,18 @@ class pantallaCuevaUno():
     self.screen.blit(self.cub[5], [0 + (self.cub_size[0]*16), self.pantalla_y-(self.cub_size[1]*16)])
 
     #Plataforma tres
-    self.screen.blit(self.cub[2], [0, self.pantalla_y-(self.cub_size[1]*4)])
-    self.screen.blit(self.cub[3], [0 + self.cub_size[0], self.pantalla_y-(self.cub_size[1]*4)])
-    self.screen.blit(self.cub[4], [0 + (self.cub_size[0]*2), self.pantalla_y-(self.cub_size[1]*4)])
-    self.screen.blit(self.cub[1], [0 + (self.cub_size[0]*3), self.pantalla_y-(self.cub_size[1]*4)])
-    self.screen.blit(self.cub[7], [0 + (self.cub_size[0]*4), self.pantalla_y-(self.cub_size[1]*4)])
+    self.screen.blit(self.cub[2], [0, self.pantalla_y-(self.cub_size[1]*5)])
+    self.screen.blit(self.cub[3], [0 + self.cub_size[0], self.pantalla_y-(self.cub_size[1]*5)])
+    self.screen.blit(self.cub[4], [0 + (self.cub_size[0]*2), self.pantalla_y-(self.cub_size[1]*5)])
+    self.screen.blit(self.cub[1], [0 + (self.cub_size[0]*3), self.pantalla_y-(self.cub_size[1]*5)])
+    self.screen.blit(self.cub[7], [0 + (self.cub_size[0]*4), self.pantalla_y-(self.cub_size[1]*5)])
 
     #Plataforma cuatro
-    self.screen.blit(self.cub[2], [0 + (self.cub_size[0]*9), self.pantalla_y-(self.cub_size[1]*2)])
-    self.screen.blit(self.cub[3], [0 + (self.cub_size[0]*10), self.pantalla_y-(self.cub_size[1]*2)])
-    self.screen.blit(self.cub[4], [0 + (self.cub_size[0]*11), self.pantalla_y-(self.cub_size[1]*2)])
-    self.screen.blit(self.cub[1], [0 + (self.cub_size[0]*12), self.pantalla_y-(self.cub_size[1]*2)])
-    self.screen.blit(self.cub[2], [0 + (self.cub_size[0]*13), self.pantalla_y-(self.cub_size[1]*2)])
+    self.screen.blit(self.cub[2], [0 + (self.cub_size[0]*9), self.pantalla_y-(self.cub_size[1]*3)])
+    self.screen.blit(self.cub[3], [0 + (self.cub_size[0]*10), self.pantalla_y-(self.cub_size[1]*3)])
+    self.screen.blit(self.cub[4], [0 + (self.cub_size[0]*11), self.pantalla_y-(self.cub_size[1]*3)])
+    self.screen.blit(self.cub[1], [0 + (self.cub_size[0]*12), self.pantalla_y-(self.cub_size[1]*3)])
+    self.screen.blit(self.cub[2], [0 + (self.cub_size[0]*13), self.pantalla_y-(self.cub_size[1]*3)])
 
 
     #Plataforma cinco

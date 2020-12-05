@@ -39,6 +39,10 @@ collidersLivel2 = [
   pygame.Rect(0, 576, 832, 64),
   #pygame.Rect(0, 576, 1152, 64)
   ]
+collidersLevel3= [
+  pygame.Rect(0, 160, 378, 40),
+  pygame.Rect(228, 320, 360, 40)
+]
 clock = pygame.time.Clock()
 
 naveLand = False
@@ -103,12 +107,12 @@ while not done:
     if player.rect.y > 640:
       level = 5
       player.rect.x = 0
-      player.rect.y = 60
+      player.rect.y = 120
 
   if level == 5:
     screen.blit(backgroundCave1, [0,0])
     PantallaCueva1.Cueva1()
-    player.handle_event(event, collidersLivel2)
+    player.handle_event(event, collidersLevel3)
     screen.blit(player.image,player.rect)
     clock.tick(15)
 
