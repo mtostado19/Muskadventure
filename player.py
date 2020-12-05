@@ -66,7 +66,7 @@ class Player(pygame.sprite.Sprite):
                 self.update('left')
             if event.key == pygame.K_RIGHT:
                 self.update('right')
-            if event.key == pygame.K_SPACE:
+            if event.key == pygame.K_UP:
                 if self.jumpCount < 6:
                     self.momentum = -5
 

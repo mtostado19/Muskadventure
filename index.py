@@ -37,11 +37,13 @@ player = player.Player((0, pantalla_y - 64 - 39))
 collidersLivel1 = [pygame.Rect(0, 576, 1152, 64)]
 collidersLivel2 = [
   pygame.Rect(0, 576, 832, 64),
-  #pygame.Rect(0, 576, 1152, 64)
+  pygame.Rect(1024, 576, 128, 64)
+  #(x,y,largo,altura)
   ]
 collidersLevel3= [
   pygame.Rect(0, 160, 378, 40),
-  pygame.Rect(228, 320, 360, 40)
+  pygame.Rect(228, 320, 360, 40),
+  pygame.Rect(0, 440, 208, 40),
 ]
 clock = pygame.time.Clock()
 
@@ -77,9 +79,9 @@ while not done:
             naveLand = True
   if level == 2:
 
-    
     screen.blit(background2,[0,0])
     Pantalla2.Plataformer_Nivel2()
+
   if level == 3:
     screen.blit(background, [0,0])
     pantallaMarte.superficieMarte()
