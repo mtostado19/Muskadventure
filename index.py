@@ -15,7 +15,7 @@ pantalla_y = 640
 color_1 = (255, 1, 5)
 
 size = (pantalla_x,pantalla_y)
-level = 3
+level = 7
 screen = pygame.display.set_mode(size)
 
 background = pygame.image.load("Assets/BF.jpg").convert()
@@ -139,6 +139,10 @@ while not done:
     player.handle_event(event, collidersLevel4)
     screen.blit(player.image,player.rect)
     clock.tick(15)
+
+  if level == 7:
+    screen.blit(backgroundCave1, [0,0])
+    PantallaCueva2.Cueva3()
 
   pygame.display.flip()
 
