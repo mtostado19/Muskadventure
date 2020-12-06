@@ -378,7 +378,6 @@ class Nivel1():
     self.restart()
     self.restartSalida()
 
-
   def clickInstruccion(self):
     self.texto_marcador = self.font.render(f"[Click para continuar]", True, [255,255,255])
     self.texto_marcador_rect = self.texto_marcador.get_rect()

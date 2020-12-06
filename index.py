@@ -7,7 +7,6 @@ import video
 import nivel1
 import random
 import xbox360_controller
-from pygame import movie
 import NaveLevel2 # Esto es level 2
 
 # WILD SPACE
@@ -25,7 +24,7 @@ nivel1bool = True
 color_1 = (255, 1, 5)
 
 size = (pantalla_x,pantalla_y)
-level = 2
+level = 1
 screen = pygame.display.set_mode(size)
 font = pygame.font.Font(None,50) ##
 fontmini = pygame.font.Font(None,30) ##
@@ -46,7 +45,7 @@ animacionNave = NaveAnimacion.NaveBackground((64, 0))
 NaveLevel = NaveLevel2.NaveLevel2((pantalla_x//2, pantalla_y//2+90))
 
 # Esto es del level 2 --    
-
+intro = NaveLevel2.Intro(screen)
 cantidad = 5
 enemylist = []
 for x in range(cantidad):
@@ -57,7 +56,7 @@ for x in range(cantidad):
 naveLand = False
 patata = True
 done = False
-NuevoIntento = False ##
+NuevoIntento = True ##
 current_time = pygame.time.get_ticks() + 60000
 Menu.Menu_entrada()
 try:
@@ -84,7 +83,6 @@ while not done:
         pygame.time.delay(1000)
         pygame.mixer.music.fadeout(1000)
         pygame.time.delay(1000)
-        Nivel1.ShowPrimerNivel()
   NaveLevel.manejador_eventos(event) # Level 2
   if level == 0:
     Menu.inicio()
@@ -92,6 +90,7 @@ while not done:
   if level == 1:
     ##Version 2
     if(nivel1bool):
+      Nivel1.ShowPrimerNivel()
       time_terminar = pygame.time.get_ticks() + 60000
       nivel1bool = False
 
@@ -103,7 +102,7 @@ while not done:
         video.video2(screen)
         pygame.mixer.music.fadeout(1000)
         pygame.time.delay(1000)
-        level = 3
+        level = 2
       else: 
         Nivel1.nivelSalida()
         Nivel1 = nivel1.Nivel1(screen)
@@ -122,9 +121,10 @@ while not done:
         # que el tiempo inicie aqui
         if NuevoIntento:
             # quiero reiniciar el tiempo aqui
+            intro.showIntro()
             NaveLevel.vida = 100
             NuevoIntento = False
-        current_time_2 = pygame.time.get_ticks()
+            current_time_2 = pygame.time.get_ticks()
         if current_time_2 >= current_time:
             level += 1
         screen.blit(BackgroundAtomosfera, [0, 0])
@@ -165,7 +165,7 @@ while not done:
             texto_final_rect.center = screen_rect.center
             texto_x = texto_final_rect[0]
             screen.blit(texto_final,[texto_x,10])
-            NuevoIntento = False ## cambiar cuando este listo el boton
+            NuevoIntento = True ## cambiar cuando este listo el boton
   if level == 3:
     ## 
     if LevelIntro[0] != True:
@@ -185,6 +185,6 @@ while not done:
     pass
     # Pantalla3.inicio()
   pygame.display.flip()
-  clock.tick(60)
+  clock.tick(200)
 
 pygame.quit
