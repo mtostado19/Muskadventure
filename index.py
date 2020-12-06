@@ -15,7 +15,7 @@ pantalla_y = 640
 color_1 = (255, 1, 5)
 
 size = (pantalla_x,pantalla_y)
-level = 7
+level = 3
 screen = pygame.display.set_mode(size)
 
 background = pygame.image.load("Assets/BF.jpg").convert()
@@ -36,17 +36,23 @@ animacionNave = NaveAnimacion.NaveBackground((64, 0))
 player = player.Player((0, pantalla_y - 64 - 39))
 collidersLivel1 = [pygame.Rect(0, 576, 1152, 64)]
 collidersLivel2 = [
-    pygame.Rect(0, 576, 832, 64),
-    pygame.Rect(1024, 576, 128, 64),
+    pygame.Rect(0, 576, 824, 64),
+    pygame.Rect(1040, 576, 128, 64),
 ]
+paredLeftCollider2 = [pygame.Rect(833, 576, 4, 60)]
+paredRightCollider2 = [pygame.Rect(1023, 576, 8, 60)]
+
 collidersLevel3= [
-    pygame.Rect(0, 160, 378, 40),
-    pygame.Rect(228, 320, 360, 40),
-    pygame.Rect(0, 440, 208, 40),
-    pygame.Rect(324, 520, 180, 40),
-    pygame.Rect(612, 480, 180, 40),
-    pygame.Rect(828, 600, 360, 40),
+    pygame.Rect(0, 160, 378, 5),
+    pygame.Rect(228, 320, 360, 5),
+    pygame.Rect(0, 440, 208, 5),
+    pygame.Rect(324, 520, 180, 5),
+    pygame.Rect(612, 480, 180, 5),
+    pygame.Rect(828, 600, 360, 5),
 ]
+paredLeftCollider3 = []
+paredRightCollider3 = [pygame.Rect(576, 0, 36, 288)]
+
 collidersLevel4= [
     pygame.Rect(0, 565, 1152, 75),
     pygame.Rect(0, 136, 120, 36),
@@ -56,6 +62,9 @@ collidersLevel4= [
     pygame.Rect(910, 440, 170, 40),
     pygame.Rect(490, 360, 320, 40),
 ]
+paredLeftCollider4 = [pygame.Rect(833, 576, 4, 60)]
+paredRightCollider4 = [pygame.Rect(1023, 576, 8, 60)]
+
 clock = pygame.time.Clock()
 
 naveLand = False
@@ -103,7 +112,7 @@ while not done:
             print("aterrizo")
             naveLand = True
     if naveLand == True:
-          player.handle_event(event, collidersLivel1)
+          player.handle_event(event, collidersLivel1, [], [])
           screen.blit(player.image,player.rect)
           clock.tick(15)
           if player.rect.x > 1152:
@@ -114,7 +123,7 @@ while not done:
   if level == 4:
     screen.blit(background, [0,0])
     pantallaMarte.superficieMarteCueva()
-    player.handle_event(event, collidersLivel2)
+    player.handle_event(event, collidersLivel2, paredLeftCollider2, paredRightCollider2)
     screen.blit(player.image,player.rect)
     clock.tick(15)
     if player.rect.y > 640:
@@ -125,7 +134,7 @@ while not done:
   if level == 5:
     screen.blit(backgroundCave1, [0,0])
     PantallaCueva1.Cueva1()
-    player.handle_event(event, collidersLevel3)
+    player.handle_event(event, collidersLevel3, paredLeftCollider3, paredRightCollider3)
     screen.blit(player.image,player.rect)
     clock.tick(15)
     if player.rect.x > 1152:
@@ -136,7 +145,7 @@ while not done:
   if level == 6:
     screen.blit(backgroundCave1, [0,0])
     PantallaCueva2.Cueva2()
-    player.handle_event(event, collidersLevel4)
+    player.handle_event(event, collidersLevel4, paredLeftCollider4, paredRightCollider4)
     screen.blit(player.image,player.rect)
     clock.tick(15)
 

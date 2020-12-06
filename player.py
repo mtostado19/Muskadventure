@@ -13,6 +13,8 @@ class Player(pygame.sprite.Sprite):
         self.jumpCount = 8
         self.momentum = 0
         self.plataformRect = []
+        self.paredLeftRect = []
+        self.paredRightRect = []
         self.direccion = [0,0]
         self.left_states = {0:(5,41,28,39),1:(45,41,28,39),2:(85,41,28,39)}
         self.right_states = {0:(7,81,28,39),1:(47,81,28,39),2:(87,81,28,39)}
@@ -30,15 +32,27 @@ class Player(pygame.sprite.Sprite):
             self.sheet.set_clip(pygame.Rect(clipped_rect))
         return clipped_rect
 
+    def check_pared(self, pared):
+        cont = 0
+        for c in pared:
+            if self.rect.colliderect(c) == True:
+                cont += 1
+        if cont > 0:
+            return True
+        else:
+            return False
+
     def update(self, direction):
         if direction == 'left':
             self.clip(self.left_states)
-            if self.rect.x > 0:
+            check = self.check_pared(self.paredLeftRect)
+            if self.rect.x > 0 and check == False:
                 self.rect.x -= 10
                 self.direccion[0] -= 10
         if direction == 'right':
             self.clip(self.right_states)
-            if self.rect.x < 1152:
+            check = self.check_pared(self.paredRightRect)
+            if self.rect.x < 1152 and check == False:
                 self.rect.x += 10
                 self.direccion[0] += 10
 
@@ -49,11 +63,13 @@ class Player(pygame.sprite.Sprite):
 
         self.image = self.sheet.subsurface(self.sheet.get_clip())
 
-    def handle_event(self, event, colliders):
+    def handle_event(self, event, colliders, left, right):
         if event.type == pygame.QUIT:
             game_over = True
 
         self.plataformRect = colliders
+        self.paredLeftRect = left
+        self.paredRightRect = right
 
         self.direccion = [0,0]
         self.rect.y += self.momentum
