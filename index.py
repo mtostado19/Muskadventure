@@ -36,14 +36,25 @@ animacionNave = NaveAnimacion.NaveBackground((64, 0))
 player = player.Player((0, pantalla_y - 64 - 39))
 collidersLivel1 = [pygame.Rect(0, 576, 1152, 64)]
 collidersLivel2 = [
-  pygame.Rect(0, 576, 832, 64),
-  pygame.Rect(1024, 576, 128, 64)
-  #(x,y,largo,altura)
-  ]
+    pygame.Rect(0, 576, 832, 64),
+    pygame.Rect(1024, 576, 128, 64),
+]
 collidersLevel3= [
-  pygame.Rect(0, 160, 378, 40),
-  pygame.Rect(228, 320, 360, 40),
-  pygame.Rect(0, 440, 208, 40),
+    pygame.Rect(0, 160, 378, 40),
+    pygame.Rect(228, 320, 360, 40),
+    pygame.Rect(0, 440, 208, 40),
+    pygame.Rect(324, 520, 180, 40),
+    pygame.Rect(612, 480, 180, 40),
+    pygame.Rect(828, 600, 360, 40),
+]
+collidersLevel4= [
+    pygame.Rect(0, 565, 1152, 75),
+    pygame.Rect(0, 136, 120, 36),
+    pygame.Rect(210, 240, 170, 40),
+    pygame.Rect(910, 240, 170, 40),
+    pygame.Rect(210, 440, 170, 40),
+    pygame.Rect(910, 440, 170, 40),
+    pygame.Rect(490, 360, 320, 40),
 ]
 clock = pygame.time.Clock()
 
@@ -108,8 +119,8 @@ while not done:
     clock.tick(15)
     if player.rect.y > 640:
       level = 5
-      player.rect.x = 0
-      player.rect.y = 120
+      player.rect.x = 60
+      player.rect.y = 0
 
   if level == 5:
     screen.blit(backgroundCave1, [0,0])
@@ -117,10 +128,17 @@ while not done:
     player.handle_event(event, collidersLevel3)
     screen.blit(player.image,player.rect)
     clock.tick(15)
+    if player.rect.x > 1152:
+      level = 6
+      player.rect.x = 60
+      player.rect.y = 0
 
   if level == 6:
     screen.blit(backgroundCave1, [0,0])
     PantallaCueva2.Cueva2()
+    player.handle_event(event, collidersLevel4)
+    screen.blit(player.image,player.rect)
+    clock.tick(15)
 
   pygame.display.flip()
 

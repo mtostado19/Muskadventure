@@ -564,4 +564,4 @@ class pantallaCuevaDos():
     self.screen.blit(self.cub[3], [0 + (self.cub_size[5]*11)-(self.cub_size[4]*3), self.pantalla_y-(self.cub_size[4]*7)])
     self.screen.blit(self.cub[3], [0 + (self.cub_size[5]*12)-(self.cub_size[4]*4), self.pantalla_y-(self.cub_size[4]*7)])
     self.screen.blit(self.cub[3], [0 + (self.cub_size[5]*13)-(self.cub_size[4]*5), self.pantalla_y-(self.cub_size[4]*7)])
-    self.screen.blit(self.cub[5], [0 + (self.cub_size[5]*11)-self.cub_size[4], self.pantalla_y-(self.cub_size[4]*7)])
+    self.screen.blit(self.cub[5], [0 + (self.cub_size[5]*11)-self.cub_size[4], self.pantalla_y-(self.cub_size[4]*7)])    

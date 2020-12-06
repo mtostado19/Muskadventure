@@ -99,7 +99,7 @@ class Player(pygame.sprite.Sprite):
             if self.direccion[1] > 0:
                 self.rect.bottom = tile.top
                 collision_types['bottom'] = True
-            elif self.direccion[1] < 0:
-                self.rect.top = tile.bottom
-                collision_types['top'] = True
+            #elif self.direccion[1] < 0:
+            #    self.rect.top = tile.bottom
+            #    collision_types['top'] = True
         return collision_types
