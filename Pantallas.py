@@ -745,7 +745,7 @@ class pantallaCuevaDos():
     self.screen.blit(self.cub[3], [self.pantalla_x - (self.cub_size[4]*2), self.pantalla_y - (self.cub_size[3]*7)])
     self.screen.blit(self.cub[14], [self.pantalla_x - (self.cub_size[4]*3), self.pantalla_y - (self.cub_size[3]*7)])
 
-  def Cueva5(self):
+  def Cueva5(self, pressed):
     #Entrada
     self.screen.blit(self.cub[3], [0, self.pantalla_y-(self.cub_size[3]*14)])
     self.screen.blit(self.cub[3], [(self.cub_size[3]), self.pantalla_y-(self.cub_size[3]*14)])
@@ -889,6 +889,12 @@ class pantallaCuevaDos():
     self.screen.blit(self.cub[3], [(self.cub_size[3]*4), self.pantalla_y-(self.cub_size[3]*2)])
     self.screen.blit(self.cub[3], [(self.cub_size[3]*5), self.pantalla_y-(self.cub_size[3]*2)])
     self.screen.blit(self.cub[3], [(self.cub_size[3]*6), self.pantalla_y-(self.cub_size[3]*2)])
+
+    #boton
+    if pressed == False:
+      self.screen.blit(self.cub[16], [(self.cub_size[3]*15), self.pantalla_y-self.cub_size[1]-(self.cub_size[3]*5.5)])
+    else:
+      self.screen.blit(self.cub[17], [(self.cub_size[3]*15), self.pantalla_y-self.cub_size[1]-(self.cub_size[3]*5.5)])
 
     #plataforma central
     self.screen.blit(self.cub[3], [(self.cub_size[3]*7), self.pantalla_y-(self.cub_size[3]*7)])
