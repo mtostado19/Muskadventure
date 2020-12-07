@@ -16,6 +16,8 @@ class Player(pygame.sprite.Sprite):
         self.paredLeftRect = []
         self.paredRightRect = []
         self.direccion = [0,0]
+        self.listButton = []
+        self.buttonPressed = False
         self.left_states = {0:(5,41,28,39),1:(45,41,28,39),2:(85,41,28,39)}
         self.right_states = {0:(7,81,28,39),1:(47,81,28,39),2:(87,81,28,39)}
 
@@ -85,6 +87,11 @@ class Player(pygame.sprite.Sprite):
             if event.key == pygame.K_UP:
                 if self.jumpCount < 6:
                     self.momentum = -5
+            if event.key == pygame.K_DOWN:
+                if self.listButton and self.buttonPressed == False:
+                    if self.rect.colliderect(self.listButton):
+                        self.left.pop()
+                        self.buttonPressed = True
 
         self.direccion[1] = self.momentum
 

@@ -35,8 +35,8 @@ animacionNave = NaveAnimacion.NaveBackground((64, 0))
 player = player.Player((0, pantalla_y - 64 - 39))
 collidersLivel1 = [pygame.Rect(0, 576, 1152, 64)]
 collidersLivel2 = [
-    pygame.Rect(0, 576, 824, 64),
-    pygame.Rect(1040, 576, 128, 64),
+    pygame.Rect(0, 576, 824, 20),
+    pygame.Rect(1040, 576, 128, 20),
 ]
 paredLeftCollider2 = [pygame.Rect(833, 576, 4, 60)]
 paredRightCollider2 = [
@@ -67,8 +67,9 @@ collidersLevel4= [
 paredLeftCollider4 = [
     pygame.Rect(0, 0, 40, 100),
     pygame.Rect(76, 172, 36, 252),
+    pygame.Rect(72, 420, 5, 144),
 ]
-paredRightCollider4 = []
+paredRightCollider4 = [pygame.Rect(1152, 0, 5, 640)]
 
 collidersLevel5= [
     pygame.Rect(0, 565, 1152, 75),
@@ -87,15 +88,27 @@ paredRightCollider5 = []
 
 collidersLevel6= [
   pygame.Rect(0, 136, 156, 5),
-  pygame.Rect(280, 220, 40, 5),
-  pygame.Rect(420, 162.5, 40, 5),
-  pygame.Rect(560, 220, 40, 5),
-  pygame.Rect(770, 277.5, 40, 5),
-  pygame.Rect(910, 335, 40, 5),
+  pygame.Rect(300, 220, 20, 5),
+  pygame.Rect(440, 162.5, 20, 5),
+  pygame.Rect(580, 220, 20, 5),
+  pygame.Rect(790, 277.5, 20, 5),
+  pygame.Rect(930, 335, 20, 5),
   pygame.Rect(1112, 388, 156, 5),
 ]
-paredLeftCollider6 = []
-paredRightCollider6 = []
+paredLeftCollider6 = [
+  pygame.Rect(321, 220, 5, 420),
+  pygame.Rect(461, 162.5, 5, 477.5),
+  pygame.Rect(601, 220, 5, 420),
+  pygame.Rect(811, 277.5, 5, 362.5),
+  pygame.Rect(951, 355, 5, 285),
+]
+paredRightCollider6 = [
+  pygame.Rect(279, 220, 5, 420),
+  pygame.Rect(419, 162.5, 5, 477.5),
+  pygame.Rect(559, 220, 5, 420),
+  pygame.Rect(769, 277.5, 5, 362.5),
+  pygame.Rect(909, 335, 5, 285),
+]
 
 collidersLevel7= [
   pygame.Rect(0, 352, 108, 10),
