@@ -119,3 +119,17 @@ class Player(pygame.sprite.Sprite):
             #    self.rect.top = tile.bottom
             #    collision_types['top'] = True
         return collision_types
+
+    def barra_vida(screen, x, y, vida):
+        largo = 500
+        ancho = 25
+        calculo_barra = int((vida/100) * largo)
+        borde = pygame.Rect(x, y, largo, ancho)
+        rectangulo = pygame.Rect(x, y, calculo_barra, ancho)
+        pygame.draw.rect(screen, (255, 255, 255), borde, 3)
+        if vida >= 60:
+            pygame.draw.rect(screen, (50, 185, 40), rectangulo)
+        else:
+            pygame.draw.rect(screen, (255, 255, 40), rectangulo)
+        if vida <= 30:
+            pygame.draw.rect(screen, (185, 50, 40), rectangulo)

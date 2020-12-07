@@ -102,7 +102,7 @@ while not done:
   
   if level == 0:
     if 217 < posx < 333 and 150 < posy < 300:
-      screen.blit(menu1,[0,0])      
+      screen.blit(menu1,[0,0])
     else: 
       screen.blit(menu0,[0,0])
 
@@ -165,6 +165,7 @@ while not done:
     PantallaCueva2.Cueva2()
     player.handle_event(event, collidersLevel4, paredLeftCollider4, paredRightCollider4)
     screen.blit(player.image,player.rect)
+    player.barra_vida(screen, 0, 0, 100)
     clock.tick(15)
     #if player.rect.x > 10:
       #level = 7
