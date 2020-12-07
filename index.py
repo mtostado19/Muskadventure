@@ -14,7 +14,7 @@ pantalla_y = 640
 color_1 = (255, 1, 5)
 
 size = (pantalla_x,pantalla_y)
-level = 7
+level = 3
 screen = pygame.display.set_mode(size)
 
 background = pygame.image.load("Assets/BF.jpg").convert()
@@ -84,6 +84,36 @@ paredLeftCollider5 = [
     pygame.Rect(76, 172, 36, 252),
 ]
 paredRightCollider5 = []
+
+collidersLevel6= [
+  pygame.Rect(0, 136, 156, 5),
+  pygame.Rect(280, 220, 40, 5),
+  pygame.Rect(420, 162.5, 40, 5),
+  pygame.Rect(560, 220, 40, 5),
+  pygame.Rect(770, 277.5, 40, 5),
+  pygame.Rect(910, 335, 40, 5),
+  pygame.Rect(1112, 388, 156, 5),
+]
+paredLeftCollider6 = []
+paredRightCollider6 = []
+
+collidersLevel7= [
+  pygame.Rect(0, 352, 108, 10),
+  pygame.Rect(108, 424, 144, 10),
+  pygame.Rect(252, 388, 432, 10),
+  pygame.Rect(684, 424, 144, 10),
+  pygame.Rect(828, 496, 288, 10),
+]
+paredLeftCollider7 = [
+  pygame.Rect(0, 0, 40, 640),
+  pygame.Rect(109, 352, 5, 72),
+  pygame.Rect(686, 388, 5, 36),
+  pygame.Rect(828, 424, 5, 144),
+]
+paredRightCollider7 = [
+  pygame.Rect(250, 388, 1, 36),
+  pygame.Rect(1116, 0, 5, 640),
+]
 
 clock = pygame.time.Clock()
 
@@ -216,6 +246,29 @@ while not done:
     screen.blit(player.image,player.rect)
     clock.tick(15)
     barra_vida(screen, 0, 0, oxigeno)
+    if player.rect.x > 1152:
+      level = 8
+      player.rect.x = 80
+      player.rect.y = 0
+
+  if level == 8:
+    screen.blit(backgroundCave1, [0,0])
+    PantallaCueva2.Cueva4()
+    player.handle_event(event, collidersLevel6, paredLeftCollider6, paredRightCollider6)
+    screen.blit(player.image,player.rect)
+    clock.tick(15)
+    barra_vida(screen, 0, 0, oxigeno)
+    if player.rect.x > 1152:
+      level = 9
+      player.rect.x = 80
+      player.rect.y = 400
+    
+  if level == 9:
+    screen.blit(backgroundCave1, [0,0])
+    PantallaCueva2.Cueva5()
+    player.handle_event(event, collidersLevel7, paredLeftCollider7, paredRightCollider7)
+    screen.blit(player.image,player.rect)
+    clock.tick(15)
 
   pygame.display.flip()
 
