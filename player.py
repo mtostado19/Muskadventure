@@ -65,7 +65,7 @@ class Player(pygame.sprite.Sprite):
 
         self.image = self.sheet.subsurface(self.sheet.get_clip())
 
-    def handle_event(self, event, colliders, left, right):
+    def handle_event(self, event, colliders, left, right, boton):
         if event.type == pygame.QUIT:
             game_over = True
 
@@ -88,9 +88,8 @@ class Player(pygame.sprite.Sprite):
                 if self.jumpCount < 6:
                     self.momentum = -5
             if event.key == pygame.K_DOWN:
-                if self.listButton and self.buttonPressed == False:
-                    if self.rect.colliderect(self.listButton):
-                        self.left.pop()
+                if len(boton) > 0 and self.buttonPressed == False:
+                    if self.rect.colliderect(boton[0]):
                         self.buttonPressed = True
 
         self.direccion[1] = self.momentum
@@ -122,8 +121,11 @@ class Player(pygame.sprite.Sprite):
             if self.direccion[1] > 0:
                 self.rect.bottom = tile.top
                 collision_types['bottom'] = True
-            #elif self.direccion[1] < 0:
-            #    self.rect.top = tile.bottom
-            #    collision_types['top'] = True
         return collision_types
+
+    def breath_air(self, arboles, oxigeno):
+        for a in arboles:
+            if self.rect.colliderect(a) and oxigeno < 100:
+                return True
+        return False
         

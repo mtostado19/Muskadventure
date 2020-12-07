@@ -69,7 +69,7 @@ paredLeftCollider4 = [
     pygame.Rect(76, 172, 36, 252),
     pygame.Rect(72, 420, 5, 144),
 ]
-paredRightCollider4 = [pygame.Rect(1152, 0, 5, 640)]
+paredRightCollider4 = [pygame.Rect(1116, 0, 5, 640)]
 
 collidersLevel5= [
     pygame.Rect(0, 565, 1152, 75),
@@ -84,7 +84,7 @@ paredLeftCollider5 = [
     pygame.Rect(0, 0, 40, 100),
     pygame.Rect(76, 172, 36, 252),
 ]
-paredRightCollider5 = []
+paredRightCollider5 = [pygame.Rect(1116, 0, 5, 496)]
 
 collidersLevel6= [
   pygame.Rect(0, 136, 156, 5),
@@ -93,7 +93,7 @@ collidersLevel6= [
   pygame.Rect(580, 220, 20, 5),
   pygame.Rect(790, 277.5, 20, 5),
   pygame.Rect(930, 335, 20, 5),
-  pygame.Rect(1112, 388, 156, 5),
+  pygame.Rect(1002, 388, 156, 5),
 ]
 paredLeftCollider6 = [
   pygame.Rect(321, 220, 5, 420),
@@ -128,6 +128,10 @@ paredRightCollider7 = [
   pygame.Rect(1116, 0, 5, 640),
 ]
 
+primerBoton = [pygame.Rect(600, 335, 80, 25)]
+segundoBoton = [pygame.Rect(0, 0, 1125, 640)]
+numberOfPops = 0
+
 clock = pygame.time.Clock()
 
 naveLand = False
@@ -138,7 +142,16 @@ sec = 0
 tiempo_ahora = 0
 inicial_time = 0
 
-arboles1 = [ pygame.Rect(0, 397, 260, 168)]
+arboles1 = [
+  pygame.Rect(0, 397, 260, 168), 
+  pygame.Rect(910, 102, 220, 140),
+  ]
+
+arboles2 = [
+  pygame.Rect(280, 193, 40, 27),
+  pygame.Rect(560, 193, 40, 27),
+  pygame.Rect(910, 308, 40, 27),
+]
 
 def barra_vida(screen, x, y, vida):
         largo = 500
@@ -196,7 +209,7 @@ while not done:
             print("aterrizo")
             naveLand = True
     if naveLand == True:
-          player.handle_event(event, collidersLivel1, [], [])
+          player.handle_event(event, collidersLivel1, [], [], [])
           screen.blit(player.image,player.rect)
           clock.tick(15)
           if player.rect.x > 1152:
@@ -207,7 +220,7 @@ while not done:
   if level == 4:
     screen.blit(background, [0,0])
     pantallaMarte.superficieMarteCueva()
-    player.handle_event(event, collidersLivel2, paredLeftCollider2, paredRightCollider2)
+    player.handle_event(event, collidersLivel2, paredLeftCollider2, paredRightCollider2, [])
     screen.blit(player.image,player.rect)
     clock.tick(15)
     if player.rect.y > 640:
@@ -218,25 +231,30 @@ while not done:
   if level == 5:
     screen.blit(backgroundCave1, [0,0])
     PantallaCueva1.Cueva1()
-    player.handle_event(event, collidersLevel3, paredLeftCollider3, paredRightCollider3)
+    player.handle_event(event, collidersLevel3, paredLeftCollider3, paredRightCollider3, [])
     screen.blit(player.image,player.rect)
     clock.tick(15)
     if player.rect.x > 1152:
       level = 6
       player.rect.x = 80
-      player.rect.y = 0
+      player.rect.y = 96
 
   if level == 6:
 
     screen.blit(backgroundCave1, [0,0])
-    PantallaCueva2.Cueva2()
-    player.handle_event(event, collidersLevel4, paredLeftCollider4, paredRightCollider4)
+    PantallaCueva2.Cueva2(player.buttonPressed)
+    player.handle_event(event, collidersLevel4, paredLeftCollider4, paredRightCollider4, primerBoton)
     screen.blit(player.image,player.rect)
     clock.tick(15)
+    if player.buttonPressed == True and numberOfPops == 0:
+      paredLeftCollider4.pop()
+      numberOfPops += 1
     if player.rect.x < 10:
       level = 7
       player.rect.x = 80
-      player.rect.y = 0
+      player.rect.y = 96
+      player.buttonPressed = False
+      numberOfPops = 0
 
   if level == 7:
     if isLevelOx:
@@ -247,39 +265,50 @@ while not done:
     sec = (tiempo_ahora-inicial_time)//-1000
 
     if (sec%2)==0 and sec!=0:
-      for a in arboles1:
-        if player.rect.colliderect(a) and oxigeno < 100:
-          oxigeno += 1
-        else:
-          oxigeno -= 1
+      if player.breath_air(arboles1, oxigeno):
+        oxigeno += 1
+      else:
+        oxigeno -= 1
 
     screen.blit(backgroundCave1, [0,0])
     PantallaCueva2.Cueva3()
-    player.handle_event(event, collidersLevel5, paredLeftCollider5, paredRightCollider5)
+    player.handle_event(event, collidersLevel5, paredLeftCollider5, paredRightCollider5, [])
     screen.blit(player.image,player.rect)
     clock.tick(15)
     barra_vida(screen, 0, 0, oxigeno)
     if player.rect.x > 1152:
       level = 8
       player.rect.x = 80
-      player.rect.y = 0
+      player.rect.y = 96
 
   if level == 8:
+
+    tiempo_ahora = pygame.time.get_ticks()
+    sec = (tiempo_ahora-inicial_time)//-1000
+
+    if (sec%2)==0 and sec!=0:
+      if player.breath_air(arboles2, oxigeno):
+        oxigeno += 1
+      else:
+        oxigeno -= 1
+
     screen.blit(backgroundCave1, [0,0])
     PantallaCueva2.Cueva4()
-    player.handle_event(event, collidersLevel6, paredLeftCollider6, paredRightCollider6)
+    player.handle_event(event, collidersLevel6, paredLeftCollider6, paredRightCollider6, [])
     screen.blit(player.image,player.rect)
     clock.tick(15)
     barra_vida(screen, 0, 0, oxigeno)
+
     if player.rect.x > 1152:
       level = 9
       player.rect.x = 80
-      player.rect.y = 400
+      player.rect.y = 312
+      oxigeno = 100
     
   if level == 9:
     screen.blit(backgroundCave1, [0,0])
     PantallaCueva2.Cueva5()
-    player.handle_event(event, collidersLevel7, paredLeftCollider7, paredRightCollider7)
+    player.handle_event(event, collidersLevel7, paredLeftCollider7, paredRightCollider7, segundoBoton)
     screen.blit(player.image,player.rect)
     clock.tick(15)
 

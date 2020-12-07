@@ -465,6 +465,9 @@ class pantallaCuevaDos():
       pygame.image.load("Assets/Cave/arbol2.png"), #13
       pygame.image.load("Assets/Cave/plataforma2C7.png"), #14
       pygame.image.load("Assets/Cave/block.png"), #15
+      pygame.image.load("Assets/BotonOFF_mini.png"), #16
+      pygame.image.load("Assets/BotonON_mini.png"), #17
+      pygame.image.load("Assets/Cave/arbol3.png"), #18
     ]
     self.cub_size = [
       112,   #Tamaño del piso
@@ -477,20 +480,28 @@ class pantallaCuevaDos():
       140,  #altura piedra 1
       168,  #altura arbol 1
       138,  #altura arbol 2
+      27,   #altura arbol 3
     ]
     self.pantalla_x = 1152
     self.pantalla_y = 640
 
-  def Cueva2(self):
+  def Cueva2(self, pressed):
     #bloque
-    self.screen.blit(self.cub[15], [0 + (self.cub_size[3]), self.pantalla_y-self.cub_size[0]])
-    self.screen.blit(self.cub[15], [0 + (self.cub_size[3]), self.pantalla_y-self.cub_size[0]-(self.cub_size[3])])
-    self.screen.blit(self.cub[15], [0 + (self.cub_size[3]), self.pantalla_y-self.cub_size[0]-(self.cub_size[3]*2)])
-    self.screen.blit(self.cub[15], [0 + (self.cub_size[3]), self.pantalla_y-self.cub_size[0]-(self.cub_size[3]*3)])
+    if pressed == False:
+      self.screen.blit(self.cub[15], [0 + (self.cub_size[3]), self.pantalla_y-self.cub_size[0]])
+      self.screen.blit(self.cub[15], [0 + (self.cub_size[3]), self.pantalla_y-self.cub_size[0]-(self.cub_size[3])])
+      self.screen.blit(self.cub[15], [0 + (self.cub_size[3]), self.pantalla_y-self.cub_size[0]-(self.cub_size[3]*2)])
+      self.screen.blit(self.cub[15], [0 + (self.cub_size[3]), self.pantalla_y-self.cub_size[0]-(self.cub_size[3]*3)])
 
     #piedra
     self.screen.blit(self.cub[10], [0 + self.cub_size[5]* 12, self.pantalla_y - self.cub_size[1]- self.cub_size[7]])
     self.screen.blit(self.cub[11], [0 + self.cub_size[5]* 4, self.pantalla_y - self.cub_size[1]- self.cub_size[7]])
+
+    #boton
+    if pressed == False:
+      self.screen.blit(self.cub[16], [0 + self.cub_size[5]*9, self.pantalla_y-self.cub_size[1]-(self.cub_size[6]*2)])
+    else:
+      self.screen.blit(self.cub[17], [0 + self.cub_size[5]*9, self.pantalla_y-self.cub_size[1]-(self.cub_size[6]*2)])
 
     #Pilares
     self.screen.blit(self.cub[7], [0 + (self.cub_size[5]*4), self.pantalla_y-self.cub_size[1]-(self.cub_size[6])])
@@ -592,6 +603,7 @@ class pantallaCuevaDos():
     #arbol
     self.screen.blit(self.cub[12], [0, self.pantalla_y - self.cub_size[1] - self.cub_size[8]])
     self.screen.blit(self.cub[13], [90, self.pantalla_y - self.cub_size[1] - self.cub_size[9]])
+    self.screen.blit(self.cub[13], [(self.cub_size[5]*13), self.pantalla_y-self.cub_size[9]-(self.cub_size[4]*10)])
 
     #Plataforma inferior
     self.screen.blit(self.cub[0], [0, self.pantalla_y-self.cub_size[1]])
@@ -692,6 +704,10 @@ class pantallaCuevaDos():
   def Cueva4(self):
     #LAVA
 
+    #arboles
+    self.screen.blit(self.cub[18], [(self.cub_size[5]*4), self.pantalla_y-self.cub_size[1]-self.cub_size[10]-(self.cub_size[6]*3)])
+    self.screen.blit(self.cub[18], [(self.cub_size[5]*8), self.pantalla_y-self.cub_size[1]-self.cub_size[10]-(self.cub_size[6]*3)])
+    self.screen.blit(self.cub[18], [(self.cub_size[5]*13), self.pantalla_y-self.cub_size[1]-self.cub_size[10]-(self.cub_size[6]*2)])
 
     #pilares
     self.screen.blit(self.cub[7], [0 + (self.cub_size[5]*4), self.pantalla_y-self.cub_size[1]])
