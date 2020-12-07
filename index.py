@@ -4,7 +4,6 @@ import Pantallas
 import NaveAnimacion
 import player
 
-
 pygame.init()
 
 #pygame.mixer.music.load('Assets/sound/city.mp3')
@@ -15,7 +14,7 @@ pantalla_y = 640
 color_1 = (255, 1, 5)
 
 size = (pantalla_x,pantalla_y)
-level = 3
+level = 7
 screen = pygame.display.set_mode(size)
 
 background = pygame.image.load("Assets/BF.jpg").convert()
@@ -40,7 +39,10 @@ collidersLivel2 = [
     pygame.Rect(1040, 576, 128, 64),
 ]
 paredLeftCollider2 = [pygame.Rect(833, 576, 4, 60)]
-paredRightCollider2 = [pygame.Rect(1023, 576, 8, 60)]
+paredRightCollider2 = [
+  pygame.Rect(1023, 576, 8, 60),
+  pygame.Rect(1152, 0, 10, 640)
+  ]
 
 collidersLevel3= [
     pygame.Rect(0, 160, 378, 5),
@@ -71,11 +73,11 @@ paredRightCollider4 = []
 collidersLevel5= [
     pygame.Rect(0, 565, 1152, 75),
     pygame.Rect(0, 136, 120, 36),
-    pygame.Rect(210, 240, 170, 40),
-    pygame.Rect(910, 240, 170, 40),
-    pygame.Rect(210, 440, 170, 40),
-    pygame.Rect(910, 440, 170, 40),
-    pygame.Rect(490, 360, 320, 40),
+    pygame.Rect(280, 200, 460, 10),
+    pygame.Rect(910, 240, 490, 10),
+    pygame.Rect(840, 320, 490, 10),
+    pygame.Rect(770, 400, 490, 10),
+    pygame.Rect(700, 480, 490, 10),
 ]
 paredLeftCollider5 = [
     pygame.Rect(0, 0, 40, 100),
@@ -86,7 +88,28 @@ paredRightCollider5 = []
 clock = pygame.time.Clock()
 
 naveLand = False
+isLevelOx = False
 done = False
+oxigeno = 100
+sec = 0
+tiempo_ahora = 0
+inicial_time = 0
+
+arboles1 = [ pygame.Rect(0, 397, 260, 168)]
+
+def barra_vida(screen, x, y, vida):
+        largo = 500
+        ancho = 25
+        calculo_barra = int((vida/100) * largo)
+        borde = pygame.Rect(x, y, largo, ancho)
+        rectangulo = pygame.Rect(x, y, calculo_barra, ancho)
+        pygame.draw.rect(screen, (255, 255, 255), borde, 3)
+        if vida >= 60:
+            pygame.draw.rect(screen, (85, 100, 235), rectangulo)
+        else:
+            pygame.draw.rect(screen, (255, 255, 40), rectangulo)
+        if vida <= 30:
+            pygame.draw.rect(screen, (185, 50, 40), rectangulo)
 
 while not done:
   posx, posy = pygame.mouse.get_pos()
@@ -146,8 +169,8 @@ while not done:
     clock.tick(15)
     if player.rect.y > 640:
       level = 5
-      player.rect.x = 60
-      player.rect.y = 0
+      player.rect.x = 120
+      player.rect.y = 100
 
   if level == 5:
     screen.blit(backgroundCave1, [0,0])
@@ -161,20 +184,38 @@ while not done:
       player.rect.y = 0
 
   if level == 6:
+
     screen.blit(backgroundCave1, [0,0])
     PantallaCueva2.Cueva2()
     player.handle_event(event, collidersLevel4, paredLeftCollider4, paredRightCollider4)
     screen.blit(player.image,player.rect)
-    player.barra_vida(screen, 0, 0, 100)
     clock.tick(15)
-    #if player.rect.x > 10:
-      #level = 7
-      #player.rect.x = 80
-      #player.rect.y = 0
+    if player.rect.x < 10:
+      level = 7
+      player.rect.x = 80
+      player.rect.y = 0
 
   if level == 7:
+    if isLevelOx:
+      inicial_time = pygame.time.get_ticks() + 60000
+      isLevelOx = False
+
+    tiempo_ahora = pygame.time.get_ticks()
+    sec = (tiempo_ahora-inicial_time)//-1000
+
+    if (sec%2)==0 and sec!=0:
+      for a in arboles1:
+        if player.rect.colliderect(a) and oxigeno < 100:
+          oxigeno += 1
+        else:
+          oxigeno -= 1
+
     screen.blit(backgroundCave1, [0,0])
     PantallaCueva2.Cueva3()
+    player.handle_event(event, collidersLevel5, paredLeftCollider5, paredRightCollider5)
+    screen.blit(player.image,player.rect)
+    clock.tick(15)
+    barra_vida(screen, 0, 0, oxigeno)
 
   pygame.display.flip()
 
