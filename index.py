@@ -25,7 +25,7 @@ nivel1bool = True
 color_1 = (255, 1, 5)
 
 size = (pantalla_x,pantalla_y)
-level = 0
+level = 3
 screen = pygame.display.set_mode(size)
 font = pygame.font.Font(None,50) ##
 fontmini = pygame.font.Font(None,30) ##
@@ -77,7 +77,7 @@ collidersLevel3= [
     pygame.Rect(228, 320, 360, 5),
     pygame.Rect(0, 440, 208, 5),
     pygame.Rect(324, 520, 180, 5),
-    pygame.Rect(612, 480, 180, 5),
+    pygame.Rect(612, 560, 180, 5),
     pygame.Rect(828, 600, 360, 5),
     pygame.Rect(516, 240, 60, 20),
     pygame.Rect(0, 360, 60, 20),
