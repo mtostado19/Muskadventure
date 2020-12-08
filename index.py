@@ -103,7 +103,6 @@ while not done:
         level = 2
         Nivel1.nivelSalida()
         video.video2(screen)
-        print(level)
       else: 
         Nivel1.nivelSalida()
         Nivel1 = nivel1.Nivel1(screen)
@@ -156,8 +155,8 @@ while not done:
         NaveLevel2.barra_vida(screen, pantalla_x//2-150, pantalla_y-55, NaveLevel.vida)
         for x in enemylist:
             screen.blit(x.image,x.rect)
-            x.rect.y +=1
-            x.rect.x -=1
+            x.rect.y +=2
+            x.rect.x -=2
             if x.rect.y > 840:
                 x.rect.y = -100
                 x.rect.x = random.randint(400,1452)
@@ -173,6 +172,7 @@ while not done:
             texto_x = texto_final_rect[0]
             screen.blit(texto_final,[texto_x,10])
             NuevoIntento = True ## cambiar cuando este listo el boton
+            intro.showRestart()
   if level == 3:
     ## 
     if LevelIntro[0] != True:

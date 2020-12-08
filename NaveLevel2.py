@@ -44,13 +44,13 @@ class NaveLevel2():
     def update(self, direccion):
         if self.rect.x > 0:
             if direccion == 'left':
-                self.rect.x -=1
-                self.rect_daño.x -=1
+                self.rect.x -=2
+                self.rect_daño.x -=2
 
         if self.rect.x < 1152-113:
             if direccion == 'right':
-                self.rect.x +=1
-                self.rect_daño.x +=1
+                self.rect.x +=2
+                self.rect_daño.x +=2
         
         if len(self.combi) != 0:
             if self.combi[-1] == 'LEFT': ## DEBE SER HEAD
