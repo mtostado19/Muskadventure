@@ -342,6 +342,8 @@ class pantallaMarte():
 class pantallaCuevaUno():
   def __init__(self,screen):
     self.screen = screen
+    self.lavaIsUp = False
+    self.lavaCount = 1
     self.cub = [
       pygame.image.load("Assets/Cave/plataformaC1.png"), #0
       pygame.image.load("Assets/Cave/plataformaC2.png"), #1
@@ -357,6 +359,7 @@ class pantallaCuevaUno():
       pygame.image.load("Assets/Cave/cristal1.png"), #11
       pygame.image.load("Assets/Cave/roca2.png"), #12
       pygame.image.load("Assets/Cave/roca3.png"), #13
+      pygame.image.load("Assets/LavaTostado.png"), #14
     ]
     self.cub_size = [
       36,   #Tamaño del terreno 0
@@ -451,9 +454,15 @@ class pantallaCuevaUno():
     self.screen.blit(self.cub[3], [0 + (self.cub_size[0]*30), self.pantalla_y-self.cub_size[1]])
     self.screen.blit(self.cub[3], [0 + (self.cub_size[0]*31), self.pantalla_y-self.cub_size[1]])
 
+    #LAVA
+    if self.lavaIsUp == True:
+      self.screen.blit(self.cub[14], [0, self.pantalla_y - (self.lavaCount * 36)+ self.lavaCount])
+
 class pantallaCuevaDos():
   def __init__(self,screen):
     self.screen = screen
+    self.lavaIsUp = False
+    self.lavaCount = 1
     self.cub = [
       pygame.image.load("Assets/Cave/plataforma2C1.png"), #0
       pygame.image.load("Assets/Cave/plataforma2C2.png"), #1
@@ -475,6 +484,7 @@ class pantallaCuevaDos():
       pygame.image.load("Assets/BotonON_mini.png"), #17
       pygame.image.load("Assets/Cave/arbol3.png"), #18
       pygame.image.load("Assets/LibroTostado.png"), #19
+      pygame.image.load("Assets/LavaTostado.png"), #20
     ]
     self.cub_size = [
       112,   #Tamaño del piso
@@ -595,6 +605,10 @@ class pantallaCuevaDos():
     self.screen.blit(self.cub[3], [0 + (self.cub_size[5]*12)-(self.cub_size[4]*4), self.pantalla_y-(self.cub_size[4]*7)])
     self.screen.blit(self.cub[3], [0 + (self.cub_size[5]*13)-(self.cub_size[4]*5), self.pantalla_y-(self.cub_size[4]*7)])
     self.screen.blit(self.cub[5], [0 + (self.cub_size[5]*11)-self.cub_size[4], self.pantalla_y-(self.cub_size[4]*7)])
+
+    #LAVA
+    if self.lavaIsUp == True:
+      self.screen.blit(self.cub[20], [0, self.pantalla_y - (self.lavaCount * 36)+ self.lavaCount])
   
   def Cueva3(self):
 
@@ -710,9 +724,12 @@ class pantallaCuevaDos():
     self.screen.blit(self.cub[3], [self.pantalla_x - (self.cub_size[4]), (self.cub_size[3]*12)])
     self.screen.blit(self.cub[3], [self.pantalla_x - (self.cub_size[4]), (self.cub_size[3]*13)])
 
+    #LAVA
+    if self.lavaIsUp == True:
+      self.screen.blit(self.cub[20], [0, self.pantalla_y - (self.lavaCount * 36)+ self.lavaCount])
+
 
   def Cueva4(self):
-    #LAVA
 
     #arboles
     self.screen.blit(self.cub[18], [(self.cub_size[5]*4), self.pantalla_y-self.cub_size[1]-self.cub_size[10]-(self.cub_size[6]*3)])
@@ -754,6 +771,9 @@ class pantallaCuevaDos():
     self.screen.blit(self.cub[3], [self.pantalla_x - self.cub_size[4], self.pantalla_y - (self.cub_size[3]*7)])
     self.screen.blit(self.cub[3], [self.pantalla_x - (self.cub_size[4]*2), self.pantalla_y - (self.cub_size[3]*7)])
     self.screen.blit(self.cub[14], [self.pantalla_x - (self.cub_size[4]*3), self.pantalla_y - (self.cub_size[3]*7)])
+
+    #LAVA
+    self.screen.blit(self.cub[20], [0, self.pantalla_y - 150 - (self.lavaCount * 36)])
 
   def Cueva5(self, pressed):
     #arboles
@@ -1037,3 +1057,6 @@ class pantallaCuevaDos():
     self.screen.blit(self.cub[3], [(self.cub_size[3]*28), self.pantalla_y-(self.cub_size[3]*2)])
     self.screen.blit(self.cub[3], [(self.cub_size[3]*29), self.pantalla_y-(self.cub_size[3]*2)])
     self.screen.blit(self.cub[3], [(self.cub_size[3]*30), self.pantalla_y-(self.cub_size[3]*2)])
+
+    #LAVA
+    self.screen.blit(self.cub[20], [0, self.pantalla_y - (self.lavaCount * 36)+ self.lavaCount])
