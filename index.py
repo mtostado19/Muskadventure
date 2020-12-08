@@ -176,6 +176,8 @@ naveLand = False
 patata = True
 done = False
 NuevoIntento = True ##
+instruccionesPlataformer = True
+musicPlataformer = False
 
 Menu.Menu_entrada()
 try:
@@ -319,8 +321,8 @@ while not done:
             if NaveLevel.rect.colliderect(x.rect):
                 x.rect.y = 650
                 #screen.blit(NaveLevel.image_explo, NaveLevel.rect_explo) ## WARNING
-                pygame.mixer.sound.load('Assets/sound/daño.mp3')
-                pygame.mixer.sound.play(1)
+                #pygame.mixer.sound.load('Assets/sound/daño.mp3')
+                #pygame.mixer.sound.play(1)
                 # screen.blit(NaveLevel.fireimage,NaveLevel.rect)
                 NaveLevel.vida -= 10
         if NaveLevel.vida <= 0:
@@ -333,6 +335,13 @@ while not done:
             NuevoIntento = True ## cambiar cuando este listo el boton
             intro.showRestart()  
   if level == 3:
+    if instruccionesPlataformer:
+      intro.showIntro()
+      instruccionesPlataformer = False
+    if not musicPlataformer:
+      pygame.mixer.music.load('Assets/sound/final-voyage.mp3')
+      pygame.mixer.music.play(-1)
+      musicPlataformer = True
     screen.blit(background, [0,0])
     pantallaMarte.superficieMarte()
     screen.blit(animacionNave.image, animacionNave.rect)
@@ -376,6 +385,7 @@ while not done:
       level = 3
       player.rect.x = 0
       player.rect.y = pantalla_y - 64 - 39
+      musicPlataformer = False
       intro.showRestart()
 
   if level == 6:
@@ -426,6 +436,7 @@ while not done:
       player.rect.y = pantalla_y - 64 - 39
       oxigeno = 100
       paredLeftCollider4.append(pygame.Rect(72, 420, 5, 144))
+      musicPlataformer = False
       intro.showRestart()
 
   if level == 8:
@@ -458,6 +469,7 @@ while not done:
       player.rect.y = pantalla_y - 64 - 39
       oxigeno = 100
       paredLeftCollider4.append(pygame.Rect(72, 420, 5, 144))
+      musicPlataformer = False
       intro.showRestart()
 
   #Desde aqui va la lava
@@ -502,6 +514,7 @@ while not done:
       PantallaCueva2.lavaIsUp = False
       PantallaCueva1.lavaIsUp = False
       PantallaCueva2.lavaCount = 1
+      musicPlataformer = False
       intro.showRestart()
       
   #Aqui la lava empieza a subir despues del boton
@@ -551,6 +564,7 @@ while not done:
       PantallaCueva1.lavaIsUp = False
       PantallaCueva2.lavaCount = 1
       paredRightCollider6.pop()
+      musicPlataformer = False
       intro.showRestart()
 
   if level == 11:
@@ -600,6 +614,7 @@ while not done:
       paredRightCollider5.pop()
       paredLeftCollider5.pop()
       paredLeftCollider5.append(pygame.Rect(0, 0, 40, 100))
+      musicPlataformer = False
       intro.showRestart()
 
   if level == 12:
@@ -642,6 +657,7 @@ while not done:
       paredLeftCollider5.append(pygame.Rect(0, 0, 40, 100))
       paredLeftCollider4.pop()
       paredLeftCollider4.insert(0, pygame.Rect(0, 0, 40, 100))
+      musicPlataformer = False
       intro.showRestart()
 
   if level == 13:
@@ -683,6 +699,7 @@ while not done:
       paredLeftCollider5.append(pygame.Rect(0, 0, 40, 100))
       paredLeftCollider4.pop()
       paredLeftCollider4.insert(0, pygame.Rect(0, 0, 40, 100))
+      musicPlataformer = False
       intro.showRestart()
 
   if level == 14:
