@@ -51,9 +51,17 @@ collidersLevel3= [
     pygame.Rect(324, 520, 180, 5),
     pygame.Rect(612, 480, 180, 5),
     pygame.Rect(828, 600, 360, 5),
+    pygame.Rect(516, 240, 60, 20),
+    pygame.Rect(0, 360, 60, 20),
+    pygame.Rect(0, 80, 60, 20)
 ]
-paredLeftCollider3 = []
-paredRightCollider3 = [pygame.Rect(576, 0, 36, 288)]
+paredLeftCollider3 = [
+  pygame.Rect(385, 170, 5, 36),
+  ]
+paredRightCollider3 = [
+  pygame.Rect(576, 0, 36, 288),
+  #pygame.Rect(228, 320, 5, 36),
+  ]
 
 collidersLevel4= [
     pygame.Rect(0, 565, 1152, 75),
@@ -370,7 +378,7 @@ while not done:
       level = 12
       player.rect.x = 40
       player.rect.y = 525
-      paredLeftCollider4.pop()
+      paredLeftCollider4.pop(0)
       paredLeftCollider4.append(pygame.Rect(0, 136, 40, 504))
 
   if level == 12:
@@ -381,8 +389,8 @@ while not done:
     clock.tick(15)
     if player.rect.x < 10:
       level = 13
-      player.rect.x = 80
-      player.rect.y = 96
+      player.rect.x = 1112
+      player.rect.y = 604
 
   if level == 13:
     screen.blit(backgroundCave1, [0,0])
@@ -390,7 +398,7 @@ while not done:
     player.handle_event(event, collidersLevel3, paredLeftCollider3, paredRightCollider3, [])
     screen.blit(player.image,player.rect)
     clock.tick(15)
-    if player.rect.y == 0:
+    if player.rect.y < 20:
       level = 14
       player.rect.x = 80
       player.rect.y = 96

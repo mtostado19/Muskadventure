@@ -402,6 +402,9 @@ class pantallaCuevaUno():
     self.screen.blit(self.cub[3], [0 + (self.cub_size[0]*14), self.pantalla_y-(self.cub_size[1]*8)])
     self.screen.blit(self.cub[4], [0 + (self.cub_size[0]*15), self.pantalla_y-(self.cub_size[1]*8)])
     self.screen.blit(self.cub[6], [0 + (self.cub_size[0]*16), self.pantalla_y-(self.cub_size[1]*8)])
+
+    self.screen.blit(self.cub[8], [0 + (self.cub_size[0]*16)-self.cub_size[3], self.pantalla_y-(self.cub_size[1]*10)])
+
     #Pared
     self.screen.blit(self.cub[5], [0 + (self.cub_size[0]*16), self.pantalla_y-(self.cub_size[1]*9)])
     self.screen.blit(self.cub[5], [0 + (self.cub_size[0]*16), self.pantalla_y-(self.cub_size[1]*10)])
@@ -418,6 +421,9 @@ class pantallaCuevaUno():
     self.screen.blit(self.cub[4], [0 + (self.cub_size[0]*2), self.pantalla_y-(self.cub_size[1]*5)])
     self.screen.blit(self.cub[1], [0 + (self.cub_size[0]*3), self.pantalla_y-(self.cub_size[1]*5)])
     self.screen.blit(self.cub[7], [0 + (self.cub_size[0]*4), self.pantalla_y-(self.cub_size[1]*5)])
+
+    self.screen.blit(self.cub[7], [0, self.pantalla_y-(self.cub_size[1]*7)])
+    self.screen.blit(self.cub[7], [0, self.pantalla_y-(self.cub_size[1]*14)])
 
     #Plataforma cuatro
     self.screen.blit(self.cub[2], [0 + (self.cub_size[0]*9), self.pantalla_y-(self.cub_size[1]*3)])
@@ -468,6 +474,7 @@ class pantallaCuevaDos():
       pygame.image.load("Assets/BotonOFF_mini.png"), #16
       pygame.image.load("Assets/BotonON_mini.png"), #17
       pygame.image.load("Assets/Cave/arbol3.png"), #18
+      pygame.image.load("Assets/LibroTostado.png"), #19
     ]
     self.cub_size = [
       112,   #Tamaño del piso
@@ -903,9 +910,7 @@ class pantallaCuevaDos():
 
     #boton
     if pressed == False:
-      self.screen.blit(self.cub[16], [(self.cub_size[3]*15), self.pantalla_y-self.cub_size[1]-(self.cub_size[3]*5.5)])
-    else:
-      self.screen.blit(self.cub[17], [(self.cub_size[3]*15), self.pantalla_y-self.cub_size[1]-(self.cub_size[3]*5.5)])
+      self.screen.blit(self.cub[19], [(self.cub_size[3]*15), self.pantalla_y-self.cub_size[1]-(self.cub_size[3]*6)])
 
     #plataforma central
     self.screen.blit(self.cub[3], [(self.cub_size[3]*7), self.pantalla_y-(self.cub_size[3]*7)])
