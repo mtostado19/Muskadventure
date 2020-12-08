@@ -25,7 +25,7 @@ nivel1bool = True
 color_1 = (255, 1, 5)
 
 size = (pantalla_x,pantalla_y)
-level = 3
+level = 0
 screen = pygame.display.set_mode(size)
 font = pygame.font.Font(None,50) ##
 fontmini = pygame.font.Font(None,30) ##
@@ -57,8 +57,9 @@ intro = NaveLevel2.Intro(screen)
 cantidad = 9
 enemylist = []
 for x in range(cantidad):
-    teorito = NaveLevel2.Teorito((random.randint(400,1452), (random.randint(20,50))*-1))
+    teorito = NaveLevel2.Teorito((random.randint(400,1452), (random.randint(20,80))*-1))
     enemylist.append(teorito)
+
 player = player.Player((0, pantalla_y - 64 - 39))
 collidersLivel1 = [pygame.Rect(0, 576, 1152, 64)]
 collidersLivel2 = [
@@ -318,8 +319,8 @@ while not done:
             if NaveLevel.rect.colliderect(x.rect):
                 x.rect.y = 650
                 #screen.blit(NaveLevel.image_explo, NaveLevel.rect_explo) ## WARNING
-                #pygame.mixer.music.load('Assets/sound/daño.mp3')
-                #pygame.mixer.music.play(1)
+                pygame.mixer.sound.load('Assets/sound/daño.mp3')
+                pygame.mixer.sound.play(1)
                 # screen.blit(NaveLevel.fireimage,NaveLevel.rect)
                 NaveLevel.vida -= 10
         if NaveLevel.vida <= 0:
@@ -372,7 +373,10 @@ while not done:
       player.rect.y = 96
 
     if player.rect.y > 640:
-      print("Aqui va pantalla GAME OVER caida") #Ingresar pantalla GAME OVER
+      level = 3
+      player.rect.x = 0
+      player.rect.y = pantalla_y - 64 - 39
+      intro.showRestart()
 
   if level == 6:
 
@@ -417,7 +421,12 @@ while not done:
       player.rect.y = 96
 
     if oxigeno < 0:
-      print("Aqui va pantalla GAME OVER oxigeno") #Ingresar pantalla GAME OVER
+      level = 3
+      player.rect.x = 0
+      player.rect.y = pantalla_y - 64 - 39
+      oxigeno = 100
+      paredLeftCollider4.append(pygame.Rect(72, 420, 5, 144))
+      intro.showRestart()
 
   if level == 8:
 
@@ -443,11 +452,13 @@ while not done:
       player.rect.y = 312
       oxigeno = 100
 
-    if oxigeno < 0:
-      print("Aqui va pantalla GAME OVER oxigeno") #Ingresar pantalla GAME OVER
-
-    if player.rect.y > 490:
-      print("Aqui va pantalla GAME OVER caida") #Ingresar pantalla GAME OVER
+    if oxigeno < 0 or player.rect.y > 490:
+      level = 3
+      player.rect.x = 0
+      player.rect.y = pantalla_y - 64 - 39
+      oxigeno = 100
+      paredLeftCollider4.append(pygame.Rect(72, 420, 5, 144))
+      intro.showRestart()
 
   #Desde aqui va la lava
   if level == 9:
@@ -470,9 +481,6 @@ while not done:
       PantallaCueva2.lavaIsUp = True
       PantallaCueva1.lavaIsUp = True
 
-    if player.rect.colliderect(lavaCollide):
-      print("Aqui va pantalla GAME OVER boton") #Ingresar pantalla GAME OVER
-
     if player.rect.x < 20:
       level = 10
       player.rect.x = 1072
@@ -482,7 +490,20 @@ while not done:
       patito = 0
       lavaCollide = pygame.Rect(0, pantalla_y - (patito*36), 1152, 640)
 
-
+    if player.rect.colliderect(lavaCollide):
+      level = 3
+      player.rect.x = 0
+      player.rect.y = pantalla_y - 64 - 39
+      oxigeno = 100
+      paredLeftCollider4.append(pygame.Rect(72, 420, 5, 144))
+      paredLeftCollider7.append(pygame.Rect(0, 0, 40, 640))
+      numberOfPops = 0
+      player.buttonPressed = False
+      PantallaCueva2.lavaIsUp = False
+      PantallaCueva1.lavaIsUp = False
+      PantallaCueva2.lavaCount = 1
+      intro.showRestart()
+      
   #Aqui la lava empieza a subir despues del boton
   if level == 10:
     tiempo_ahora = pygame.time.get_ticks()
@@ -498,12 +519,6 @@ while not done:
       PantallaCueva2.lavaCount += 0.1
       patito += 0.1
       lavaCollide = pygame.Rect(0, pantalla_y - (patito*36) - 120, 1152, 640)
-
-    if oxigeno < 0:
-      print("Aqui va pantalla GAME OVER oxigeno") #Ingresar pantalla GAME OVER
-
-    if player.rect.colliderect(lavaCollide):
-      print("Aqui va pantalla GAME OVER 1") #Ingresar pantalla GAME OVER
 
     screen.blit(backgroundCave1, [0,0])
     PantallaCueva2.Cueva4()
@@ -523,6 +538,21 @@ while not done:
       patito = 0
       lavaCollide = pygame.Rect(0, pantalla_y - (patito*36), 1152, 640)
 
+    if oxigeno < 0 or player.rect.colliderect(lavaCollide):
+      level = 3
+      player.rect.x = 0
+      player.rect.y = pantalla_y - 64 - 39
+      oxigeno = 100
+      paredLeftCollider4.append(pygame.Rect(72, 420, 5, 144))
+      paredLeftCollider7.append(pygame.Rect(0, 0, 40, 640))
+      numberOfPops = 0
+      player.buttonPressed = False
+      PantallaCueva2.lavaIsUp = False
+      PantallaCueva1.lavaIsUp = False
+      PantallaCueva2.lavaCount = 1
+      paredRightCollider6.pop()
+      intro.showRestart()
+
   if level == 11:
     tiempo_ahora = pygame.time.get_ticks()
     sec = (tiempo_ahora-inicial_time)//-1000
@@ -537,12 +567,6 @@ while not done:
       PantallaCueva2.lavaCount += 0.1
       patito += 0.1
       lavaCollide = pygame.Rect(0, pantalla_y - (patito*36), 1152, 640)
-
-    if oxigeno < 0:
-      print("Aqui va pantalla GAME OVER oxigeno") #Ingresar pantalla GAME OVER
-      
-    if player.rect.colliderect(lavaCollide):
-      print("Aqui va pantalla GAME OVER 2") #Ingresar pantalla GAME OVER
 
     screen.blit(backgroundCave1, [0,0])
     PantallaCueva2.Cueva3()
@@ -560,6 +584,24 @@ while not done:
       patito = 0
       lavaCollide = pygame.Rect(0, pantalla_y - (patito*36), 1152, 640)
 
+    if oxigeno < 0 or player.rect.colliderect(lavaCollide):
+      level = 3
+      player.rect.x = 0
+      player.rect.y = pantalla_y - 64 - 39
+      oxigeno = 100
+      paredLeftCollider4.append(pygame.Rect(72, 420, 5, 144))
+      paredLeftCollider7.append(pygame.Rect(0, 0, 40, 640))
+      numberOfPops = 0
+      player.buttonPressed = False
+      PantallaCueva2.lavaIsUp = False
+      PantallaCueva1.lavaIsUp = False
+      PantallaCueva2.lavaCount = 1
+      paredRightCollider6.pop()
+      paredRightCollider5.pop()
+      paredLeftCollider5.pop()
+      paredLeftCollider5.append(pygame.Rect(0, 0, 40, 100))
+      intro.showRestart()
+
   if level == 12:
     tiempo_ahora = pygame.time.get_ticks()
     sec = (tiempo_ahora-inicial_time)//-1000
@@ -569,9 +611,6 @@ while not done:
       patito += 0.1
       lavaCollide = pygame.Rect(0, pantalla_y - (patito*36), 1152, 640)
 
-    if player.rect.colliderect(lavaCollide):
-      print("Aqui va pantalla GAME OVER 3") #Ingresar pantalla GAME OVER
-    
     screen.blit(backgroundCave1, [0,0])
     PantallaCueva2.Cueva2(player.buttonPressed)
     player.handle_event(event, collidersLevel4, paredLeftCollider4, paredRightCollider4, primerBoton)
@@ -579,11 +618,31 @@ while not done:
     clock.tick(15)
     if player.rect.x < 10:
       level = 13
-      player.rect.x = 1112
-      player.rect.y = 604
+      player.rect.x = 1102
+      player.rect.y = 598
       PantallaCueva2.lavaCount = 1
       patito = 0
-      lavaCollide = pygame.Rect(0, pantalla_y - (patito*36), 1152, 640)
+      lavaCollide = pygame.Rect(0, 680 - (patito*36), 1152, 640)
+
+    if player.rect.colliderect(lavaCollide):
+      level = 3
+      player.rect.x = 0
+      player.rect.y = pantalla_y - 64 - 39
+      oxigeno = 100
+      paredLeftCollider4.append(pygame.Rect(72, 420, 5, 144))
+      paredLeftCollider7.append(pygame.Rect(0, 0, 40, 640))
+      numberOfPops = 0
+      player.buttonPressed = False
+      PantallaCueva2.lavaIsUp = False
+      PantallaCueva1.lavaIsUp = False
+      PantallaCueva2.lavaCount = 1
+      paredRightCollider6.pop()
+      paredRightCollider5.pop()
+      paredLeftCollider5.pop()
+      paredLeftCollider5.append(pygame.Rect(0, 0, 40, 100))
+      paredLeftCollider4.pop()
+      paredLeftCollider4.insert(0, pygame.Rect(0, 0, 40, 100))
+      intro.showRestart()
 
   if level == 13:
     tiempo_ahora = pygame.time.get_ticks()
@@ -592,11 +651,8 @@ while not done:
     if (sec%5)==0 and sec!=0 and PantallaCueva2.lavaIsUp == True:
       PantallaCueva1.lavaCount += 0.1
       patito += 0.1
-      lavaCollide = pygame.Rect(0, pantalla_y - (patito*36), 1152, 640)
+      lavaCollide = pygame.Rect(0, 680 - (patito*36), 1152, 640)
 
-    if player.rect.colliderect(lavaCollide):
-      print("Aqui va pantalla GAME OVER 4") #Ingresar pantalla GAME OVER
-    
     screen.blit(backgroundCave1, [0,0])
     PantallaCueva1.Cueva1()
     player.handle_event(event, collidersLevel3, paredLeftCollider3, paredRightCollider3, [])
@@ -608,6 +664,26 @@ while not done:
       player.rect.y = 96
       patito = 0
       lavaCollide = pygame.Rect(0, pantalla_y - (patito*36), 1152, 640)
+
+    if player.rect.colliderect(lavaCollide):
+      level = 3
+      player.rect.x = 0
+      player.rect.y = pantalla_y - 64 - 39
+      oxigeno = 100
+      paredLeftCollider4.append(pygame.Rect(72, 420, 5, 144))
+      paredLeftCollider7.append(pygame.Rect(0, 0, 40, 640))
+      numberOfPops = 0
+      player.buttonPressed = False
+      PantallaCueva2.lavaIsUp = False
+      PantallaCueva1.lavaIsUp = False
+      PantallaCueva2.lavaCount = 1
+      paredRightCollider6.pop()
+      paredRightCollider5.pop()
+      paredLeftCollider5.pop()
+      paredLeftCollider5.append(pygame.Rect(0, 0, 40, 100))
+      paredLeftCollider4.pop()
+      paredLeftCollider4.insert(0, pygame.Rect(0, 0, 40, 100))
+      intro.showRestart()
 
   if level == 14:
     screen.blit(background, [0,0])
