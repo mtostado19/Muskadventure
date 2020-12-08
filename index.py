@@ -13,7 +13,7 @@ import NaveLevel2 # Esto es level 2
 pygame.init()
 
 pygame.mixer.music.load('Assets/sound/city.mp3')
-pygame.mixer.music.set_volume(.5)
+pygame.mixer.music.set_volume(.2)
 pygame.mixer.music.play(-1)
 
 pantalla_x = 1152
@@ -46,10 +46,10 @@ NaveLevel = NaveLevel2.NaveLevel2((pantalla_x//2, pantalla_y//2+90))
 
 # Esto es del level 2 --    
 intro = NaveLevel2.Intro(screen)
-cantidad = 5
+cantidad = 9
 enemylist = []
 for x in range(cantidad):
-    teorito = NaveLevel2.Teorito((random.randint(400,1452), -50))
+    teorito = NaveLevel2.Teorito((random.randint(400,1452), (random.randint(20,50))*-1))
     enemylist.append(teorito)
 
 # Termina level 2 --
@@ -83,7 +83,6 @@ while not done:
         pygame.time.delay(1000)
         pygame.mixer.music.fadeout(3000)
         pygame.time.delay(3000)
-
   if level == 0:
     Menu.inicio()
   
@@ -128,10 +127,13 @@ while not done:
             pygame.time.delay(1000)
             NaveLevel.vida = 100
             NuevoIntento = False
+            if len(enemylist)>3:
+              enemylist.pop()
             current_time = pygame.time.get_ticks() + 60000
+            pygame.mixer.music.load('Assets/sound/final-voyage.mp3')
+            pygame.mixer.music.play(1)
         current_time_2 = pygame.time.get_ticks()
         if current_time_2 >= current_time:
-            print('puto roger, la cago')
             level += 1
         screen.blit(BackgroundAtomosfera, [0, 0])
         segundos = (current_time_2-current_time)//-1000
@@ -162,6 +164,9 @@ while not done:
                 x.rect.x = random.randint(400,1452)
             if NaveLevel.rect.colliderect(x.rect):
                 x.rect.y = 650
+                #screen.blit(NaveLevel.image_explo, NaveLevel.rect_explo) ## WARNING
+                #pygame.mixer.music.load('Assets/sound/daño.mp3')
+                #pygame.mixer.music.play(1)
                 # screen.blit(NaveLevel.fireimage,NaveLevel.rect)
                 NaveLevel.vida -= 10
         if NaveLevel.vida <= 0:

@@ -27,6 +27,12 @@ class NaveLevel2():
         self.image_daño = self.sheet_daño.subsurface(self.sheet_daño.get_clip())
         self.rect_daño = self.image_daño.get_rect()
         self.rect_daño.center = position
+        # Daño real
+        self.sheet_explo = pygame.image.load("Assets/Level2/explo.png")
+        self.image_explo = self.sheet_explo.subsurface(self.sheet_explo.get_clip())
+        self.rect_explo = self.image_explo.get_rect()
+        self.rect_explo.center = position
+
         self.combiteclas = ['LEFT','RIGHT','UP','DOWN']
         self.combi = ['RIGHT','LEFT', 'DOWN','UP' ]
     
