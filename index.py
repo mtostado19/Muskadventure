@@ -14,7 +14,7 @@ pantalla_y = 640
 color_1 = (255, 1, 5)
 
 size = (pantalla_x,pantalla_y)
-level = 7
+level = 3
 screen = pygame.display.set_mode(size)
 
 background = pygame.image.load("Assets/BF.jpg").convert()
@@ -192,26 +192,6 @@ while not done:
         #pygame.mixer.music.stop()
       x,y = event.pos
   
-  if level == 0:
-    if 217 < posx < 333 and 150 < posy < 300:
-      screen.blit(menu1,[0,0])
-    else: 
-      screen.blit(menu0,[0,0])
-
-  if level == 1:
-    screen.blit(background,[0,0])
-    Pantalla1.inicio()
-    screen.blit(animacionNave.image, animacionNave.rect)
-    if naveLand == False:
-        animacionNave.rect.y += 1
-        if animacionNave.rect.y >= pantalla_y-364:
-            print("aterrizo")
-            naveLand = True
-  if level == 2:
-
-    screen.blit(background2,[0,0])
-    Pantalla2.Plataformer_Nivel2()
-
   if level == 3:
     screen.blit(background, [0,0])
     pantallaMarte.superficieMarte()
@@ -251,6 +231,9 @@ while not done:
       level = 6
       player.rect.x = 80
       player.rect.y = 96
+
+    if player.rect.y > 640:
+      print("Aqui va pantalla GAME OVER caida") #Ingresar pantalla GAME OVER
 
   if level == 6:
 
@@ -294,6 +277,9 @@ while not done:
       player.rect.x = 80
       player.rect.y = 96
 
+    if oxigeno < 0:
+      print("Aqui va pantalla GAME OVER oxigeno") #Ingresar pantalla GAME OVER
+
   if level == 8:
 
     tiempo_ahora = pygame.time.get_ticks()
@@ -317,6 +303,12 @@ while not done:
       player.rect.x = 80
       player.rect.y = 312
       oxigeno = 100
+
+    if oxigeno < 0:
+      print("Aqui va pantalla GAME OVER oxigeno") #Ingresar pantalla GAME OVER
+
+    if player.rect.y > 490:
+      print("Aqui va pantalla GAME OVER caida") #Ingresar pantalla GAME OVER
 
   #Desde aqui va la lava
   if level == 9:
@@ -368,6 +360,9 @@ while not done:
       patito += 0.1
       lavaCollide = pygame.Rect(0, pantalla_y - (patito*36) - 120, 1152, 640)
 
+    if oxigeno < 0:
+      print("Aqui va pantalla GAME OVER oxigeno") #Ingresar pantalla GAME OVER
+
     if player.rect.colliderect(lavaCollide):
       print("Aqui va pantalla GAME OVER 1") #Ingresar pantalla GAME OVER
 
@@ -404,6 +399,9 @@ while not done:
       patito += 0.1
       lavaCollide = pygame.Rect(0, pantalla_y - (patito*36), 1152, 640)
 
+    if oxigeno < 0:
+      print("Aqui va pantalla GAME OVER oxigeno") #Ingresar pantalla GAME OVER
+      
     if player.rect.colliderect(lavaCollide):
       print("Aqui va pantalla GAME OVER 2") #Ingresar pantalla GAME OVER
 
