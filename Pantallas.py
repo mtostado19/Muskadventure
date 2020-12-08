@@ -443,7 +443,7 @@ class pantallaCuevaUno():
     self.screen.blit(self.cub[1], [0 + (self.cub_size[0]*20), self.pantalla_y-(self.cub_size[1]*4)])
     self.screen.blit(self.cub[2], [0 + (self.cub_size[0]*21), self.pantalla_y-(self.cub_size[1]*4)])
 
-    #Piso final    
+    #Piso final
     self.screen.blit(self.cub[9], [0 + (self.cub_size[0]*23), self.pantalla_y-self.cub_size[1]])
     self.screen.blit(self.cub[1], [0 + (self.cub_size[0]*24), self.pantalla_y-self.cub_size[1]])
     self.screen.blit(self.cub[2], [0 + (self.cub_size[0]*25), self.pantalla_y-self.cub_size[1]])
