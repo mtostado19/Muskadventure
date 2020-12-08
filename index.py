@@ -14,7 +14,7 @@ pantalla_y = 640
 color_1 = (255, 1, 5)
 
 size = (pantalla_x,pantalla_y)
-level = 9
+level = 3
 screen = pygame.display.set_mode(size)
 
 background = pygame.image.load("Assets/BF.jpg").convert()
@@ -65,9 +65,10 @@ collidersLevel4= [
     pygame.Rect(510, 360, 280, 40),
 ]
 paredLeftCollider4 = [
+    pygame.Rect(0, 0, 40, 100),
     pygame.Rect(76, 172, 36, 252),
     pygame.Rect(72, 420, 5, 144),
-    pygame.Rect(0, 0, 40, 100),
+    #pygame.Rect(0, 0, 40, 100),
 ]
 paredRightCollider4 = [pygame.Rect(1116, 0, 5, 640)]
 
