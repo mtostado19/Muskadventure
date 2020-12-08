@@ -46,7 +46,7 @@ def video1(screen):
             currentTime = pygame.time.get_ticks()
     
         if currentTime >= time and playSound:
-            pygame.mixer.music.load('Assets/sound/video.mp3')
+            pygame.mixer.music.load('Assets/sound/videoIntro.mp3')
             pygame.mixer.music.play(1)
             playSound = False
         ##print(pygame.time.get_ticks() - time)
@@ -97,8 +97,8 @@ def video2(screen):
             currentTime = pygame.time.get_ticks()
     
         if currentTime >= time and playSound:
-            pygame.mixer.music.load('Assets/sound/video2.mp3')
-            pygame.mixer.music.play(1)
+            #pygame.mixer.music.load('Assets/sound/video2.mp3')
+            #pygame.mixer.music.play(1)
             playSound = False
         ##print(pygame.time.get_ticks() - time)
         pygame.display.flip()

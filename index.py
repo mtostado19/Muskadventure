@@ -24,7 +24,7 @@ nivel1bool = True
 color_1 = (255, 1, 5)
 
 size = (pantalla_x,pantalla_y)
-level = 1
+level = 0
 screen = pygame.display.set_mode(size)
 font = pygame.font.Font(None,50) ##
 fontmini = pygame.font.Font(None,30) ##
@@ -57,7 +57,7 @@ naveLand = False
 patata = True
 done = False
 NuevoIntento = True ##
-current_time = pygame.time.get_ticks() + 60000
+
 Menu.Menu_entrada()
 try:
     controller = xbox360_controller.Controller()
@@ -81,15 +81,17 @@ while not done:
         pygame.time.delay(3000)
         video.video1(screen)
         pygame.time.delay(1000)
-        pygame.mixer.music.fadeout(1000)
-        pygame.time.delay(1000)
-  NaveLevel.manejador_eventos(event) # Level 2
+        pygame.mixer.music.fadeout(3000)
+        pygame.time.delay(3000)
+
   if level == 0:
     Menu.inicio()
   
   if level == 1:
     ##Version 2
     if(nivel1bool):
+      pygame.mixer.music.load('Assets/sound/mountains.mp3')
+      pygame.mixer.music.play(1)
       Nivel1.ShowPrimerNivel()
       time_terminar = pygame.time.get_ticks() + 60000
       nivel1bool = False
@@ -98,15 +100,15 @@ while not done:
     segundos = (time_actual-time_terminar)//-1000
     if(time_actual >= time_terminar):
       if (Nivel1.verificar()):
+        level = 2
         Nivel1.nivelSalida()
         video.video2(screen)
-        pygame.mixer.music.fadeout(1000)
-        pygame.time.delay(1000)
-        level = 2
+        print(level)
       else: 
         Nivel1.nivelSalida()
         Nivel1 = nivel1.Nivel1(screen)
         nivel1bool= True
+        pygame.mixer.music.fadeout(3000)
         Nivel1.showRestart()
     if controller != None:
             x, y = controller.get_left_stick()
@@ -119,13 +121,18 @@ while not done:
     #level = 3
   if level == 2:  # Obviamente Level 2
         # que el tiempo inicie aqui
+        NaveLevel.manejador_eventos(event) # Level 2
         if NuevoIntento:
             # quiero reiniciar el tiempo aqui
             intro.showIntro()
+            pygame.mixer.music.fadeout(1000)
+            pygame.time.delay(1000)
             NaveLevel.vida = 100
             NuevoIntento = False
-            current_time_2 = pygame.time.get_ticks()
+            current_time = pygame.time.get_ticks() + 60000
+        current_time_2 = pygame.time.get_ticks()
         if current_time_2 >= current_time:
+            print('puto roger, la cago')
             level += 1
         screen.blit(BackgroundAtomosfera, [0, 0])
         segundos = (current_time_2-current_time)//-1000
