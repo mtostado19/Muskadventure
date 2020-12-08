@@ -65,9 +65,9 @@ collidersLevel4= [
     pygame.Rect(510, 360, 280, 40),
 ]
 paredLeftCollider4 = [
-    pygame.Rect(0, 0, 40, 100),
     pygame.Rect(76, 172, 36, 252),
     pygame.Rect(72, 420, 5, 144),
+    pygame.Rect(0, 0, 40, 100),
 ]
 paredRightCollider4 = [pygame.Rect(1116, 0, 5, 640)]
 
@@ -346,7 +346,8 @@ while not done:
       player.rect.x = 1072
       player.rect.y = 525
       paredRightCollider5.append(pygame.Rect(1125, 0, 5, 640))
-      paredLeftCollider5.pop(0)
+      paredLeftCollider5.pop()
+      paredLeftCollider5.append(pygame.Rect(0, 136, 40, 504))
 
   if level == 11:
     tiempo_ahora = pygame.time.get_ticks()
@@ -368,6 +369,8 @@ while not done:
       level = 12
       player.rect.x = 40
       player.rect.y = 525
+      paredLeftCollider4.pop()
+      paredLeftCollider4.append(pygame.Rect(0, 136, 40, 504))
 
   if level == 12:
     screen.blit(backgroundCave1, [0,0])
