@@ -604,6 +604,9 @@ class pantallaCuevaDos():
     self.screen.blit(self.cub[12], [0, self.pantalla_y - self.cub_size[1] - self.cub_size[8]])
     self.screen.blit(self.cub[13], [90, self.pantalla_y - self.cub_size[1] - self.cub_size[9]])
     self.screen.blit(self.cub[13], [(self.cub_size[5]*13), self.pantalla_y-self.cub_size[9]-(self.cub_size[4]*10)])
+    self.screen.blit(self.cub[18], [(self.cub_size[5]*15), self.pantalla_y-self.cub_size[10]-(self.cub_size[4]*4)])
+    self.screen.blit(self.cub[18], [(self.cub_size[5]*15)-20, self.pantalla_y-self.cub_size[10]-(self.cub_size[4]*4)])
+    self.screen.blit(self.cub[18], [(self.cub_size[5]*15)+20, self.pantalla_y-self.cub_size[10]-(self.cub_size[4]*4)])
 
     #Plataforma inferior
     self.screen.blit(self.cub[0], [0, self.pantalla_y-self.cub_size[1]])
@@ -746,6 +749,14 @@ class pantallaCuevaDos():
     self.screen.blit(self.cub[14], [self.pantalla_x - (self.cub_size[4]*3), self.pantalla_y - (self.cub_size[3]*7)])
 
   def Cueva5(self, pressed):
+    #arboles
+    #self.screen.blit(self.cub[12], [self.pantalla_x, self.pantalla_y - self.cub_size[1] - self.cub_size[8]])
+    #self.screen.blit(self.cub[13], [90, self.pantalla_y - self.cub_size[1] - self.cub_size[9]])
+    #self.screen.blit(self.cub[13], [(self.cub_size[5]*13), self.pantalla_y-self.cub_size[9]-(self.cub_size[4]*10)])
+    #self.screen.blit(self.cub[18], [(self.cub_size[5]*15), self.pantalla_y-self.cub_size[10]-(self.cub_size[4]*4)])
+    #self.screen.blit(self.cub[18], [(self.cub_size[5]*15)-20, self.pantalla_y-self.cub_size[10]-(self.cub_size[4]*4)])
+    #self.screen.blit(self.cub[18], [(self.cub_size[5]*15)+20, self.pantalla_y-self.cub_size[10]-(self.cub_size[4]*4)])
+
     #Entrada
     self.screen.blit(self.cub[3], [0, self.pantalla_y-(self.cub_size[3]*14)])
     self.screen.blit(self.cub[3], [(self.cub_size[3]), self.pantalla_y-(self.cub_size[3]*14)])

@@ -14,7 +14,7 @@ pantalla_y = 640
 color_1 = (255, 1, 5)
 
 size = (pantalla_x,pantalla_y)
-level = 3
+level = 9
 screen = pygame.display.set_mode(size)
 
 background = pygame.image.load("Assets/BF.jpg").convert()
@@ -58,11 +58,11 @@ paredRightCollider3 = [pygame.Rect(576, 0, 36, 288)]
 collidersLevel4= [
     pygame.Rect(0, 565, 1152, 75),
     pygame.Rect(0, 136, 120, 36),
-    pygame.Rect(210, 240, 170, 40),
-    pygame.Rect(910, 240, 170, 40),
-    pygame.Rect(210, 440, 170, 40),
-    pygame.Rect(910, 440, 170, 40),
-    pygame.Rect(490, 360, 320, 40),
+    pygame.Rect(230, 240, 150, 40),
+    pygame.Rect(930, 240, 160, 40),
+    pygame.Rect(230, 440, 160, 40),
+    pygame.Rect(930, 440, 160, 40),
+    pygame.Rect(510, 360, 280, 40),
 ]
 paredLeftCollider4 = [
     pygame.Rect(0, 0, 40, 100),
@@ -73,7 +73,7 @@ paredRightCollider4 = [pygame.Rect(1116, 0, 5, 640)]
 
 collidersLevel5= [
     pygame.Rect(0, 565, 1152, 75),
-    pygame.Rect(0, 136, 120, 36),
+    pygame.Rect(0, 136, 155, 10),
     pygame.Rect(280, 200, 460, 10),
     pygame.Rect(910, 240, 490, 10),
     pygame.Rect(840, 320, 490, 10),
@@ -81,8 +81,8 @@ collidersLevel5= [
     pygame.Rect(700, 480, 490, 10),
 ]
 paredLeftCollider5 = [
+    pygame.Rect(156, 136, 5, 10),
     pygame.Rect(0, 0, 40, 100),
-    pygame.Rect(76, 172, 36, 252),
 ]
 paredRightCollider5 = [pygame.Rect(1116, 0, 5, 496)]
 
@@ -145,6 +145,7 @@ inicial_time = 0
 arboles1 = [
   pygame.Rect(0, 397, 260, 168), 
   pygame.Rect(910, 102, 220, 140),
+  pygame.Rect(1050, 453, 102, 27)
   ]
 
 arboles2 = [
