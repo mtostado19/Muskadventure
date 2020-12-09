@@ -88,35 +88,35 @@ class Nivel1():
   def update(self, direction):
     if direction == 'left':
         self.LastMovement = 'left'
-        self.naveX += .070
+        self.naveX += .150
     if direction == 'right':
         self.LastMovement = 'right'
-        self.naveX -= .070
+        self.naveX -= .150
 
     if direction == 'up':
         self.LastMovement = 'up'
-        self.naveY += .070
+        self.naveY += .150
     if direction == 'down':
         self.LastMovement = 'down'
-        self.naveY -= .070
+        self.naveY -= .150
 
     if direction == 'down-left':
         self.LastMovement = 'down-left'
-        self.naveY -= .070
-        self.naveX += .070
+        self.naveY -= .150
+        self.naveX += .150
     if direction == 'down-right':
         self.LastMovement = 'down-right'
-        self.naveY -= .070
-        self.naveX -= .070
+        self.naveY -= .150
+        self.naveX -= .150
 
     if direction == 'up-right':
       self.LastMovement = 'up-right'
-      self.naveY += .070
-      self.naveX -= .070
+      self.naveY += .150
+      self.naveX -= .150
     if direction == 'up-left':
       self.LastMovement = 'up-left'
-      self.naveY += .070
-      self.naveX += .070
+      self.naveY += .150
+      self.naveX += .150
     if direction == '':
       pass
 
