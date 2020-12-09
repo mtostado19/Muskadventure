@@ -296,8 +296,7 @@ while not done:
             current_time = pygame.time.get_ticks() + 60000
         current_time_2 = pygame.time.get_ticks()
         if current_time_2 >= current_time:
-            pygame.mixer.music.fadeout(3000)
-            pygame.time.delay(1000)
+            video.video3(screen)
             level += 1
         screen.blit(BackgroundAtomosfera, [0, 0])
         segundos = (current_time_2-current_time)//-1000
@@ -344,6 +343,8 @@ while not done:
             intro.showRestart()  
   if level == 3:
     if instruccionesPlataformer:
+      pygame.mixer.music.fadeout(3000)
+      pygame.time.delay(1000)
       intrucciones3.showIntro()
       instruccionesPlataformer = False
     if not musicPlataformer:
