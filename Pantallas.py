@@ -1,4 +1,5 @@
 import pygame
+import xbox360_controller
 
 class pantallaUno():
   def __init__(self,screen):
@@ -1113,14 +1114,17 @@ class Intrucciones():
                     pygame.quit
                 if event.type == pygame.MOUSEBUTTONDOWN:
                     firstText = False
+                if event.type == pygame.JOYBUTTONDOWN:
+                    if event.button == xbox360_controller.A:
+                        firstText = False
 
-        self.screen.blit(self.instrucciones,[0,0])
-        self.clickInstruccion()
-        pygame.display.update()
-        
-        tiempo = pygame.time.get_ticks()
-        if tiempo >= endTime:
-            firstText = False 
+            self.screen.blit(self.instrucciones,[0,0])
+            self.clickInstruccion()
+            pygame.display.update()
+            
+            tiempo = pygame.time.get_ticks()
+            if tiempo >= endTime:
+                firstText = False 
 
     def instruccionesSalida(self):
         for event in pygame.event.get():
@@ -1137,7 +1141,7 @@ class Intrucciones():
             pygame.time.delay(5)
             
     def clickInstruccion(self):
-        self.texto_marcador = self.font.render(f"[Click para continuar]", True, [255,255,255])
+        self.texto_marcador = self.font.render(f"[Presione click o 'A' para continuar]", True, [255,255,255])
         self.texto_marcador_rect = self.texto_marcador.get_rect()
         self.screen.blit(self.texto_marcador, (self.pantalla_x - self.texto_marcador_rect[2] -10, self.pantalla_y - self.texto_marcador_rect[3]-10))
 

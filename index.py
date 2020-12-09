@@ -25,7 +25,7 @@ nivel1bool = True
 color_1 = (255, 1, 5)
 
 size = (pantalla_x,pantalla_y)
-level = 2
+level = 3
 screen = pygame.display.set_mode(size)
 font = pygame.font.Font(None,50) ##
 fontmini = pygame.font.Font(None,30) ##
@@ -241,7 +241,9 @@ while not done:
         pygame.mixer.music.fadeout(3000)
         pygame.time.delay(3000)
   
-  pressed = controller.get_buttons()
+  #event = pygame.event.get()
+  if controller != None:
+    pressed = controller.get_buttons()
   if level == 0:
     Menu.inicio()
   
@@ -249,6 +251,7 @@ while not done:
     ##Version 2
     if(nivel1bool):
       pygame.mixer.music.load('Assets/sound/mountains.mp3')
+      pygame.mixer.music.set_volume(.2)
       pygame.mixer.music.play(1)
       Nivel1.ShowPrimerNivel()
       time_terminar = pygame.time.get_ticks() + 60000
@@ -287,6 +290,7 @@ while not done:
             pygame.mixer.music.fadeout(1000)
             pygame.time.delay(1000)
             pygame.mixer.music.load('Assets/sound/final-voyage.mp3')
+            pygame.mixer.music.set_volume(.2)
             pygame.mixer.music.play(1)
             intro.showIntro()
             NaveLevel.vida = 100
@@ -349,6 +353,7 @@ while not done:
       instruccionesPlataformer = False
     if not musicPlataformer:
       pygame.mixer.music.load('Assets/sound/musicPlataformer1.mp3')
+      pygame.mixer.music.set_volume(.2)
       pygame.mixer.music.play(-1)
       musicPlataformer = True
     screen.blit(background, [0,0])
@@ -535,6 +540,7 @@ while not done:
       PantallaCueva2.lavaIsUp = True
       PantallaCueva1.lavaIsUp = True
       pygame.mixer.music.load('Assets/sound/musicPlataformer2.mp3')
+      pygame.mixer.music.set_volume(.2)
       pygame.mixer.music.play(-1)
 
     if player.rect.x < 20:
@@ -741,7 +747,7 @@ while not done:
     PantallaCueva1.Cueva1()
     if controller != None:
       x, y = controller.get_left_stick()
-      player.moveConControl(event, collidersLevel4, paredLeftCollider4, paredRightCollider4, primerBoton, x, y, pressed[xbox360_controller.A], pressed[xbox360_controller.X])
+      player.moveConControl(event, collidersLevel3, paredLeftCollider3, paredRightCollider3, [], x, y, pressed[xbox360_controller.A], pressed[xbox360_controller.X])
     else:
       player.handle_event(event, collidersLevel3, paredLeftCollider3, paredRightCollider3, [])
 
@@ -780,7 +786,8 @@ while not done:
       intrucciones3.showRestart()
 
   if level == 14:
-    screen.blit(background, [0,0])
+    intro.showLibro1()
+    intro.showLibro2()
 
   pygame.display.flip()
   clock.tick(200)
