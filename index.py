@@ -808,7 +808,7 @@ while not done:
     intro.showLibro2()
     intro.showFelicidades()
     video.video4(screen)
-    pygame.mixer.music.fadeout(3000)
+    pygame.mixer.music.fadeout(7000)
     intro.showFin()
     done = True
 
