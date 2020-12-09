@@ -240,6 +240,8 @@ while not done:
         pygame.time.delay(1000)
         pygame.mixer.music.fadeout(3000)
         pygame.time.delay(3000)
+  
+  pressed = controller.get_buttons()
   if level == 0:
     Menu.inicio()
   
@@ -277,6 +279,9 @@ while not done:
   if level == 2:  # Obviamente Level 2
         # que el tiempo inicie aqui
         NaveLevel.manejador_eventos(event) # Level 2
+        if controller != None:
+            x, y = controller.get_left_stick()
+            NaveLevel.moveConControl(x, y)
         if NuevoIntento:
             # quiero reiniciar el tiempo aqui
             intro.showIntro()
@@ -352,7 +357,11 @@ while not done:
             print("aterrizo")
             naveLand = True
     if naveLand == True:
-          player.handle_event(event, collidersLivel1, [], [], [])
+          if controller != None:
+            x, y = controller.get_left_stick()
+            player.moveConControl(event, collidersLivel1, [], [], [], x, y, pressed[xbox360_controller.A], pressed[xbox360_controller.X])
+          else:
+            player.handle_event(event, collidersLivel1, [], [], [])
           screen.blit(player.image,player.rect)
           clock.tick(15)
           if player.rect.x > 1152:
@@ -363,7 +372,11 @@ while not done:
   if level == 4:
     screen.blit(background, [0,0])
     pantallaMarte.superficieMarteCueva()
-    player.handle_event(event, collidersLivel2, paredLeftCollider2, paredRightCollider2, [])
+    if controller != None:
+      x, y = controller.get_left_stick()
+      player.moveConControl(event, collidersLivel2, paredLeftCollider2, paredRightCollider2, [], x, y, pressed[xbox360_controller.A], pressed[xbox360_controller.X])
+    else:
+      player.handle_event(event, collidersLivel2, paredLeftCollider2, paredRightCollider2, [])
     screen.blit(player.image,player.rect)
     clock.tick(15)
     if player.rect.y > 640:
@@ -374,7 +387,11 @@ while not done:
   if level == 5:
     screen.blit(backgroundCave1, [0,0])
     PantallaCueva1.Cueva1()
-    player.handle_event(event, collidersLevel3, paredLeftCollider3, paredRightCollider3, [])
+    if controller != None:
+      x, y = controller.get_left_stick()
+      player.moveConControl(event, collidersLevel3, paredLeftCollider3, paredRightCollider3, [], x, y, pressed[xbox360_controller.A], pressed[xbox360_controller.X])
+    else:
+      player.handle_event(event, collidersLevel3, paredLeftCollider3, paredRightCollider3, [])
     screen.blit(player.image,player.rect)
     clock.tick(15)
     if player.rect.x > 1152:
@@ -394,7 +411,11 @@ while not done:
 
     screen.blit(backgroundCave1, [0,0])
     PantallaCueva2.Cueva2(player.buttonPressed)
-    player.handle_event(event, collidersLevel4, paredLeftCollider4, paredRightCollider4, primerBoton)
+    if controller != None:
+      x, y = controller.get_left_stick()
+      player.moveConControl(event, collidersLevel4, paredLeftCollider4, paredRightCollider4, primerBoton, x, y, pressed[xbox360_controller.A], pressed[xbox360_controller.X])
+    else:
+      player.handle_event(event, collidersLevel4, paredLeftCollider4, paredRightCollider4, primerBoton)
     screen.blit(player.image,player.rect)
     clock.tick(15)
     if player.buttonPressed == True and numberOfPops == 0:
@@ -423,7 +444,12 @@ while not done:
 
     screen.blit(backgroundCave1, [0,0])
     PantallaCueva2.Cueva3()
-    player.handle_event(event, collidersLevel5, paredLeftCollider5, paredRightCollider5, [])
+    if controller != None:
+      x, y = controller.get_left_stick()
+      player.moveConControl(event, collidersLevel5, paredLeftCollider5, paredRightCollider5, [], x, y, pressed[xbox360_controller.A], pressed[xbox360_controller.X])
+    else:
+      player.handle_event(event, collidersLevel5, paredLeftCollider5, paredRightCollider5, [])
+    
     screen.blit(player.image,player.rect)
     clock.tick(15)
     barra_vida(screen, 0, 0, oxigeno)
@@ -455,7 +481,11 @@ while not done:
 
     screen.blit(backgroundCave1, [0,0])
     PantallaCueva2.Cueva4()
-    player.handle_event(event, collidersLevel6, paredLeftCollider6, paredRightCollider6, [])
+    if controller != None:
+      x, y = controller.get_left_stick()
+      player.moveConControl(event, collidersLevel6, paredLeftCollider6, paredRightCollider6, [], x, y, pressed[xbox360_controller.A], pressed[xbox360_controller.X])
+    else:
+      player.handle_event(event, collidersLevel6, paredLeftCollider6, paredRightCollider6, [])
     screen.blit(player.image,player.rect)
     clock.tick(15)
     barra_vida(screen, 0, 0, oxigeno)
@@ -489,7 +519,11 @@ while not done:
 
     screen.blit(backgroundCave1, [0,0])
     PantallaCueva2.Cueva5(player.buttonPressed)
-    player.handle_event(event, collidersLevel7, paredLeftCollider7, paredRightCollider7, segundoBoton)
+    if controller != None:
+      x, y = controller.get_left_stick()
+      player.moveConControl(event, collidersLevel7, paredLeftCollider7, paredRightCollider7, segundoBoton, x, y, pressed[xbox360_controller.A], pressed[xbox360_controller.X])
+    else:
+      player.handle_event(event, collidersLevel7, paredLeftCollider7, paredRightCollider7, segundoBoton)
     screen.blit(player.image,player.rect)
     clock.tick(15)
     if player.buttonPressed == True and numberOfPops == 0:
@@ -523,6 +557,8 @@ while not done:
       PantallaCueva2.lavaCount = 1
       musicPlataformer = False
       pygame.mixer.music.fadeout(3000)
+      patito = 0
+      lavaCollide = pygame.Rect(0, pantalla_y - (patito*36), 1152, 640)
       intrucciones3.showRestart()
       
   #Aqui la lava empieza a subir despues del boton
@@ -543,7 +579,11 @@ while not done:
 
     screen.blit(backgroundCave1, [0,0])
     PantallaCueva2.Cueva4()
-    player.handle_event(event, collidersLevel6, paredLeftCollider6, paredRightCollider6, [])
+    if controller != None:
+      x, y = controller.get_left_stick()
+      player.moveConControl(event, collidersLevel6, paredLeftCollider6, paredRightCollider6, [], x, y, pressed[xbox360_controller.A], pressed[xbox360_controller.X])
+    else:
+      player.handle_event(event, collidersLevel6, paredLeftCollider6, paredRightCollider6, [])
     screen.blit(player.image,player.rect)
     clock.tick(15)
     barra_vida(screen, 0, 0, oxigeno)
@@ -571,6 +611,8 @@ while not done:
       PantallaCueva2.lavaIsUp = False
       PantallaCueva1.lavaIsUp = False
       PantallaCueva2.lavaCount = 1
+      patito = 0
+      lavaCollide = pygame.Rect(0, pantalla_y - (patito*36), 1152, 640)
       paredRightCollider6.pop()
       musicPlataformer = False
       pygame.mixer.music.fadeout(3000)
@@ -593,7 +635,11 @@ while not done:
 
     screen.blit(backgroundCave1, [0,0])
     PantallaCueva2.Cueva3()
-    player.handle_event(event, collidersLevel5, paredLeftCollider5, paredRightCollider5, [])
+    if controller != None:
+      x, y = controller.get_left_stick()
+      player.moveConControl(event, collidersLevel5, paredLeftCollider5, paredRightCollider5, [], x, y, pressed[xbox360_controller.A], pressed[xbox360_controller.X])
+    else:
+      player.handle_event(event, collidersLevel5, paredLeftCollider5, paredRightCollider5, [])
     screen.blit(player.image,player.rect)
     clock.tick(15)
     barra_vida(screen, 0, 0, oxigeno)
@@ -619,6 +665,8 @@ while not done:
       PantallaCueva2.lavaIsUp = False
       PantallaCueva1.lavaIsUp = False
       PantallaCueva2.lavaCount = 1
+      patito = 0
+      lavaCollide = pygame.Rect(0, pantalla_y - (patito*36), 1152, 640)
       paredRightCollider6.pop()
       paredRightCollider5.pop()
       paredLeftCollider5.pop()
@@ -638,7 +686,11 @@ while not done:
 
     screen.blit(backgroundCave1, [0,0])
     PantallaCueva2.Cueva2(player.buttonPressed)
-    player.handle_event(event, collidersLevel4, paredLeftCollider4, paredRightCollider4, primerBoton)
+    if controller != None:
+      x, y = controller.get_left_stick()
+      player.moveConControl(event, collidersLevel4, paredLeftCollider4, paredRightCollider4, primerBoton, x, y, pressed[xbox360_controller.A], pressed[xbox360_controller.X])
+    else:
+      player.handle_event(event, collidersLevel4, paredLeftCollider4, paredRightCollider4, primerBoton)
     screen.blit(player.image,player.rect)
     clock.tick(15)
     if player.rect.x < 10:
@@ -651,6 +703,8 @@ while not done:
 
     if player.rect.colliderect(lavaCollide):
       level = 3
+      patito = 0
+      lavaCollide = pygame.Rect(0, pantalla_y - (patito*36), 1152, 640)
       player.rect.x = 0
       player.rect.y = pantalla_y - 64 - 39
       oxigeno = 100
@@ -682,7 +736,12 @@ while not done:
 
     screen.blit(backgroundCave1, [0,0])
     PantallaCueva1.Cueva1()
-    player.handle_event(event, collidersLevel3, paredLeftCollider3, paredRightCollider3, [])
+    if controller != None:
+      x, y = controller.get_left_stick()
+      player.moveConControl(event, collidersLevel4, paredLeftCollider4, paredRightCollider4, primerBoton, x, y, pressed[xbox360_controller.A], pressed[xbox360_controller.X])
+    else:
+      player.handle_event(event, collidersLevel3, paredLeftCollider3, paredRightCollider3, [])
+
     screen.blit(player.image,player.rect)
     clock.tick(15)
     if player.rect.y < 20:
@@ -695,6 +754,8 @@ while not done:
 
     if player.rect.colliderect(lavaCollide):
       level = 3
+      patito = 0
+      lavaCollide = pygame.Rect(0, pantalla_y - (patito*36), 1152, 640)
       player.rect.x = 0
       player.rect.y = pantalla_y - 64 - 39
       oxigeno = 100

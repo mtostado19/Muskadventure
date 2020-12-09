@@ -129,8 +129,54 @@ class Player(pygame.sprite.Sprite):
                 return True
         return False
 
-    def moveConControl(self, x, y):
+    def moveConControl(self, event, colliders, left, right, boton, x, y, A, X):
+        if event.type == pygame.QUIT:
+            game_over = True
+
+        self.plataformRect = colliders
+        self.paredLeftRect = left
+        self.paredRightRect = right
+
+        self.direccion = [0,0]
+        self.rect.y += self.momentum
+        self.momentum += 0.2
+        if self.momentum > 6:
+            self.momentum = 6
+
+    
         if x < 0 and y == 0:
             self.update('left')
         if x > 0 and y == 0:
             self.update('right')
+            
+        if  x > 0 and y < 0:
+            self.update('right')
+        if  x > 0 and y > 0:
+            self.update('right')
+
+        if  x < 0 and y < 0:
+            self.update('left')
+        if  x < 0 and y > 0:
+            self.update('left')
+        if A == 1:
+            if self.jumpCount < 6:
+                self.momentum = -5
+        if X == 1:
+            if len(boton) > 0 and self.buttonPressed == False:
+                if self.rect.colliderect(boton[0]):
+                    self.buttonPressed = True
+
+        self.direccion[1] = self.momentum
+
+        if event.type == pygame.KEYUP:
+            if event.key == pygame.K_LEFT or event.key == pygame.K_a:
+                self.update("stand_left")
+            if event.key == pygame.K_RIGHT or event.key == pygame.K_d:
+                self.update("stand_right")
+
+        prueba = self.movement()
+        if prueba['bottom']:
+            self.momentum = 0
+            self.jumpCount = 0
+        else:
+            self.jumpCount += 1
