@@ -7,7 +7,7 @@ def video1(screen):
     pantalla_x = 1152
     pantalla_y = 640
     font = pygame.font.Font(None,30)
-    texto_marcador = font.render(f"[Click para omitir]", True, [255,255,255])
+    texto_marcador = font.render(f"[Presione click o 'A' para omitir]", True, [255,255,255])
     texto_marcador_rect = texto_marcador.get_rect()
     
     cap = cv2.VideoCapture(video)
@@ -29,8 +29,8 @@ def video1(screen):
             if event.type == pygame.MOUSEBUTTONDOWN:
                 running = False
             if event.type == pygame.JOYBUTTONDOWN:
-                    if event.button == xbox360_controller.A:
-                        firstText = False
+                if event.button == xbox360_controller.A:
+                    running = False
 
         # read one frame and check if there was no problem
         ret, img = cap.read()
@@ -50,8 +50,8 @@ def video1(screen):
             currentTime = pygame.time.get_ticks()
     
         if currentTime >= time and playSound:
-            #pygame.mixer.music.load('Assets/sound/videoIntro.mp3')
-            #pygame.mixer.music.play(-1)
+            pygame.mixer.music.load('Assets/sound/videoIntro.mp3')
+            pygame.mixer.music.play(-1)
             playSound = False
         ##print(pygame.time.get_ticks() - time)
         pygame.display.flip()
@@ -61,7 +61,7 @@ def video2(screen):
     pantalla_x = 1152
     pantalla_y = 640
     font = pygame.font.Font(None,30)
-    texto_marcador = font.render(f"[Click para omitir]", True, [255,255,255])
+    texto_marcador = font.render(f"[Presione click o 'A' para omitir]", True, [255,255,255])
     texto_marcador_rect = texto_marcador.get_rect()
     
     cap = cv2.VideoCapture(video)
@@ -83,8 +83,8 @@ def video2(screen):
             if event.type == pygame.MOUSEBUTTONDOWN:
                 running = False
             if event.type == pygame.JOYBUTTONDOWN:
-                    if event.button == xbox360_controller.A:
-                        firstText = False
+                if event.button == xbox360_controller.A:
+                    running = False
         # read one frame and check if there was no problem
         ret, img = cap.read()
         if not ret:
@@ -114,7 +114,7 @@ def video3(screen):
     pantalla_x = 1152
     pantalla_y = 640
     font = pygame.font.Font(None,30)
-    texto_marcador = font.render(f"[Click para omitir]", True, [255,255,255])
+    texto_marcador = font.render(f"[Presione click o 'A' para omitir]", True, [255,255,255])
     texto_marcador_rect = texto_marcador.get_rect()
     
     cap = cv2.VideoCapture(video)
@@ -136,8 +136,8 @@ def video3(screen):
             if event.type == pygame.MOUSEBUTTONDOWN:
                 running = False
             if event.type == pygame.JOYBUTTONDOWN:
-                    if event.button == xbox360_controller.A:
-                        firstText = False
+                if event.button == xbox360_controller.A:
+                    running = False
         # read one frame and check if there was no problem
         ret, img = cap.read()
         if not ret:
@@ -167,7 +167,7 @@ def video4(screen):
     pantalla_x = 1152
     pantalla_y = 640
     font = pygame.font.Font(None,30)
-    texto_marcador = font.render(f"[Click para omitir]", True, [255,255,255])
+    texto_marcador = font.render(f"[Presione click o 'A' para omitir]", True, [255,255,255])
     texto_marcador_rect = texto_marcador.get_rect()
     
     cap = cv2.VideoCapture(video)
@@ -189,8 +189,8 @@ def video4(screen):
             if event.type == pygame.MOUSEBUTTONDOWN:
                 running = False
             if event.type == pygame.JOYBUTTONDOWN:
-                    if event.button == xbox360_controller.A:
-                        firstText = False
+                if event.button == xbox360_controller.A:
+                    running = False
         # read one frame and check if there was no problem
         ret, img = cap.read()
         if not ret:

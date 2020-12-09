@@ -25,7 +25,7 @@ nivel1bool = True
 color_1 = (255, 1, 5)
 
 size = (pantalla_x,pantalla_y)
-level = 14
+level = 0
 screen = pygame.display.set_mode(size)
 font = pygame.font.Font(None,50) ##
 fontmini = pygame.font.Font(None,30) ##
@@ -240,7 +240,18 @@ while not done:
         pygame.time.delay(1000)
         pygame.mixer.music.fadeout(3000)
         pygame.time.delay(3000)
-  
+    if event.type == pygame.JOYBUTTONDOWN:
+      if event.button == xbox360_controller.A and level==0:
+        level += 1
+        Menu.Menu_salida()
+        pygame.mixer.music.fadeout(3000)
+        pygame.time.delay(3000)
+        video.video1(screen)
+        pygame.time.delay(1000)
+        pygame.mixer.music.fadeout(3000)
+        pygame.time.delay(3000)
+        
+        
   #event = pygame.event.get()
   if controller != None:
     pressed = controller.get_buttons()
@@ -251,7 +262,7 @@ while not done:
     ##Version 2
     if(nivel1bool):
       pygame.mixer.music.load('Assets/sound/mountains.mp3')
-      pygame.mixer.music.set_volume(.2)
+      pygame.mixer.music.set_volume(1)
       pygame.mixer.music.play(1)
       Nivel1.ShowPrimerNivel()
       time_terminar = pygame.time.get_ticks() + 60000
@@ -788,10 +799,18 @@ while not done:
       intrucciones3.showRestart()
 
   if level == 14:
+    pygame.mixer.music.fadeout(3000)
+    pygame.time.delay(3000)
+    pygame.mixer.music.load('Assets/sound/time.mp3')
+    pygame.mixer.music.set_volume(1)
+    pygame.mixer.music.play(1)
     intro.showLibro1()
     intro.showLibro2()
-    
+    intro.showFelicidades()
     video.video4(screen)
+    pygame.mixer.music.fadeout(3000)
+    intro.showFin()
+    done = True
 
   pygame.display.flip()
   clock.tick(200)

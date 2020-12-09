@@ -1,5 +1,6 @@
 import pygame
 import random
+import xbox360_controller
 
 class Nivel1():
   def __init__(self, screen):
@@ -216,7 +217,9 @@ class Nivel1():
           pygame.quit
         if event.type == pygame.MOUSEBUTTONDOWN:
           firstText = False
-
+        if event.type == pygame.JOYBUTTONDOWN:
+          if event.button == xbox360_controller.A:
+            firstText = False
       self.screen.blit(self.nivel1,[(self.pantalla_x)//2 - self.nivel1_rect[2]//2, (self.pantalla_y)//2 - self.nivel1_rect[3]//2])
       self.clickInstruccion()
       pygame.display.update()
@@ -254,7 +257,7 @@ class Nivel1():
   
   def instruccionesFunc(self):
     current_time = pygame.time.get_ticks()
-    endTime = current_time + 10000
+    endTime = current_time + 40000
 
     firstText = True;
 
@@ -264,7 +267,9 @@ class Nivel1():
           pygame.quit
         if event.type == pygame.MOUSEBUTTONDOWN:
           firstText = False
-
+        if event.type == pygame.JOYBUTTONDOWN:
+          if event.button == xbox360_controller.A:
+            firstText = False
       self.screen.blit(self.instrucciones,[0,0])
       self.clickInstruccion()
       pygame.display.update()
@@ -337,7 +342,9 @@ class Nivel1():
           pygame.quit
         if event.type == pygame.MOUSEBUTTONDOWN:
           firstText = False
-
+        if event.type == pygame.JOYBUTTONDOWN:
+          if event.button == xbox360_controller.A:
+            firstText = False
       self.screen.blit(self.fallaste,[0,0])
       self.clickInstruccion()
       pygame.display.update()
@@ -379,6 +386,6 @@ class Nivel1():
     self.restartSalida()
 
   def clickInstruccion(self):
-    self.texto_marcador = self.font.render(f"[Click para continuar]", True, [255,255,255])
+    self.texto_marcador = self.font.render(f"[Presione click o 'A' para continuar]", True, [255,255,255])
     self.texto_marcador_rect = self.texto_marcador.get_rect()
     self.screen.blit(self.texto_marcador, (self.pantalla_x - self.texto_marcador_rect[2] -10, self.pantalla_y - self.texto_marcador_rect[3]-10))

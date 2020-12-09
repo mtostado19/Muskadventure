@@ -1,5 +1,5 @@
 import pygame
-##import pygame_gui
+import xbox360_controller
 
 class background ():
   def __init__(self,screen):
@@ -31,7 +31,7 @@ class background ():
     ##self.manager = pygame_gui.UIManager((self.pantalla_X, self.pantalla_y))
 
   def clickInstruccion(self):
-    self.texto_marcador = self.font.render(f"[Click para continuar]", True, [255,255,255])
+    self.texto_marcador = self.font.render(f"[Presione click o 'A' para continuar]", True, [255,255,255])
     self.texto_marcador_rect = self.texto_marcador.get_rect()
     self.screen.blit(self.texto_marcador, (self.pantalla_X - self.texto_marcador_rect[2] -10, self.pantalla_y - self.texto_marcador_rect[3]-10))
 
@@ -90,6 +90,9 @@ class background ():
           pygame.quit
         if event.type == pygame.MOUSEBUTTONDOWN:
           firstText = False
+        if event.type == pygame.JOYBUTTONDOWN:
+          if event.button == xbox360_controller.A:
+            firstText = False
 
       self.screen.blit(self.p1,[(self.pantalla_X)//2 - self.p1_rect[2]//2, (self.pantalla_y)//2 - self.p1_rect[3]//2])
       self.clickInstruccion()
@@ -139,7 +142,9 @@ class background ():
             pygame.quit
           if event.type == pygame.MOUSEBUTTONDOWN:
             firstText = False
-          
+          if event.type == pygame.JOYBUTTONDOWN:
+            if event.button == xbox360_controller.A:
+              firstText = False
         self.screen.blit(self.p2,[(self.pantalla_X)//2 - self.p2_rect[2]//2, (self.pantalla_y)//2 - self.p2_rect[3]//2])
         self.clickInstruccion()
         pygame.display.update()

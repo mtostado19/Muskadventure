@@ -1104,7 +1104,7 @@ class Intrucciones():
 
     def instruccionesFunc(self):
         current_time = pygame.time.get_ticks()
-        endTime = current_time + 10000
+        endTime = current_time + 40000
 
         firstText = True;
 

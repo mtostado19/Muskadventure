@@ -146,6 +146,9 @@ class Intro():
         self.libro1 = pygame.image.load("Assets/libro1.jpg")
         self.libro2 = pygame.image.load("Assets/libro2.jpg")
 
+        self.felicidades =  pygame.image.load("Assets/felicidades.jpg")
+        self.fin =  pygame.image.load("Assets/fin.jpg")
+
     def showIntro(self):
         self.introEntrada()
         self.instruccionesFunc()
@@ -166,7 +169,7 @@ class Intro():
 
     def instruccionesFunc(self):
         current_time = pygame.time.get_ticks()
-        endTime = current_time + 10000
+        endTime = current_time + 40000
 
         firstText = True;
 
@@ -218,6 +221,9 @@ class Intro():
                     pygame.quit
                 if event.type == pygame.MOUSEBUTTONDOWN:
                     firstText = False
+                if event.type == pygame.JOYBUTTONDOWN:
+                    if event.button == xbox360_controller.A:
+                        firstText = False
 
             self.screen.blit(self.fallaste,[0,0])
             self.clickInstruccion()
@@ -285,9 +291,12 @@ class Intro():
         while firstText:
             for event in pygame.event.get():
                 if event.type == pygame.QUIT:
-                    pygame.quit
+                    break
                 if event.type == pygame.MOUSEBUTTONDOWN:
                     firstText = False
+                if event.type == pygame.JOYBUTTONDOWN:
+                    if event.button == xbox360_controller.A:
+                        firstText = False
 
             self.screen.blit(self.libro1,[0,0])
             self.clickInstruccionLibro1()
@@ -330,7 +339,7 @@ class Intro():
 
     def libro2Func(self):
         current_time = pygame.time.get_ticks()
-        endTime = current_time + 20000
+        endTime = current_time + 60000
 
         firstText = True;
 
@@ -340,7 +349,9 @@ class Intro():
                     pygame.quit
                 if event.type == pygame.MOUSEBUTTONDOWN:
                     firstText = False
-
+                if event.type == pygame.JOYBUTTONDOWN:
+                    if event.button == xbox360_controller.A:
+                        firstText = False
             self.screen.blit(self.libro2,[0,0])
             self.clickInstruccion()
             pygame.display.update()
@@ -364,5 +375,120 @@ class Intro():
     
     def clickInstruccionLibro1(self):
         self.texto_marcador = self.font.render(f"[Presione click o 'A' para traducir]", True, [255,255,255])
+        self.texto_marcador_rect = self.texto_marcador.get_rect()
+        self.screen.blit(self.texto_marcador, (self.pantalla_x - self.texto_marcador_rect[2] -10, self.pantalla_y - self.texto_marcador_rect[3]-10))
+
+    def showFelicidades(self):
+        self.felicidadesEntrada()
+        self.felicidadesFunc()
+        self.felicidadesSalida()
+    
+    def felicidadesFunc(self):
+        current_time = pygame.time.get_ticks()
+        endTime = current_time + 40000
+
+        firstText = True;
+
+        while firstText:
+            for event in pygame.event.get():
+                if event.type == pygame.QUIT:
+                    pygame.quit
+                if event.type == pygame.MOUSEBUTTONDOWN:
+                    firstText = False
+                if event.type == pygame.JOYBUTTONDOWN:
+                    if event.button == xbox360_controller.A:
+                        firstText = False
+
+            self.screen.blit(self.felicidades,[0,0])
+            self.clickInstruccion()
+            pygame.display.update()
+        
+            tiempo = pygame.time.get_ticks()
+            if tiempo >= endTime:
+                firstText = False 
+
+    def felicidadesEntrada(self):
+        for event in pygame.event.get():
+            if event.type == pygame.QUIT:
+                pygame.quit
+        self.fade = pygame.Surface((self.pantalla_x, self.pantalla_y))
+        self.fade.fill((0,0,0))
+        for alpha in range(0,300):
+            self.fade.set_alpha(300 - alpha)
+            self.screen.blit(self.felicidades, [0,0])
+            self.screen.blit(self.fade, [0,0])
+            pygame.display.update()
+            pygame.time.delay(5)
+
+    def felicidadesSalida(self):
+        for event in pygame.event.get():
+            if event.type == pygame.QUIT:
+                pygame.quit
+        self.fade = pygame.Surface((self.pantalla_x, self.pantalla_y))
+        self.fade.fill((0,0,0))
+        for alpha in range(0,300):
+            self.fade.set_alpha(alpha)
+            self.screen.blit(self.felicidades,[0,0])
+            self.screen.blit(self.fade, [0,0])
+            pygame.display.update()
+            pygame.time.delay(5)
+    
+    def showFin(self):
+        self.finEntrada()
+        self.finFunc()
+        self.finSalida()
+    
+    def finFunc(self):
+        current_time = pygame.time.get_ticks()
+        endTime = current_time + 10000
+
+        firstText = True;
+
+        while firstText:
+            for event in pygame.event.get():
+                if event.type == pygame.QUIT:
+                    pygame.quit
+                if event.type == pygame.MOUSEBUTTONDOWN:
+                    firstText = False
+                if event.type == pygame.JOYBUTTONDOWN:
+                    if event.button == xbox360_controller.A:
+                        firstText = False
+
+            self.screen.blit(self.fin,[0,0])
+            self.clickInstruccionFin()
+            pygame.display.update()
+        
+            tiempo = pygame.time.get_ticks()
+            if tiempo >= endTime:
+                firstText = False 
+
+    def finEntrada(self):
+        for event in pygame.event.get():
+            if event.type == pygame.QUIT:
+                pygame.quit
+        self.fade = pygame.Surface((self.pantalla_x, self.pantalla_y))
+        self.fade.fill((0,0,0))
+        for alpha in range(0,300):
+            self.fade.set_alpha(300 - alpha)
+            self.screen.blit(self.fin, [0,0])
+            self.screen.blit(self.fade, [0,0])
+            pygame.display.update()
+            pygame.time.delay(5)
+
+    def finSalida(self):
+        for event in pygame.event.get():
+            if event.type == pygame.QUIT:
+                pygame.quit
+        self.fade = pygame.Surface((self.pantalla_x, self.pantalla_y))
+        self.fade.fill((0,0,0))
+        for alpha in range(0,300):
+            self.fade.set_alpha(alpha)
+            self.screen.blit(self.fin,[0,0])
+            self.screen.blit(self.fade, [0,0])
+            pygame.display.update()
+            pygame.time.delay(5)
+
+    def clickInstruccionFin(self):
+        self.texto_marcador = self.font.render(f"[Presione click o 'A' para terminar]", True, [255,255,255])
         self.texto_marcador_rect = self.texto_marcador.get_rect()
         self.screen.blit(self.texto_marcador, (self.pantalla_x - self.texto_marcador_rect[2] -10, self.pantalla_y - self.texto_marcador_rect[3]-10))
