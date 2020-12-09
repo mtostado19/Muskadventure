@@ -83,7 +83,7 @@ class NaveLevel2():
                         self.vida += 5
                     self.combi.pop() ## DEBE HACER POP
 
-    def moveConControl(self, x, y):
+    def moveConControl(self, x, y, A, B, X, Y):
         if x < 0 and y == 0:
             self.update('left')
         if x > 0 and y == 0:
@@ -98,6 +98,15 @@ class NaveLevel2():
             self.update('left')
         if  x < 0 and y > 0:
             self.update('left')
+
+        if X:
+            self.update('LEFT')
+        if B:
+            self.update('RIGHT')
+        if Y:
+            self.update('UP')
+        if A:
+            self.update('DOWN')
             
     def manejador_eventos(self, event):
         keys = pygame.key.get_pressed()

@@ -25,7 +25,7 @@ nivel1bool = True
 color_1 = (255, 1, 5)
 
 size = (pantalla_x,pantalla_y)
-level = 3
+level = 2
 screen = pygame.display.set_mode(size)
 font = pygame.font.Font(None,50) ##
 fontmini = pygame.font.Font(None,30) ##
@@ -281,21 +281,23 @@ while not done:
         NaveLevel.manejador_eventos(event) # Level 2
         if controller != None:
             x, y = controller.get_left_stick()
-            NaveLevel.moveConControl(x, y)
+            NaveLevel.moveConControl(x, y, pressed[xbox360_controller.A], pressed[xbox360_controller.B], pressed[xbox360_controller.X], pressed[xbox360_controller.Y])
         if NuevoIntento:
             # quiero reiniciar el tiempo aqui
-            intro.showIntro()
             pygame.mixer.music.fadeout(1000)
             pygame.time.delay(1000)
+            pygame.mixer.music.load('Assets/sound/final-voyage.mp3')
+            pygame.mixer.music.play(1)
+            intro.showIntro()
             NaveLevel.vida = 100
             NuevoIntento = False
             if len(enemylist)>3:
               enemylist.pop()
             current_time = pygame.time.get_ticks() + 60000
-            pygame.mixer.music.load('Assets/sound/final-voyage.mp3')
-            pygame.mixer.music.play(1)
         current_time_2 = pygame.time.get_ticks()
         if current_time_2 >= current_time:
+            pygame.mixer.music.fadeout(3000)
+            pygame.time.delay(1000)
             level += 1
         screen.blit(BackgroundAtomosfera, [0, 0])
         segundos = (current_time_2-current_time)//-1000
