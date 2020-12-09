@@ -42,6 +42,7 @@ menu0 = pygame.image.load("Assets/menu0.jpg")
 Nivel1 = nivel1.Nivel1(screen)
 Pantalla1 = Pantallas.pantallaUno(screen)
 Pantalla2 = Pantallas.pantallaDos(screen)
+intrucciones3 = Pantallas.Intrucciones(screen)
 Menu = Menu.background(screen)
 PantallaCueva1 = Pantallas.pantallaCuevaUno(screen)
 PantallaCueva2 = Pantallas.pantallaCuevaDos(screen)
@@ -336,7 +337,7 @@ while not done:
             intro.showRestart()  
   if level == 3:
     if instruccionesPlataformer:
-      intro.showIntro()
+      intrucciones3.showIntro()
       instruccionesPlataformer = False
     if not musicPlataformer:
       pygame.mixer.music.load('Assets/sound/final-voyage.mp3')
@@ -386,7 +387,7 @@ while not done:
       player.rect.x = 0
       player.rect.y = pantalla_y - 64 - 39
       musicPlataformer = False
-      intro.showRestart()
+      intrucciones3.showRestart()
 
   if level == 6:
 
@@ -437,7 +438,7 @@ while not done:
       oxigeno = 100
       paredLeftCollider4.append(pygame.Rect(72, 420, 5, 144))
       musicPlataformer = False
-      intro.showRestart()
+      intrucciones3.showRestart()
 
   if level == 8:
 
@@ -470,7 +471,7 @@ while not done:
       oxigeno = 100
       paredLeftCollider4.append(pygame.Rect(72, 420, 5, 144))
       musicPlataformer = False
-      intro.showRestart()
+      intrucciones3.showRestart()
 
   #Desde aqui va la lava
   if level == 9:
@@ -515,7 +516,7 @@ while not done:
       PantallaCueva1.lavaIsUp = False
       PantallaCueva2.lavaCount = 1
       musicPlataformer = False
-      intro.showRestart()
+      intrucciones3.showRestart()
       
   #Aqui la lava empieza a subir despues del boton
   if level == 10:
@@ -565,7 +566,7 @@ while not done:
       PantallaCueva2.lavaCount = 1
       paredRightCollider6.pop()
       musicPlataformer = False
-      intro.showRestart()
+      intrucciones3.showRestart()
 
   if level == 11:
     tiempo_ahora = pygame.time.get_ticks()
@@ -615,7 +616,7 @@ while not done:
       paredLeftCollider5.pop()
       paredLeftCollider5.append(pygame.Rect(0, 0, 40, 100))
       musicPlataformer = False
-      intro.showRestart()
+      intrucciones3.showRestart()
 
   if level == 12:
     tiempo_ahora = pygame.time.get_ticks()
@@ -658,7 +659,7 @@ while not done:
       paredLeftCollider4.pop()
       paredLeftCollider4.insert(0, pygame.Rect(0, 0, 40, 100))
       musicPlataformer = False
-      intro.showRestart()
+      intrucciones3.showRestart()
 
   if level == 13:
     tiempo_ahora = pygame.time.get_ticks()
@@ -700,7 +701,7 @@ while not done:
       paredLeftCollider4.pop()
       paredLeftCollider4.insert(0, pygame.Rect(0, 0, 40, 100))
       musicPlataformer = False
-      intro.showRestart()
+      intrucciones3.showRestart()
 
   if level == 14:
     screen.blit(background, [0,0])

@@ -1072,3 +1072,124 @@ class pantallaCuevaDos():
 
     #LAVA
     self.screen.blit(self.cub[20], [0, self.pantalla_y - (self.lavaCount * 36)+ self.lavaCount])
+
+class Intrucciones():
+    def __init__(self,screen):
+        self.screen = screen
+        self.pantalla_x = 1152
+        self.pantalla_y = 640
+
+        self.font = pygame.font.Font(None,40) ##
+        self.instrucciones = pygame.image.load("Assets/instrucciones3.jpg")
+        self.fallaste = pygame.image.load("Assets/fallaste.jpg")
+
+    def showIntro(self):
+        self.introEntrada()
+        self.instruccionesFunc()
+        self.instruccionesSalida()
+
+    def introEntrada(self):
+        for event in pygame.event.get():
+            if event.type == pygame.QUIT:
+                pygame.quit
+        self.fade = pygame.Surface((self.pantalla_x, self.pantalla_y))
+        self.fade.fill((0,0,0))
+        for alpha in range(0,300):
+            self.fade.set_alpha(300 - alpha)
+            self.screen.blit(self.instrucciones,[0,0])
+            self.screen.blit(self.fade, [0,0])
+            pygame.display.update()
+            pygame.time.delay(5)
+
+    def instruccionesFunc(self):
+        current_time = pygame.time.get_ticks()
+        endTime = current_time + 10000
+
+        firstText = True;
+
+        while firstText:
+            for event in pygame.event.get():
+                if event.type == pygame.QUIT:
+                    pygame.quit
+                if event.type == pygame.MOUSEBUTTONDOWN:
+                    firstText = False
+
+        self.screen.blit(self.instrucciones,[0,0])
+        self.clickInstruccion()
+        pygame.display.update()
+        
+        tiempo = pygame.time.get_ticks()
+        if tiempo >= endTime:
+            firstText = False 
+
+    def instruccionesSalida(self):
+        for event in pygame.event.get():
+            if event.type == pygame.QUIT:
+                pygame.quit
+        self.fade = pygame.Surface((self.pantalla_x, self.pantalla_y))
+        self.fade.fill((0,0,0))
+        for alpha in range(0,300):
+            self.fade.set_alpha(alpha)
+            self.screen.blit(self.instrucciones,[0,0])
+            self.screen.blit(self.fade, [0,0])
+            self.clickInstruccion()
+            pygame.display.update()
+            pygame.time.delay(5)
+            
+    def clickInstruccion(self):
+        self.texto_marcador = self.font.render(f"[Click para continuar]", True, [255,255,255])
+        self.texto_marcador_rect = self.texto_marcador.get_rect()
+        self.screen.blit(self.texto_marcador, (self.pantalla_x - self.texto_marcador_rect[2] -10, self.pantalla_y - self.texto_marcador_rect[3]-10))
+
+    def restart(self):
+        current_time = pygame.time.get_ticks()
+        endTime = current_time + 5000
+
+        firstText = True;
+
+        while firstText:
+            for event in pygame.event.get():
+                if event.type == pygame.QUIT:
+                    pygame.quit
+                if event.type == pygame.MOUSEBUTTONDOWN:
+                    firstText = False
+
+            self.screen.blit(self.fallaste,[0,0])
+            self.clickInstruccion()
+            pygame.display.update()
+        
+            tiempo = pygame.time.get_ticks()
+            if tiempo >= endTime:
+                firstText = False 
+
+    def restartEntrada(self):
+        for event in pygame.event.get():
+            if event.type == pygame.QUIT:
+                pygame.quit
+        self.fade = pygame.Surface((self.pantalla_x, self.pantalla_y))
+        self.fade.fill((0,0,0))
+        for alpha in range(0,300):
+            self.fade.set_alpha(300 - alpha)
+            self.screen.blit(self.fallaste, [0,0])
+            self.screen.blit(self.fade, [0,0])
+            pygame.display.update()
+            pygame.time.delay(5)
+
+    def restartSalida(self):
+        for event in pygame.event.get():
+            if event.type == pygame.QUIT:
+                pygame.quit
+        self.fade = pygame.Surface((self.pantalla_x, self.pantalla_y))
+        self.fade.fill((0,0,0))
+        for alpha in range(0,300):
+            self.fade.set_alpha(alpha)
+            self.screen.blit(self.fallaste,[0,0])
+            self.screen.blit(self.fade, [0,0])
+            self.clickInstruccion()
+            pygame.display.update()
+            pygame.time.delay(5)
+
+    def showRestart(self):
+        self.restartEntrada()
+        self.restart()
+        self.restartSalida()

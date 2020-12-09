@@ -80,14 +80,14 @@ class Player(pygame.sprite.Sprite):
             self.momentum = 6
 
         if event.type == pygame.KEYDOWN:
-            if event.key == pygame.K_LEFT:
+            if event.key == pygame.K_LEFT or event.key == pygame.K_a:
                 self.update('left')
-            if event.key == pygame.K_RIGHT:
+            if event.key == pygame.K_RIGHT or event.key == pygame.K_d:
                 self.update('right')
-            if event.key == pygame.K_UP:
+            if event.key == pygame.K_UP or event.key == pygame.K_w:
                 if self.jumpCount < 6:
                     self.momentum = -5
-            if event.key == pygame.K_DOWN:
+            if event.key == pygame.K_DOWN or event.key == pygame.K_s:
                 if len(boton) > 0 and self.buttonPressed == False:
                     if self.rect.colliderect(boton[0]):
                         self.buttonPressed = True
@@ -95,9 +95,9 @@ class Player(pygame.sprite.Sprite):
         self.direccion[1] = self.momentum
 
         if event.type == pygame.KEYUP:
-            if event.key == pygame.K_LEFT:
+            if event.key == pygame.K_LEFT or event.key == pygame.K_a:
                 self.update("stand_left")
-            if event.key == pygame.K_RIGHT:
+            if event.key == pygame.K_RIGHT or event.key == pygame.K_d:
                 self.update("stand_right")
 
         prueba = self.movement()
