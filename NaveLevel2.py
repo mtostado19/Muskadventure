@@ -112,6 +112,9 @@ class Intro():
         self.instrucciones = pygame.image.load("Assets/instrucciones2.jpg")
         self.fallaste = pygame.image.load("Assets/fallaste.jpg")
 
+        self.libro1 =  pygame.image.load("Assets/libro1.jpg")
+        self.libro2 =  pygame.image.load("Assets/libro2.jpg")
+
     def showIntro(self):
         self.introEntrada()
         self.instruccionesFunc()
@@ -222,3 +225,109 @@ class Intro():
         self.restartEntrada()
         self.restart()
         self.restartSalida()
+
+    def showLibro1(self):
+        self.libro1Entrada()
+        self.libro1()
+        self.libro1Salida()
+
+    def libro1Entrada(self):
+        for event in pygame.event.get():
+            if event.type == pygame.QUIT:
+                pygame.quit
+        self.fade = pygame.Surface((self.pantalla_x, self.pantalla_y))
+        self.fade.fill((0,0,0))
+        for alpha in range(0,300):
+            self.fade.set_alpha(300 - alpha)
+            self.screen.blit(self.libro1, [0,0])
+            self.screen.blit(self.fade, [0,0])
+            pygame.display.update()
+            pygame.time.delay(5)
+
+    def libro1(self):
+        current_time = pygame.time.get_ticks()
+        endTime = current_time + 20000
+
+        firstText = True;
+
+        while firstText:
+            for event in pygame.event.get():
+                if event.type == pygame.QUIT:
+                    pygame.quit
+                if event.type == pygame.MOUSEBUTTONDOWN:
+                    firstText = False
+
+            self.screen.blit(self.libro1,[0,0])
+            self.clickInstruccion()
+            pygame.display.update()
+        
+            tiempo = pygame.time.get_ticks()
+            if tiempo >= endTime:
+                firstText = False 
+
+    def libro1Salida(self):
+        for event in pygame.event.get():
+            if event.type == pygame.QUIT:
+                pygame.quit
+        self.fade = pygame.Surface((self.pantalla_x, self.pantalla_y))
+        self.fade.fill((0,0,0))
+        for alpha in range(0,300):
+            self.fade.set_alpha(alpha)
+            self.screen.blit(self.libro1,[0,0])
+            self.screen.blit(self.fade, [0,0])
+            self.clickInstruccion()
+            pygame.display.update()
+            pygame.time.delay(5)
+
+    def libro2Entrada(self):
+        for event in pygame.event.get():
+            if event.type == pygame.QUIT:
+                pygame.quit
+        self.fade = pygame.Surface((self.pantalla_x, self.pantalla_y))
+        self.fade.fill((0,0,0))
+        for alpha in range(0,300):
+            self.fade.set_alpha(300 - alpha)
+            self.screen.blit(self.libro2, [0,0])
+            self.screen.blit(self.fade, [0,0])
+            pygame.display.update()
+            pygame.time.delay(5)
+
+    def libro2(self):
+        current_time = pygame.time.get_ticks()
+        endTime = current_time + 20000
+
+        firstText = True;
+
+        while firstText:
+            for event in pygame.event.get():
+                if event.type == pygame.QUIT:
+                    pygame.quit
+                if event.type == pygame.MOUSEBUTTONDOWN:
+                    firstText = False
+
+            self.screen.blit(self.libro2,[0,0])
+            self.clickInstruccion()
+            pygame.display.update()
+        
+            tiempo = pygame.time.get_ticks()
+            if tiempo >= endTime:
+                firstText = False 
+    
+    def libro2Salida(self):
+        for event in pygame.event.get():
+            if event.type == pygame.QUIT:
+                pygame.quit
+        self.fade = pygame.Surface((self.pantalla_x, self.pantalla_y))
+        self.fade.fill((0,0,0))
+        for alpha in range(0,300):
+            self.fade.set_alpha(alpha)
+            self.screen.blit(self.libro2,[0,0])
+            self.screen.blit(self.fade, [0,0])
+            self.clickInstruccion()
+            pygame.display.update()
+            pygame.time.delay(5)
+
+    def showLibro2(self):
+        self.libro2Entrada()
+        self.libro2()
+        self.libro2Salida()
