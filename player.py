@@ -128,4 +128,9 @@ class Player(pygame.sprite.Sprite):
             if self.rect.colliderect(a) and oxigeno < 100:
                 return True
         return False
-        
+
+    def moveConControl(self, x, y):
+        if x < 0 and y == 0:
+            self.update('left')
+        if x > 0 and y == 0:
+            self.update('right')

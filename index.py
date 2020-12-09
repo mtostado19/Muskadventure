@@ -340,7 +340,7 @@ while not done:
       intrucciones3.showIntro()
       instruccionesPlataformer = False
     if not musicPlataformer:
-      pygame.mixer.music.load('Assets/sound/final-voyage.mp3')
+      pygame.mixer.music.load('Assets/sound/musicPlataformer1.mp3')
       pygame.mixer.music.play(-1)
       musicPlataformer = True
     screen.blit(background, [0,0])
@@ -463,6 +463,7 @@ while not done:
       player.rect.x = 80
       player.rect.y = 312
       oxigeno = 100
+      pygame.mixer.music.fadeout(3000)
 
     if oxigeno < 0 or player.rect.y > 490:
       level = 3
@@ -493,6 +494,8 @@ while not done:
       numberOfPops += 1
       PantallaCueva2.lavaIsUp = True
       PantallaCueva1.lavaIsUp = True
+      pygame.mixer.music.load('Assets/sound/musicPlataformer2.mp3')
+      pygame.mixer.music.play(-1)
 
     if player.rect.x < 20:
       level = 10
@@ -680,6 +683,7 @@ while not done:
       player.rect.x = 80
       player.rect.y = 96
       patito = 0
+      pygame.mixer.music.fadeout(3000)
       lavaCollide = pygame.Rect(0, pantalla_y - (patito*36), 1152, 640)
 
     if player.rect.colliderect(lavaCollide):
