@@ -754,6 +754,7 @@ while not done:
     screen.blit(player.image,player.rect)
     clock.tick(15)
     if player.rect.y < 20:
+      PantallaCueva1.lavaCount = 1
       level = 14
       player.rect.x = 80
       player.rect.y = 96
@@ -764,6 +765,7 @@ while not done:
     if player.rect.colliderect(lavaCollide):
       level = 3
       patito = 0
+      PantallaCueva1.lavaCount = 1
       lavaCollide = pygame.Rect(0, pantalla_y - (patito*36), 1152, 640)
       player.rect.x = 0
       player.rect.y = pantalla_y - 64 - 39
