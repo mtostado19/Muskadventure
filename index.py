@@ -9,6 +9,7 @@ import random
 import player
 import xbox360_controller
 import NaveLevel2 # Esto es level 2
+import colliders
 
 # WILD SPACE
 pygame.init()
@@ -25,7 +26,7 @@ nivel1bool = True
 color_1 = (255, 1, 5)
 
 size = (pantalla_x,pantalla_y)
-level = 0
+level = 3
 screen = pygame.display.set_mode(size)
 font = pygame.font.Font(None,50) ##
 fontmini = pygame.font.Font(None,30) ##
@@ -62,113 +63,7 @@ for x in range(cantidad):
     enemylist.append(teorito)
 
 player = player.Player((0, pantalla_y - 64 - 39))
-collidersLivel1 = [pygame.Rect(0, 576, 1152, 64)]
-collidersLivel2 = [
-    pygame.Rect(0, 576, 824, 20),
-    pygame.Rect(1040, 576, 128, 20),
-]
-paredLeftCollider2 = [pygame.Rect(833, 576, 4, 60)]
-paredRightCollider2 = [
-  pygame.Rect(1023, 576, 8, 60),
-  pygame.Rect(1152, 0, 10, 640)
-  ]
-
-collidersLevel3= [
-    pygame.Rect(0, 160, 378, 5),
-    pygame.Rect(228, 320, 360, 5),
-    pygame.Rect(0, 440, 208, 5),
-    pygame.Rect(324, 520, 180, 5),
-    pygame.Rect(612, 560, 180, 5),
-    pygame.Rect(828, 600, 360, 5),
-    pygame.Rect(516, 240, 60, 20),
-    pygame.Rect(0, 360, 60, 20),
-    pygame.Rect(0, 80, 60, 20)
-]
-paredLeftCollider3 = [
-  pygame.Rect(385, 170, 5, 36),
-  ]
-paredRightCollider3 = [
-  pygame.Rect(576, 0, 36, 288),
-  #pygame.Rect(228, 320, 5, 36),
-  ]
-
-collidersLevel4= [
-    pygame.Rect(0, 565, 1152, 75),
-    pygame.Rect(0, 136, 120, 36),
-    pygame.Rect(230, 240, 150, 40),
-    pygame.Rect(930, 240, 160, 40),
-    pygame.Rect(230, 440, 160, 40),
-    pygame.Rect(930, 440, 160, 40),
-    pygame.Rect(510, 360, 280, 40),
-]
-paredLeftCollider4 = [
-    pygame.Rect(0, 0, 40, 100),
-    pygame.Rect(76, 172, 36, 252),
-    pygame.Rect(72, 420, 5, 144),
-    #pygame.Rect(0, 0, 40, 100),
-]
-paredRightCollider4 = [pygame.Rect(1116, 0, 5, 640)]
-
-collidersLevel5= [
-    pygame.Rect(0, 565, 1152, 75),
-    pygame.Rect(0, 136, 155, 10),
-    pygame.Rect(280, 200, 460, 10),
-    pygame.Rect(910, 240, 490, 10),
-    pygame.Rect(840, 320, 490, 10),
-    pygame.Rect(770, 400, 490, 10),
-    pygame.Rect(700, 480, 490, 10),
-]
-paredLeftCollider5 = [
-    pygame.Rect(156, 136, 5, 10),
-    pygame.Rect(0, 0, 40, 100),
-]
-paredRightCollider5 = [pygame.Rect(1116, 0, 5, 496)]
-
-collidersLevel6= [
-  pygame.Rect(0, 136, 156, 5),
-  pygame.Rect(300, 220, 20, 5),
-  pygame.Rect(440, 162.5, 20, 5),
-  pygame.Rect(580, 220, 20, 5),
-  pygame.Rect(790, 277.5, 20, 5),
-  pygame.Rect(930, 335, 20, 5),
-  pygame.Rect(1002, 388, 156, 5),
-]
-paredLeftCollider6 = [
-  pygame.Rect(321, 220, 5, 420),
-  pygame.Rect(461, 162.5, 5, 477.5),
-  pygame.Rect(601, 220, 5, 420),
-  pygame.Rect(811, 277.5, 5, 362.5),
-  pygame.Rect(951, 355, 5, 285),
-]
-paredRightCollider6 = [
-  pygame.Rect(279, 220, 5, 420),
-  pygame.Rect(419, 162.5, 5, 477.5),
-  pygame.Rect(559, 220, 5, 420),
-  pygame.Rect(769, 277.5, 5, 362.5),
-  pygame.Rect(909, 335, 5, 285),
-]
-
-collidersLevel7= [
-  pygame.Rect(0, 352, 108, 10),
-  pygame.Rect(108, 424, 144, 10),
-  pygame.Rect(252, 388, 432, 10),
-  pygame.Rect(684, 424, 144, 10),
-  pygame.Rect(828, 496, 288, 10),
-]
-paredLeftCollider7 = [
-  pygame.Rect(109, 352, 5, 72),
-  pygame.Rect(686, 388, 5, 36),
-  pygame.Rect(828, 424, 5, 144),
-  pygame.Rect(0, 0, 40, 640),
-]
-paredRightCollider7 = [
-  pygame.Rect(250, 388, 1, 36),
-  pygame.Rect(1116, 0, 5, 640),
-]
-
-primerBoton = [pygame.Rect(600, 335, 80, 25)]
-segundoBoton = [pygame.Rect(520, 367, 80, 25)]
-numberOfPops = 0
+collisionDetected = colliders.Colliders()
 
 clock = pygame.time.Clock()
 
@@ -193,18 +88,6 @@ oxigeno = 100
 sec = 0
 tiempo_ahora = 0
 inicial_time = 0
-
-arboles1 = [
-  pygame.Rect(0, 397, 260, 168), 
-  pygame.Rect(910, 102, 220, 140),
-  pygame.Rect(1050, 453, 102, 27)
-  ]
-
-arboles2 = [
-  pygame.Rect(280, 193, 40, 27),
-  pygame.Rect(560, 193, 40, 27),
-  pygame.Rect(910, 308, 40, 27),
-]
 
 patito = 0
 lavaCollide = pygame.Rect(0, pantalla_y - patito, 1152, 640)
@@ -378,9 +261,9 @@ while not done:
     if naveLand == True:
           if controller != None:
             x, y = controller.get_left_stick()
-            player.moveConControl(event, collidersLivel1, [], [], [], x, y, pressed[xbox360_controller.A], pressed[xbox360_controller.X])
+            player.moveConControl(event, collisionDetected.collidersLivel1, [], [], [], x, y, pressed[xbox360_controller.A], pressed[xbox360_controller.X])
           else:
-            player.handle_event(event, collidersLivel1, [], [], [])
+            player.handle_event(event, collisionDetected.collidersLivel1, [], [], [])
           screen.blit(player.image,player.rect)
           clock.tick(15)
           if player.rect.x > 1152:
@@ -393,9 +276,9 @@ while not done:
     pantallaMarte.superficieMarteCueva()
     if controller != None:
       x, y = controller.get_left_stick()
-      player.moveConControl(event, collidersLivel2, paredLeftCollider2, paredRightCollider2, [], x, y, pressed[xbox360_controller.A], pressed[xbox360_controller.X])
+      player.moveConControl(event, collisionDetected.collidersLivel2, collisionDetected.paredLeftCollider2, collisionDetected.paredRightCollider2, [], x, y, pressed[xbox360_controller.A], pressed[xbox360_controller.X])
     else:
-      player.handle_event(event, collidersLivel2, paredLeftCollider2, paredRightCollider2, [])
+      player.handle_event(event, collisionDetected.collidersLivel2, collisionDetected.paredLeftCollider2, collisionDetected.paredRightCollider2, [])
     screen.blit(player.image,player.rect)
     clock.tick(15)
     if player.rect.y > 640:
@@ -408,9 +291,9 @@ while not done:
     PantallaCueva1.Cueva1()
     if controller != None:
       x, y = controller.get_left_stick()
-      player.moveConControl(event, collidersLevel3, paredLeftCollider3, paredRightCollider3, [], x, y, pressed[xbox360_controller.A], pressed[xbox360_controller.X])
+      player.moveConControl(event, collisionDetected.collidersLevel3, collisionDetected.paredLeftCollider3, collisionDetected.paredRightCollider3, [], x, y, pressed[xbox360_controller.A], pressed[xbox360_controller.X])
     else:
-      player.handle_event(event, collidersLevel3, paredLeftCollider3, paredRightCollider3, [])
+      player.handle_event(event, collisionDetected.collidersLevel3, collisionDetected.paredLeftCollider3, collisionDetected.paredRightCollider3, [])
     screen.blit(player.image,player.rect)
     clock.tick(15)
     if player.rect.x > 1152:
@@ -432,20 +315,20 @@ while not done:
     PantallaCueva2.Cueva2(player.buttonPressed)
     if controller != None:
       x, y = controller.get_left_stick()
-      player.moveConControl(event, collidersLevel4, paredLeftCollider4, paredRightCollider4, primerBoton, x, y, pressed[xbox360_controller.A], pressed[xbox360_controller.X])
+      player.moveConControl(event, collisionDetected.collidersLevel4, collisionDetected.paredLeftCollider4, collisionDetected.paredRightCollider4, collisionDetected.primerBoton, x, y, pressed[xbox360_controller.A], pressed[xbox360_controller.X])
     else:
-      player.handle_event(event, collidersLevel4, paredLeftCollider4, paredRightCollider4, primerBoton)
+      player.handle_event(event,collisionDetected.collidersLevel4, collisionDetected.paredLeftCollider4, collisionDetected.paredRightCollider4, collisionDetected.primerBoton)
     screen.blit(player.image,player.rect)
     clock.tick(15)
-    if player.buttonPressed == True and numberOfPops == 0:
-      paredLeftCollider4.pop()
-      numberOfPops += 1
+    if player.buttonPressed == True and collisionDetected.numberOfPops == 0:
+      collisionDetected.paredLeftCollider4.pop()
+      collisionDetected.numberOfPops += 1
     if player.rect.x < 10:
       level = 7
       player.rect.x = 80
       player.rect.y = 96
       player.buttonPressed = False
-      numberOfPops = 0
+      collisionDetected.numberOfPops = 0
 
   if level == 7:
     if isLevelOx:
@@ -456,7 +339,7 @@ while not done:
     sec = (tiempo_ahora-inicial_time)//-1000
 
     if (sec%2)==0 and sec!=0:
-      if player.breath_air(arboles1, oxigeno):
+      if player.breath_air(collisionDetected.arboles1, oxigeno):
         oxigeno += 1
       else:
         oxigeno -= 1
@@ -465,9 +348,9 @@ while not done:
     PantallaCueva2.Cueva3()
     if controller != None:
       x, y = controller.get_left_stick()
-      player.moveConControl(event, collidersLevel5, paredLeftCollider5, paredRightCollider5, [], x, y, pressed[xbox360_controller.A], pressed[xbox360_controller.X])
+      player.moveConControl(event, collisionDetected.collidersLevel5, collisionDetected.paredLeftCollider5, collisionDetected.paredRightCollider5, [], x, y, pressed[xbox360_controller.A], pressed[xbox360_controller.X])
     else:
-      player.handle_event(event, collidersLevel5, paredLeftCollider5, paredRightCollider5, [])
+      player.handle_event(event, collisionDetected.collidersLevel5, collisionDetected.paredLeftCollider5, collisionDetected.paredRightCollider5, [])
     
     screen.blit(player.image,player.rect)
     clock.tick(15)
@@ -482,7 +365,7 @@ while not done:
       player.rect.x = 0
       player.rect.y = pantalla_y - 64 - 39
       oxigeno = 100
-      paredLeftCollider4.append(pygame.Rect(72, 420, 5, 144))
+      collisionDetected.paredLeftCollider4.append(pygame.Rect(72, 420, 5, 144))
       musicPlataformer = False
       pygame.mixer.music.fadeout(3000)
       intrucciones3.showRestart()
@@ -493,7 +376,7 @@ while not done:
     sec = (tiempo_ahora-inicial_time)//-1000
 
     if (sec%2)==0 and sec!=0:
-      if player.breath_air(arboles2, oxigeno):
+      if player.breath_air(collisionDetected.arboles2, oxigeno):
         oxigeno += 1
       else:
         oxigeno -= 1
@@ -502,9 +385,9 @@ while not done:
     PantallaCueva2.Cueva4()
     if controller != None:
       x, y = controller.get_left_stick()
-      player.moveConControl(event, collidersLevel6, paredLeftCollider6, paredRightCollider6, [], x, y, pressed[xbox360_controller.A], pressed[xbox360_controller.X])
+      player.moveConControl(event, collisionDetected.collidersLevel6, collisionDetected.paredLeftCollider6, collisionDetected.paredRightCollider6, [], x, y, pressed[xbox360_controller.A], pressed[xbox360_controller.X])
     else:
-      player.handle_event(event, collidersLevel6, paredLeftCollider6, paredRightCollider6, [])
+      player.handle_event(event, collisionDetected.collidersLevel6, collisionDetected.paredLeftCollider6, collisionDetected.paredRightCollider6, [])
     screen.blit(player.image,player.rect)
     clock.tick(15)
     barra_vida(screen, 0, 0, oxigeno)
@@ -521,7 +404,7 @@ while not done:
       player.rect.x = 0
       player.rect.y = pantalla_y - 64 - 39
       oxigeno = 100
-      paredLeftCollider4.append(pygame.Rect(72, 420, 5, 144))
+      collisionDetected.paredLeftCollider4.append(pygame.Rect(72, 420, 5, 144))
       musicPlataformer = False
       pygame.mixer.music.fadeout(3000)
       intrucciones3.showRestart()
@@ -540,14 +423,14 @@ while not done:
     PantallaCueva2.Cueva5(player.buttonPressed)
     if controller != None:
       x, y = controller.get_left_stick()
-      player.moveConControl(event, collidersLevel7, paredLeftCollider7, paredRightCollider7, segundoBoton, x, y, pressed[xbox360_controller.A], pressed[xbox360_controller.X])
+      player.moveConControl(event, collisionDetected.collidersLevel7, collisionDetected.paredLeftCollider7, collisionDetected.paredRightCollider7, collisionDetected.segundoBoton, x, y, pressed[xbox360_controller.A], pressed[xbox360_controller.X])
     else:
-      player.handle_event(event, collidersLevel7, paredLeftCollider7, paredRightCollider7, segundoBoton)
+      player.handle_event(event, collisionDetected.collidersLevel7, collisionDetected.paredLeftCollider7, collisionDetected.paredRightCollider7, collisionDetected.segundoBoton)
     screen.blit(player.image,player.rect)
     clock.tick(15)
-    if player.buttonPressed == True and numberOfPops == 0:
-      paredLeftCollider7.pop()
-      numberOfPops += 1
+    if player.buttonPressed == True and collisionDetected.numberOfPops == 0:
+      collisionDetected.paredLeftCollider7.pop()
+      collisionDetected.numberOfPops += 1
       PantallaCueva2.lavaIsUp = True
       PantallaCueva1.lavaIsUp = True
       pygame.mixer.music.load('Assets/sound/musicPlataformer2.mp3')
@@ -558,7 +441,7 @@ while not done:
       level = 10
       player.rect.x = 1072
       player.rect.y = 348
-      paredRightCollider6.append(pygame.Rect(1125, 0, 5, 640))
+      collisionDetected.paredRightCollider6.append(pygame.Rect(1125, 0, 5, 640))
       PantallaCueva2.lavaCount = 1
       patito = 0
       lavaCollide = pygame.Rect(0, pantalla_y - (patito*36), 1152, 640)
@@ -568,9 +451,9 @@ while not done:
       player.rect.x = 0
       player.rect.y = pantalla_y - 64 - 39
       oxigeno = 100
-      paredLeftCollider4.append(pygame.Rect(72, 420, 5, 144))
-      paredLeftCollider7.append(pygame.Rect(0, 0, 40, 640))
-      numberOfPops = 0
+      collisionDetected.paredLeftCollider4.append(pygame.Rect(72, 420, 5, 144))
+      collisionDetected.paredLeftCollider7.append(pygame.Rect(0, 0, 40, 640))
+      collisionDetected.numberOfPops = 0
       player.buttonPressed = False
       PantallaCueva2.lavaIsUp = False
       PantallaCueva1.lavaIsUp = False
@@ -587,7 +470,7 @@ while not done:
     sec = (tiempo_ahora-inicial_time)//-1000
 
     if (sec%2)==0 and sec!=0:
-      if player.breath_air(arboles2, oxigeno):
+      if player.breath_air(collisionDetected.arboles2, oxigeno):
         oxigeno += 1
       else:
         oxigeno -= 1
@@ -601,9 +484,9 @@ while not done:
     PantallaCueva2.Cueva4()
     if controller != None:
       x, y = controller.get_left_stick()
-      player.moveConControl(event, collidersLevel6, paredLeftCollider6, paredRightCollider6, [], x, y, pressed[xbox360_controller.A], pressed[xbox360_controller.X])
+      player.moveConControl(event, collisionDetected.collidersLevel6, collisionDetected.paredLeftCollider6, collisionDetected.paredRightCollider6, [], x, y, pressed[xbox360_controller.A], pressed[xbox360_controller.X])
     else:
-      player.handle_event(event, collidersLevel6, paredLeftCollider6, paredRightCollider6, [])
+      player.handle_event(event, collisionDetected.collidersLevel6, collisionDetected.paredLeftCollider6, collisionDetected.paredRightCollider6, [])
     screen.blit(player.image,player.rect)
     clock.tick(15)
     barra_vida(screen, 0, 0, oxigeno)
@@ -612,9 +495,9 @@ while not done:
       level = 11
       player.rect.x = 1072
       player.rect.y = 525
-      paredRightCollider5.append(pygame.Rect(1125, 0, 5, 640))
-      paredLeftCollider5.pop()
-      paredLeftCollider5.append(pygame.Rect(0, 136, 40, 504))
+      collisionDetected.paredRightCollider5.append(pygame.Rect(1125, 0, 5, 640))
+      collisionDetected.paredLeftCollider5.pop()
+      collisionDetected.paredLeftCollider5.append(pygame.Rect(0, 136, 40, 504))
       PantallaCueva2.lavaCount = 1
       patito = 0
       lavaCollide = pygame.Rect(0, pantalla_y - (patito*36), 1152, 640)
@@ -624,16 +507,16 @@ while not done:
       player.rect.x = 0
       player.rect.y = pantalla_y - 64 - 39
       oxigeno = 100
-      paredLeftCollider4.append(pygame.Rect(72, 420, 5, 144))
-      paredLeftCollider7.append(pygame.Rect(0, 0, 40, 640))
-      numberOfPops = 0
+      collisionDetected.paredLeftCollider4.append(pygame.Rect(72, 420, 5, 144))
+      collisionDetected.paredLeftCollider7.append(pygame.Rect(0, 0, 40, 640))
+      collisionDetected.numberOfPops = 0
       player.buttonPressed = False
       PantallaCueva2.lavaIsUp = False
       PantallaCueva1.lavaIsUp = False
       PantallaCueva2.lavaCount = 1
       patito = 0
       lavaCollide = pygame.Rect(0, pantalla_y - (patito*36), 1152, 640)
-      paredRightCollider6.pop()
+      collisionDetected.paredRightCollider6.pop()
       musicPlataformer = False
       pygame.mixer.music.fadeout(3000)
       intrucciones3.showRestart()
@@ -643,7 +526,7 @@ while not done:
     sec = (tiempo_ahora-inicial_time)//-1000
 
     if (sec%2)==0 and sec!=0:
-      if player.breath_air(arboles1, oxigeno):
+      if player.breath_air(collisionDetected.arboles1, oxigeno):
         oxigeno += 1
       else:
         oxigeno -= 1
@@ -657,9 +540,9 @@ while not done:
     PantallaCueva2.Cueva3()
     if controller != None:
       x, y = controller.get_left_stick()
-      player.moveConControl(event, collidersLevel5, paredLeftCollider5, paredRightCollider5, [], x, y, pressed[xbox360_controller.A], pressed[xbox360_controller.X])
+      player.moveConControl(event, collisionDetected.collidersLevel5, collisionDetected.paredLeftCollider5, collisionDetected.paredRightCollider5, [], x, y, pressed[xbox360_controller.A], pressed[xbox360_controller.X])
     else:
-      player.handle_event(event, collidersLevel5, paredLeftCollider5, paredRightCollider5, [])
+      player.handle_event(event, collisionDetected.collidersLevel5, collisionDetected.paredLeftCollider5, collisionDetected.paredRightCollider5, [])
     screen.blit(player.image,player.rect)
     clock.tick(15)
     barra_vida(screen, 0, 0, oxigeno)
@@ -667,8 +550,8 @@ while not done:
       level = 12
       player.rect.x = 40
       player.rect.y = 525
-      paredLeftCollider4.pop(0)
-      paredLeftCollider4.append(pygame.Rect(0, 136, 40, 504))
+      collisionDetected.paredLeftCollider4.pop(0)
+      collisionDetected.paredLeftCollider4.append(pygame.Rect(0, 136, 40, 504))
       PantallaCueva2.lavaCount = 1
       patito = 0
       lavaCollide = pygame.Rect(0, pantalla_y - (patito*36), 1152, 640)
@@ -678,19 +561,19 @@ while not done:
       player.rect.x = 0
       player.rect.y = pantalla_y - 64 - 39
       oxigeno = 100
-      paredLeftCollider4.append(pygame.Rect(72, 420, 5, 144))
-      paredLeftCollider7.append(pygame.Rect(0, 0, 40, 640))
-      numberOfPops = 0
+      collisionDetected.paredLeftCollider4.append(pygame.Rect(72, 420, 5, 144))
+      collisionDetected.paredLeftCollider7.append(pygame.Rect(0, 0, 40, 640))
+      collisionDetected.numberOfPops = 0
       player.buttonPressed = False
       PantallaCueva2.lavaIsUp = False
       PantallaCueva1.lavaIsUp = False
       PantallaCueva2.lavaCount = 1
       patito = 0
       lavaCollide = pygame.Rect(0, pantalla_y - (patito*36), 1152, 640)
-      paredRightCollider6.pop()
-      paredRightCollider5.pop()
-      paredLeftCollider5.pop()
-      paredLeftCollider5.append(pygame.Rect(0, 0, 40, 100))
+      collisionDetected.paredRightCollider6.pop()
+      collisionDetected.paredRightCollider5.pop()
+      collisionDetected.paredLeftCollider5.pop()
+      collisionDetected.paredLeftCollider5.append(pygame.Rect(0, 0, 40, 100))
       musicPlataformer = False
       pygame.mixer.music.fadeout(3000)
       intrucciones3.showRestart()
@@ -708,9 +591,9 @@ while not done:
     PantallaCueva2.Cueva2(player.buttonPressed)
     if controller != None:
       x, y = controller.get_left_stick()
-      player.moveConControl(event, collidersLevel4, paredLeftCollider4, paredRightCollider4, primerBoton, x, y, pressed[xbox360_controller.A], pressed[xbox360_controller.X])
+      player.moveConControl(event, collisionDetected.collidersLevel4, collisionDetected.paredLeftCollider4, collisionDetected.paredRightCollider4, collisionDetected.primerBoton, x, y, pressed[xbox360_controller.A], pressed[xbox360_controller.X])
     else:
-      player.handle_event(event, collidersLevel4, paredLeftCollider4, paredRightCollider4, primerBoton)
+      player.handle_event(event, collisionDetected.collidersLevel4, collisionDetected.paredLeftCollider4, collisionDetected.paredRightCollider4, collisionDetected.primerBoton)
     screen.blit(player.image,player.rect)
     clock.tick(15)
     if player.rect.x < 10:
@@ -728,19 +611,19 @@ while not done:
       player.rect.x = 0
       player.rect.y = pantalla_y - 64 - 39
       oxigeno = 100
-      paredLeftCollider4.append(pygame.Rect(72, 420, 5, 144))
-      paredLeftCollider7.append(pygame.Rect(0, 0, 40, 640))
-      numberOfPops = 0
+      collisionDetected.paredLeftCollider4.append(pygame.Rect(72, 420, 5, 144))
+      collisionDetected.paredLeftCollider7.append(pygame.Rect(0, 0, 40, 640))
+      collisionDetected.numberOfPops = 0
       player.buttonPressed = False
       PantallaCueva2.lavaIsUp = False
       PantallaCueva1.lavaIsUp = False
       PantallaCueva2.lavaCount = 1
-      paredRightCollider6.pop()
-      paredRightCollider5.pop()
-      paredLeftCollider5.pop()
-      paredLeftCollider5.append(pygame.Rect(0, 0, 40, 100))
-      paredLeftCollider4.pop()
-      paredLeftCollider4.insert(0, pygame.Rect(0, 0, 40, 100))
+      collisionDetected.paredRightCollider6.pop()
+      collisionDetected.paredRightCollider5.pop()
+      collisionDetected.paredLeftCollider5.pop()
+      collisionDetected.paredLeftCollider5.append(pygame.Rect(0, 0, 40, 100))
+      collisionDetected.paredLeftCollider4.pop()
+      collisionDetected.paredLeftCollider4.insert(0, pygame.Rect(0, 0, 40, 100))
       musicPlataformer = False
       pygame.mixer.music.fadeout(3000)
       intrucciones3.showRestart()
@@ -758,9 +641,9 @@ while not done:
     PantallaCueva1.Cueva1()
     if controller != None:
       x, y = controller.get_left_stick()
-      player.moveConControl(event, collidersLevel3, paredLeftCollider3, paredRightCollider3, [], x, y, pressed[xbox360_controller.A], pressed[xbox360_controller.X])
+      player.moveConControl(event, collisionDetected.collidersLevel3, collisionDetected.paredLeftCollider3, collisionDetected.paredRightCollider3, [], x, y, pressed[xbox360_controller.A], pressed[xbox360_controller.X])
     else:
-      player.handle_event(event, collidersLevel3, paredLeftCollider3, paredRightCollider3, [])
+      player.handle_event(event, collisionDetected.collidersLevel3, collisionDetected.paredLeftCollider3, collisionDetected.paredRightCollider3, [])
 
     screen.blit(player.image,player.rect)
     clock.tick(15)
@@ -781,19 +664,19 @@ while not done:
       player.rect.x = 0
       player.rect.y = pantalla_y - 64 - 39
       oxigeno = 100
-      paredLeftCollider4.append(pygame.Rect(72, 420, 5, 144))
-      paredLeftCollider7.append(pygame.Rect(0, 0, 40, 640))
-      numberOfPops = 0
+      collisionDetected.paredLeftCollider4.append(pygame.Rect(72, 420, 5, 144))
+      collisionDetected.paredLeftCollider7.append(pygame.Rect(0, 0, 40, 640))
+      collisionDetected.numberOfPops = 0
       player.buttonPressed = False
       PantallaCueva2.lavaIsUp = False
       PantallaCueva1.lavaIsUp = False
       PantallaCueva2.lavaCount = 1
-      paredRightCollider6.pop()
-      paredRightCollider5.pop()
-      paredLeftCollider5.pop()
-      paredLeftCollider5.append(pygame.Rect(0, 0, 40, 100))
-      paredLeftCollider4.pop()
-      paredLeftCollider4.insert(0, pygame.Rect(0, 0, 40, 100))
+      collisionDetected.paredRightCollider6.pop()
+      collisionDetected.paredRightCollider5.pop()
+      collisionDetected.paredLeftCollider5.pop()
+      collisionDetected.paredLeftCollider5.append(pygame.Rect(0, 0, 40, 100))
+      collisionDetected.paredLeftCollider4.pop()
+      collisionDetected.paredLeftCollider4.insert(0, pygame.Rect(0, 0, 40, 100))
       musicPlataformer = False
       pygame.mixer.music.fadeout(3000)
       intrucciones3.showRestart()
