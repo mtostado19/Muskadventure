@@ -10,13 +10,11 @@ import player
 import xbox360_controller
 import NaveLevel2 # Esto es level 2
 import colliders
+import sounds
 
 # WILD SPACE
 pygame.init()
-
-pygame.mixer.music.load('Assets/sound/city.mp3')
-pygame.mixer.music.set_volume(.2)
-pygame.mixer.music.play(-1)
+sonidos = sounds.sounds()
 
 pantalla_x = 1152
 pantalla_y = 640
@@ -26,7 +24,7 @@ nivel1bool = True
 color_1 = (255, 1, 5)
 
 size = (pantalla_x,pantalla_y)
-level = 3
+level = 0
 screen = pygame.display.set_mode(size)
 font = pygame.font.Font(None,50) ##
 fontmini = pygame.font.Font(None,30) ##
@@ -41,8 +39,6 @@ menu0 = pygame.image.load("Assets/menu0.jpg")
 
 
 Nivel1 = nivel1.Nivel1(screen)
-Pantalla1 = Pantallas.pantallaUno(screen)
-Pantalla2 = Pantallas.pantallaDos(screen)
 intrucciones3 = Pantallas.Intrucciones(screen)
 Menu = Menu.background(screen)
 PantallaCueva1 = Pantallas.pantallaCuevaUno(screen)
@@ -92,7 +88,7 @@ inicial_time = 0
 patito = 0
 lavaCollide = pygame.Rect(0, pantalla_y - patito, 1152, 640)
 
-def barra_vida(screen, x, y, vida):
+def barra_oxigeno(screen, x, y, vida):
         largo = 500
         ancho = 25
         calculo_barra = int((vida/100) * largo)
@@ -117,22 +113,18 @@ while not done:
       if 498<posx<650 and 273<posy<430 and level==0:
         level += 1
         Menu.Menu_salida()
-        pygame.mixer.music.fadeout(3000)
-        pygame.time.delay(3000)
+        sonidos.stopSonido()
         video.video1(screen)
         pygame.time.delay(1000)
-        pygame.mixer.music.fadeout(3000)
-        pygame.time.delay(3000)
+        sonidos.stopSonido()
     if event.type == pygame.JOYBUTTONDOWN:
       if event.button == xbox360_controller.A and level==0:
         level += 1
         Menu.Menu_salida()
-        pygame.mixer.music.fadeout(3000)
-        pygame.time.delay(3000)
+        sonidos.stopSonido()
         video.video1(screen)
         pygame.time.delay(1000)
-        pygame.mixer.music.fadeout(3000)
-        pygame.time.delay(3000)
+        sonidos.stopSonido()
         
         
   #event = pygame.event.get()
@@ -144,9 +136,7 @@ while not done:
   if level == 1:
     ##Version 2
     if(nivel1bool):
-      pygame.mixer.music.load('Assets/sound/mountains.mp3')
-      pygame.mixer.music.set_volume(1)
-      pygame.mixer.music.play(1)
+      sonidos.nivel1()
       Nivel1.ShowPrimerNivel()
       time_terminar = pygame.time.get_ticks() + 60000
       nivel1bool = False
@@ -162,7 +152,7 @@ while not done:
         Nivel1.nivelSalida()
         Nivel1 = nivel1.Nivel1(screen)
         nivel1bool= True
-        pygame.mixer.music.fadeout(3000)
+        sonidos.stopSonido()
         Nivel1.showRestart()
     if controller != None:
             x, y = controller.get_left_stick()
@@ -181,11 +171,8 @@ while not done:
             NaveLevel.moveConControl(x, y, pressed[xbox360_controller.A], pressed[xbox360_controller.B], pressed[xbox360_controller.X], pressed[xbox360_controller.Y])
         if NuevoIntento:
             # quiero reiniciar el tiempo aqui
-            pygame.mixer.music.fadeout(1000)
-            pygame.time.delay(1000)
-            pygame.mixer.music.load('Assets/sound/final-voyage.mp3')
-            pygame.mixer.music.set_volume(.2)
-            pygame.mixer.music.play(1)
+            sonidos.QuickStopSonido()
+            sonidos.nivel2()
             intro.showIntro()
             NaveLevel.vida = 100
             NuevoIntento = False
@@ -241,14 +228,11 @@ while not done:
             intro.showRestart()  
   if level == 3:
     if instruccionesPlataformer:
-      pygame.mixer.music.fadeout(3000)
-      pygame.time.delay(1000)
+      sonidos.stopSonido()
       intrucciones3.showIntro()
       instruccionesPlataformer = False
     if not musicPlataformer:
-      pygame.mixer.music.load('Assets/sound/musicPlataformer1.mp3')
-      pygame.mixer.music.set_volume(.2)
-      pygame.mixer.music.play(-1)
+      sonidos.nivel3()
       musicPlataformer = True
     screen.blit(background, [0,0])
     pantallaMarte.superficieMarte()
@@ -306,7 +290,7 @@ while not done:
       player.rect.x = 0
       player.rect.y = pantalla_y - 64 - 39
       musicPlataformer = False
-      pygame.mixer.music.fadeout(3000)
+      sonidos.stopSonido()
       intrucciones3.showRestart()
 
   if level == 6:
@@ -354,7 +338,7 @@ while not done:
     
     screen.blit(player.image,player.rect)
     clock.tick(15)
-    barra_vida(screen, 0, 0, oxigeno)
+    barra_oxigeno(screen, 0, 0, oxigeno)
     if player.rect.x > 1152:
       level = 8
       player.rect.x = 80
@@ -367,7 +351,7 @@ while not done:
       oxigeno = 100
       collisionDetected.paredLeftCollider4.append(pygame.Rect(72, 420, 5, 144))
       musicPlataformer = False
-      pygame.mixer.music.fadeout(3000)
+      sonidos.stopSonido()
       intrucciones3.showRestart()
 
   if level == 8:
@@ -390,14 +374,14 @@ while not done:
       player.handle_event(event, collisionDetected.collidersLevel6, collisionDetected.paredLeftCollider6, collisionDetected.paredRightCollider6, [])
     screen.blit(player.image,player.rect)
     clock.tick(15)
-    barra_vida(screen, 0, 0, oxigeno)
+    barra_oxigeno(screen, 0, 0, oxigeno)
 
     if player.rect.x > 1152:
       level = 9
       player.rect.x = 80
       player.rect.y = 312
       oxigeno = 100
-      pygame.mixer.music.fadeout(3000)
+      sonidos.stopSonido()
 
     if oxigeno < 0 or player.rect.y > 490:
       level = 3
@@ -406,7 +390,7 @@ while not done:
       oxigeno = 100
       collisionDetected.paredLeftCollider4.append(pygame.Rect(72, 420, 5, 144))
       musicPlataformer = False
-      pygame.mixer.music.fadeout(3000)
+      sonidos.stopSonido()
       intrucciones3.showRestart()
 
   #Desde aqui va la lava
@@ -433,9 +417,7 @@ while not done:
       collisionDetected.numberOfPops += 1
       PantallaCueva2.lavaIsUp = True
       PantallaCueva1.lavaIsUp = True
-      pygame.mixer.music.load('Assets/sound/musicPlataformer2.mp3')
-      pygame.mixer.music.set_volume(.2)
-      pygame.mixer.music.play(-1)
+      sonidos.lavaSound()
 
     if player.rect.x < 20:
       level = 10
@@ -459,7 +441,7 @@ while not done:
       PantallaCueva1.lavaIsUp = False
       PantallaCueva2.lavaCount = 1
       musicPlataformer = False
-      pygame.mixer.music.fadeout(3000)
+      sonidos.stopSonido()
       patito = 0
       lavaCollide = pygame.Rect(0, pantalla_y - (patito*36), 1152, 640)
       intrucciones3.showRestart()
@@ -489,7 +471,7 @@ while not done:
       player.handle_event(event, collisionDetected.collidersLevel6, collisionDetected.paredLeftCollider6, collisionDetected.paredRightCollider6, [])
     screen.blit(player.image,player.rect)
     clock.tick(15)
-    barra_vida(screen, 0, 0, oxigeno)
+    barra_oxigeno(screen, 0, 0, oxigeno)
 
     if player.rect.x < 20:
       level = 11
@@ -518,7 +500,7 @@ while not done:
       lavaCollide = pygame.Rect(0, pantalla_y - (patito*36), 1152, 640)
       collisionDetected.paredRightCollider6.pop()
       musicPlataformer = False
-      pygame.mixer.music.fadeout(3000)
+      sonidos.stopSonido()
       intrucciones3.showRestart()
 
   if level == 11:
@@ -545,7 +527,7 @@ while not done:
       player.handle_event(event, collisionDetected.collidersLevel5, collisionDetected.paredLeftCollider5, collisionDetected.paredRightCollider5, [])
     screen.blit(player.image,player.rect)
     clock.tick(15)
-    barra_vida(screen, 0, 0, oxigeno)
+    barra_oxigeno(screen, 0, 0, oxigeno)
     if player.rect.x < 20:
       level = 12
       player.rect.x = 40
@@ -575,7 +557,7 @@ while not done:
       collisionDetected.paredLeftCollider5.pop()
       collisionDetected.paredLeftCollider5.append(pygame.Rect(0, 0, 40, 100))
       musicPlataformer = False
-      pygame.mixer.music.fadeout(3000)
+      sonidos.stopSonido()
       intrucciones3.showRestart()
 
   if level == 12:
@@ -625,7 +607,7 @@ while not done:
       collisionDetected.paredLeftCollider4.pop()
       collisionDetected.paredLeftCollider4.insert(0, pygame.Rect(0, 0, 40, 100))
       musicPlataformer = False
-      pygame.mixer.music.fadeout(3000)
+      sonidos.stopSonido()
       intrucciones3.showRestart()
 
   if level == 13:
@@ -653,7 +635,7 @@ while not done:
       player.rect.x = 80
       player.rect.y = 96
       patito = 0
-      pygame.mixer.music.fadeout(3000)
+      sonidos.stopSonido()
       lavaCollide = pygame.Rect(0, pantalla_y - (patito*36), 1152, 640)
 
     if player.rect.colliderect(lavaCollide):
@@ -678,20 +660,17 @@ while not done:
       collisionDetected.paredLeftCollider4.pop()
       collisionDetected.paredLeftCollider4.insert(0, pygame.Rect(0, 0, 40, 100))
       musicPlataformer = False
-      pygame.mixer.music.fadeout(3000)
+      sonidos.stopSonido()
       intrucciones3.showRestart()
 
   if level == 14:
-    pygame.mixer.music.fadeout(3000)
-    pygame.time.delay(3000)
-    pygame.mixer.music.load('Assets/sound/time.mp3')
-    pygame.mixer.music.set_volume(1)
-    pygame.mixer.music.play(1)
+    sonidos.stopSonido()
+    sonidos.final()
     intro.showLibro1()
     intro.showLibro2()
     intro.showFelicidades()
     video.video4(screen)
-    pygame.mixer.music.fadeout(7000)
+    sonidos.lowStopSonido()
     intro.showFin()
     done = True
 
